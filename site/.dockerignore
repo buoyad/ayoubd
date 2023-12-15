@@ -1,0 +1,9 @@
+.dockerignore
+.git
+.next
+.envrc*
+node_modules
+README.md
+project-notes.md
+docker
+terraform

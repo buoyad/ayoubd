@@ -21,3 +21,4 @@ optional: install direnv, populate .envrc with aws creds, and run `direnv allow 
    only need to provision this once ever, and CI/CD should never alter any
    resources provisioned by `remote-state`. also commit `backend.conf`
 8. in `terraform` run `make init` to initialize s3 backend
+9. in AWS Amplify console, go to "get started" and authenticate repo account with OAuth for access. This is to avoid having to create and store a personal access token

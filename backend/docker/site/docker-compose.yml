@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ../../../site
+      dockerfile: ../backend/docker/site/Dockerfile
+    image: ayoubd.web
+    ports:
+      - "3000:3000"
