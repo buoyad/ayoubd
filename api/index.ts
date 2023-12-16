@@ -18,10 +18,6 @@ app.get('/api/goodbye', (req, res) => {
 const wss = new Server({ server, path: '/api' });
 
 wss.on('connection', (ws, req) => {
-    if (req.url !== '/api') {
-        ws.close();
-        return;
-    }
     console.log('WebSocket connection established');
     ws.send(JSON.stringify({ message: 'hey' }))
 
@@ -36,6 +32,6 @@ wss.on('connection', (ws, req) => {
 });
 
 // Start the server
-server.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
+server.listen(3001, () => {
+    console.log('Server is running on http://localhost:3001');
 });
