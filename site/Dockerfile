@@ -28,6 +28,7 @@ RUN bun install --frozen-lockfile
 COPY --link . .
 
 # Build application
+ENV NEXT_TELEMETRY_DISABLED 1
 RUN bun run build
 
 # Remove development dependencies
