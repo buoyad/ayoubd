@@ -1,5 +1,50 @@
 ## Personal website
 
+![deployment status badge](https://github.com/buoyad/ayoubd/actions/workflows/fly.yml/badge.svg) 
+
+I decided to rebuild my website after my trusty old Jekyll setup was getting a
+little stale. After building [Tally](https://github.com/buoyad/tally) with
+Next.js, I wanted to integrate some fun more dynamic stuff into my site.
+
+This repo is structured as a monorepo:
+
+- `site` - the next.js frontend
+- `backend` - TBD / go service? rust(!) service? probably some DB stuff. maybe
+  some terraform. we'll see.
+
+### Commands
+
+Under `/site`:
+
+| command   | description      |
+| --------- | ---------------- |
+| `bun dev` | local dev server |
+
+### Deploying
+
+I currently host this on [Fly](fly.io). You can read about why [here](#TBD),
+TL;DR I like hot air balloons.
+
+Deployment cluster is configured by `/site/fly.toml` + a bit of manual work on
+the fly console to set up certificate and domain hookup to `new.ayoubd.com`. CD
+runs on every commit to master via github action configured in
+`/.github/workflows/fly.yml`.
+
+```sh
+brew install flyctl
+fly auth login
+cd site && fly launch
+
+# CD
+fly tokens create deploy -x 999999h | pbcopy
+# paste into FLY_API_TOKEN repository secret
+```
+
+### Out of date readme below
+
+Instructions from when I was experimenting with deployment solutions mostly for
+my benefit.
+
 1. Install terraform:
 
 [reference](https://developer.hashicorp.com/terraform/install)  

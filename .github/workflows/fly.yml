@@ -2,6 +2,8 @@
 name: Deploy to Fly
 on:
   push:
+    paths:
+      - site/**
     branches:
       - main
 jobs:
