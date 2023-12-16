@@ -1,5 +1,5 @@
-const apiURL = 'http://localhost:3001/api/hello'
-const apiSocketURL = 'ws://127.0.0.1:3001/api'
+const apiURL = '/api/hello'
+const apiSocketURL = '/api'
 
 export const fetchAPI = async () => {
     const response = await fetch(apiURL)
@@ -8,6 +8,6 @@ export const fetchAPI = async () => {
 }
 
 export const socketAPI = () => {
-    const socket = new WebSocket(apiSocketURL)
-    return socket
+    // const socket = new WebSocket(apiSocketURL)
+    // return socket
 }

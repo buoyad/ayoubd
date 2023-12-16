@@ -15,26 +15,26 @@ export default function AdminPage() {
 
     const [ws, setWs] = React.useState<WebSocket | null>(null)
     const [socketMsg, setSocketMsg] = React.useState<string>('nothing yet...')
-    React.useEffect(() => {
-        const websocket = socketAPI()
-        websocket.onmessage = (event) => {
-            console.log('Received: ', event.data)
-            setSocketMsg(event.data)
-        }
-        websocket.onopen = () => {
-            console.log('Connected')
-        }
-        websocket.onclose = () => {
-            console.log('Disconnected')
-        }
-        setWs(websocket)
+    // React.useEffect(() => {
+    //     const websocket = socketAPI()
+    //     websocket.onmessage = (event) => {
+    //         console.log('Received: ', event.data)
+    //         setSocketMsg(event.data)
+    //     }
+    //     websocket.onopen = () => {
+    //         console.log('Connected')
+    //     }
+    //     websocket.onclose = () => {
+    //         console.log('Disconnected')
+    //     }
+    //     setWs(websocket)
 
-        return () => {
-            if (ws) {
-                ws.close()
-            }
-        }
-    }, [])
+    //     return () => {
+    //         if (ws) {
+    //             ws.close()
+    //         }
+    //     }
+    // }, [])
 
     return (
         <main>

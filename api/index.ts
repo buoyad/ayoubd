@@ -5,11 +5,6 @@ import http from 'http';
 const app = express();
 const server = http.createServer(app);
 
-app.use((_, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    return next()
-})
-
 // API endpoints
 app.get('/api/hello', (req, res) => {
     res.json({ message: 'Hello from API!' });
@@ -41,6 +36,6 @@ wss.on('connection', (ws, req) => {
 });
 
 // Start the server
-server.listen(3001, () => {
-    console.log('Server is running on http://localhost:3001');
+server.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
 });
