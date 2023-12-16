@@ -38,7 +38,8 @@ cd site && fly launch
 
 # CD
 fly tokens create deploy -x 999999h | pbcopy
-# paste into FLY_API_TOKEN repository secret
+# paste into FLY_DEPLOY_SITE_TOKEN repository secret
+# do the same under api and paste into FLY_DEPLOY_API_TOKEN
 ```
 
 ### Out of date readme below
