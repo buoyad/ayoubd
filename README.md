@@ -26,8 +26,9 @@ I currently host this on [Fly](fly.io). You can read about why [here](#TBD),
 TL;DR I like hot air balloons.
 
 Deployment cluster is configured by `/site/fly.toml` + a bit of manual work on
-the fly console to set up certificate and domain hookup to `new.ayoubd.com`. CD
-runs on every commit to master via github action configured in
+the fly console to set up certificate and domain hookup to `new.ayoubd.com`.
+(update: learned I could have used `flyctl certs create <hostname>`). CD runs on
+every commit to master via github action configured in
 `/.github/workflows/fly.yml`.
 
 ```sh
