@@ -1,5 +1,4 @@
-# action def to deploy to fly.io
-name: Deploy to Fly
+name: Deploy site
 on:
   push:
     paths:
