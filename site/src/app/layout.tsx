@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { DM_Sans } from 'next/font/google'
 import './globals.css'
 
 import { SetInitialColors } from './ui/dark-mode'
 import { ThemeProvider } from './ui/theme-context'
 
-const inter = Inter({ subsets: ['latin'] })
+const bodyFont = DM_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Danny Ayoub',
@@ -22,7 +22,7 @@ export default function RootLayout({
       <head>
         <SetInitialColors />
       </head>
-      <body className={inter.className}>
+      <body className={bodyFont.className}>
         <ThemeProvider>
           {children}
         </ThemeProvider>
