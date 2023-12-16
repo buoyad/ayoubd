@@ -7,7 +7,7 @@ const server = http.createServer(app);
 
 // API endpoints
 app.get('/api/hello', (req, res) => {
-    res.json({ message: 'Hello from API! Now with github auto deploys.' });
+    res.json({ message: 'Hello from API! Now with github auto deploys. pretty fast!' });
 });
 
 app.get('/api/goodbye', (req, res) => {
