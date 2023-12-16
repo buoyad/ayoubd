@@ -23,3 +23,11 @@ body {
 svg {
   transition: stroke 350ms, stroke-width 150ms;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 48px 12px;
+}

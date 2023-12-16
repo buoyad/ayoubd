@@ -1,6 +1,6 @@
 ## Personal website
 
-![deployment status badge](https://github.com/buoyad/ayoubd/actions/workflows/deploy-site.yml/badge.svg) 
+[![deployment status badge](https://github.com/buoyad/ayoubd/actions/workflows/deploy-site.yml/badge.svg)](https://github.com/buoyad/ayoubd/actions/workflows/deploy-site.yml)
 
 I decided to rebuild my website after my trusty old Jekyll setup was getting a
 little stale. After building [Tally](https://github.com/buoyad/tally) with
