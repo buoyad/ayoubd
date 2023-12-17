@@ -1,9 +1,9 @@
 import express from 'express';
 import { Server } from 'ws';
-import http from 'http';
+import { createServer } from 'http';
 
 const app = express();
-const server = http.createServer(app);
+const server = createServer(app);
 
 // API endpoints
 app.get('/api/hello', (req, res) => {
@@ -15,7 +15,7 @@ app.get('/api/goodbye', (req, res) => {
 });
 
 // WebSocket server
-const wss = new Server({ server, path: '/api' });
+const wss = new Server({ noServer: true });
 
 wss.on('connection', (ws, req) => {
     console.log('WebSocket connection established');
@@ -32,6 +32,17 @@ wss.on('connection', (ws, req) => {
         console.log('WebSocket connection closed');
         clearInterval(interval)
     });
+});
+
+// Intercept upgrade requests
+server.on('upgrade', (req, socket, head) => {
+    if (req.url?.startsWith('/api')) {
+        wss.handleUpgrade(req, socket, head, (ws) => {
+            wss.emit('connection', ws, req);
+        });
+    } else {
+        socket.destroy();
+    }
 });
 
 // Start the server
