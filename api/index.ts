@@ -34,6 +34,9 @@ wss.on('connection', (ws, req) => {
     });
 });
 
+// Handle requests
+server.on('request', app);
+
 // Intercept upgrade requests
 server.on('upgrade', (req, socket, head) => {
     if (req.url?.startsWith('/api')) {
@@ -44,9 +47,6 @@ server.on('upgrade', (req, socket, head) => {
         socket.destroy();
     }
 });
-
-// Handle requests
-// server.on('request', app);
 
 // Start the server
 server.listen(3001, () => {
