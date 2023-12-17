@@ -7,3 +7,4 @@ README.md
 project-notes.md
 docker
 terraform
+fly.toml

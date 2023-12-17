@@ -16,10 +16,6 @@ ENV NODE_ENV="production"
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
-# Build arguments
-ARG NEXT_PUBLIC_SITE_URL="https://new.ayoubd.com"
-ARG API_URL="https://ayoubd-api.fly.dev"
-
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
     apt-get install -y build-essential pkg-config python-is-python3
@@ -32,6 +28,8 @@ RUN bun install --frozen-lockfile
 COPY --link . .
 
 # Build application
+# Build arguments
+ARG NEXT_PUBLIC_SITE_URL="https://new.ayoubd.com"
 ENV NEXT_TELEMETRY_DISABLED 1
 RUN bun run build
 
@@ -47,5 +45,6 @@ FROM base
 COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
+ARG API_URL="https://ayoubd-api.fly.dev"
 EXPOSE 3000
 CMD [ "bun", "run", "start" ]
