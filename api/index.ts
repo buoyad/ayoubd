@@ -28,6 +28,8 @@ const wss = new Server({ server, path: '/api' });
 wss.on('connection', (ws, req) => {
     console.log('WebSocket connection established');
     ws.send(JSON.stringify({ message: 'hey' }))
+    let count = 0
+    const interval = setInterval(() => ws.send(JSON.stringify({ message: `hey ${count++}` })), 1000)
 
     ws.on('message', (message) => {
         console.log('Received:', message);
@@ -36,6 +38,7 @@ wss.on('connection', (ws, req) => {
 
     ws.on('close', () => {
         console.log('WebSocket connection closed');
+        clearInterval(interval)
     });
 });
 

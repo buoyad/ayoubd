@@ -16,6 +16,9 @@ ENV NODE_ENV="production"
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
+# Build arguments
+ARG NEXT_PUBLIC_SITE_URL="https://new.ayoubd.com"
+
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
     apt-get install -y build-essential pkg-config python-is-python3
@@ -38,6 +41,7 @@ RUN rm -rf node_modules && \
 
 # Final stage for app image
 FROM base
+ARG API_URL="https://ayoubd-api.fly.dev"
 
 # Copy built application
 COPY --from=build /app /app
