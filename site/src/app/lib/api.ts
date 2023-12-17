@@ -8,6 +8,6 @@ export const fetchAPI = async () => {
 }
 
 export const socketAPI = () => {
-    // const socket = new WebSocket(apiSocketURL)
-    // return socket
+    const socket = new WebSocket(apiSocketURL)
+    return socket
 }

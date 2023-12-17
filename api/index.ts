@@ -5,6 +5,14 @@ import http from 'http';
 const app = express();
 const server = http.createServer(app);
 
+if (process.env.NODE_ENV === 'development') {
+    // enable cors for local dev
+    app.use((req, res, next) => {
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+        next();
+    });
+}
+
 // API endpoints
 app.get('/api/hello', (req, res) => {
     res.json({ message: 'Hello from API! Now with github auto deploys. pretty fast!' });
