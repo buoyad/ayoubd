@@ -5,7 +5,7 @@ const API_URL = process.env.API_URL
 const NEXT_APP_URL = 'http://localhost:3000'
 const PORT = process.env.PROXY_PORT || 8080
 
-const proxy = httpProxy.createProxyServer()
+const proxy = httpProxy.createProxyServer({ ws: true })
 
 const server = http.createServer((req, res) => {
     if (req.url.startsWith('/api')) {
