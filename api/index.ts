@@ -1,17 +1,24 @@
 import express from 'express';
 import { Server } from 'ws';
 import http from 'http';
+import httpProxy from 'http-proxy';
 
 const app = express();
 const server = http.createServer(app);
 
-if (process.env.NODE_ENV === 'development') {
-    // enable cors for local dev
-    app.use((req, res, next) => {
-        res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+const siteURL = process.env.FRONTEND_URL
+console.log(`Proxying non-API requests to ${siteURL}`)
+const proxy = httpProxy.createProxyServer({
+    target: siteURL,
+});
+app.use((req, res, next) => {
+    if (!req.url.startsWith('/api')) {
+        proxy.web(req, res);
+    } else {
         next();
-    });
-}
+    }
+
+});
 
 // API endpoints
 app.get('/api/hello', (req, res) => {
