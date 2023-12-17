@@ -4,8 +4,10 @@ if (!httpUrl) {
 }
 const wsUrl = new URL(httpUrl)
 wsUrl.protocol = wsUrl.protocol === 'https:' ? 'wss:' : 'ws:'
+wsUrl.pathname = '/api'
 const apiURL = `${httpUrl}/api/hello`
-const apiSocketURL = `${wsUrl}/api`
+console.log('trying to connect to websocket at', wsUrl.toString())
+const apiSocketURL = wsUrl
 
 export const fetchAPI = async () => {
     const response = await fetch(apiURL)
