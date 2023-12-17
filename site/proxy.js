@@ -12,18 +12,29 @@ const server = http.createServer((req, res) => {
         console.log(`Forwarding API request to ${API_URL}`)
         proxy.web(req, res, { target: API_URL, changeOrigin: true })
     } else {
+        // TODO: fails on cold start because next server is not ready
         proxy.web(req, res, { target: NEXT_APP_URL })
     }
 }).listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
 })
 
+// implement websocket proxying
+server.on('connection', (req, socket, head) => {
+    if (req.url.startsWith('/api')) {
+        console.log(`Forwarding socket connection request to ${API_URL}`)
+        proxy.ws(req, socket, head, { target: API_URL, changeOrigin: true, ws: true });
+    } else {
+        proxy.ws(req, socket, head, { target: NEXT_APP_URL, ws: true });
+    }
+})
+
 server.on('upgrade', (req, socket, head) => {
     if (req.url.startsWith('/api')) {
-        console.log(`Forwarding socket request to ${API_URL}`)
-        proxy.ws(req, socket, head, { target: API_URL, changeOrigin: true });
+        console.log(`Forwarding socket upgrade request to ${API_URL}`)
+        proxy.ws(req, socket, head, { target: API_URL, changeOrigin: true, ws: true });
     } else {
-        proxy.ws(req, socket, head, { target: NEXT_APP_URL });
+        proxy.ws(req, socket, head, { target: NEXT_APP_URL, ws: true });
     }
 });
 
