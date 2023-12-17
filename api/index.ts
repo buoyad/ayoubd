@@ -46,7 +46,7 @@ server.on('upgrade', (req, socket, head) => {
 });
 
 // Handle requests
-server.on('request', app);
+// server.on('request', app);
 
 // Start the server
 server.listen(3001, () => {
