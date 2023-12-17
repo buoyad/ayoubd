@@ -3,7 +3,7 @@ import { Server } from 'ws';
 import { createServer } from 'http';
 
 const app = express();
-const server = createServer(app);
+const server = createServer();
 
 // API endpoints
 app.get('/api/hello', (req, res) => {
@@ -44,6 +44,9 @@ server.on('upgrade', (req, socket, head) => {
         socket.destroy();
     }
 });
+
+// Handle requests
+server.on('request', app);
 
 // Start the server
 server.listen(3001, () => {
