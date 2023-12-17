@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "concurrently --restart-tries 0 \"node proxy.js\" \"next dev\"",
     "build": "next build",
-    "start": "concurrently --restart-tries -1 \"node proxy.js\" \"next start\"",
+    "start": "concurrently --restart-tries -1 --restart-after 500 \"node proxy.js\" \"next start\"",
     "lint": "next lint"
   },
   "dependencies": {

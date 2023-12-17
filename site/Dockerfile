@@ -46,6 +46,6 @@ COPY --from=build /app /app
 
 # Proxy port is public facing port
 ENV API_URL="https://api.ayoubd.com"
-ENV PORT="8080"
+ENV PROXY_PORT="8080"
 EXPOSE 8080
 CMD [ "bun", "run", "start" ]

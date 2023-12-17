@@ -3,7 +3,7 @@ const httpProxy = require('http-proxy');
 
 const API_URL = process.env.API_URL
 const NEXT_APP_URL = 'http://localhost:3000'
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PROXY_PORT || 8080
 
 const proxy = httpProxy.createProxyServer()
 
