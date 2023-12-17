@@ -42,5 +42,4 @@ COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3001
-ENV FRONTEND_URL="https://ayoubd-com.fly.dev"
 CMD [ "npm", "run", "start" ]

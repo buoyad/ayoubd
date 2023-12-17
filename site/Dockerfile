@@ -44,6 +44,8 @@ FROM base
 # Copy built application
 COPY --from=build /app /app
 
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
+# Proxy port is public facing port
+ENV API_URL="https://api.ayoubd.com"
+ENV PORT="8080"
+EXPOSE 8080
 CMD [ "bun", "run", "start" ]

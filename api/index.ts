@@ -1,24 +1,9 @@
 import express from 'express';
 import { Server } from 'ws';
 import http from 'http';
-import httpProxy from 'http-proxy';
 
 const app = express();
 const server = http.createServer(app);
-
-const siteURL = process.env.FRONTEND_URL
-console.log(`Proxying non-API requests to ${siteURL}`)
-const proxy = httpProxy.createProxyServer({
-    target: siteURL,
-});
-app.use((req, res, next) => {
-    if (!req.url.startsWith('/api')) {
-        proxy.web(req, res);
-    } else {
-        next();
-    }
-
-});
 
 // API endpoints
 app.get('/api/hello', (req, res) => {
