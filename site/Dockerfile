@@ -45,6 +45,6 @@ FROM base
 COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
-ARG API_URL="https://ayoubd-api.fly.dev"
+ENV API_URL="https://ayoubd-api.fly.dev"
 EXPOSE 3000
 CMD [ "bun", "run", "start" ]
