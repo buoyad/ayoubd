@@ -5,13 +5,13 @@ import { fetchAPI, socketAPI } from '../lib/api'
 
 export default function AdminPage() {
     const [apiHello, setApiHello] = React.useState<string>('loading...')
-    // React.useEffect(() => {
-    //     async function get() {
-    //         const res = await fetchAPI()
-    //         setApiHello(res)
-    //     }
-    //     get()
-    // }, [])
+    React.useEffect(() => {
+        async function get() {
+            const res = await fetchAPI()
+            setApiHello(res)
+        }
+        get()
+    }, [])
 
     const [ws, setWs] = React.useState<WebSocket | null>(null)
     const [socketMsg, setSocketMsg] = React.useState<string>('nothing yet...')
