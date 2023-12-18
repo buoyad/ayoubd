@@ -1,13 +1,5 @@
 const httpUrl = process.env.NEXT_PUBLIC_SITE_URL
-if (!httpUrl) {
-    throw new Error('NEXT_PUBLIC_SITE_URL is not defined')
-}
-const wsUrl = new URL(httpUrl)
-wsUrl.protocol = wsUrl.protocol === 'https:' ? 'wss:' : 'ws:'
-wsUrl.pathname = '/api/ws'
-const apiURL = `${httpUrl}/api/hello`
-console.log('trying to connect to websocket at', wsUrl.toString())
-const apiSocketURL = wsUrl
+const apiURL = `${httpUrl}/api`
 
 export const fetchAPI = async () => {
     const response = await fetch(apiURL)
@@ -16,6 +8,6 @@ export const fetchAPI = async () => {
 }
 
 export const socketAPI = () => {
-    const socket = new WebSocket(apiSocketURL)
+    const socket = new WebSocket(apiURL.replace('http', 'ws'))
     return socket
 }
