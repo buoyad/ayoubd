@@ -1,10 +1,14 @@
-const httpUrl = process.env.NEXT_PUBLIC_SITE_URL
+const httpUrl = process.env.NEXT_PUBLIC_API_URL
 const apiURL = `${httpUrl}/api`
 
 export const fetchAPI = async () => {
-    const response = await fetch(apiURL)
-    const data = await response.text()
-    return data
+    try {
+        const response = await fetch(apiURL + '/hello')
+        const data = await response.text()
+        return data
+    } catch (error) {
+        return JSON.stringify({ error })
+    }
 }
 
 export const socketAPI = () => {

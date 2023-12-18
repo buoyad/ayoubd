@@ -30,6 +30,7 @@ COPY --link . .
 # Build application
 # Build arguments
 ARG NEXT_PUBLIC_SITE_URL="https://new.ayoubd.com"
+ARG NEXT_PUBLIC_API_URL="https://api.ayoubd.com"
 ENV NEXT_TELEMETRY_DISABLED 1
 RUN bun run build
 
@@ -44,8 +45,5 @@ FROM base
 # Copy built application
 COPY --from=build /app /app
 
-# Proxy port is public facing port
-ENV API_URL="https://api.ayoubd.com"
-ENV PROXY_PORT="8080"
-EXPOSE 8080
+EXPOSE 3000
 CMD [ "bun", "run", "start" ]

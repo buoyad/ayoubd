@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently --restart-tries 0 \"sleep .9 && node proxy.js\" \"next dev\"",
+    "dev": "next dev",
     "build": "next build",
-    "start": "concurrently --restart-tries -1 --restart-after 500 \"sleep .9 && node proxy.js\" \"next start\"",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
