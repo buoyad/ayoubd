@@ -29,7 +29,6 @@ COPY --link . .
 
 # Build application
 # Build arguments
-ARG NEXT_PUBLIC_SITE_URL="https://new.ayoubd.com"
 ARG NEXT_PUBLIC_API_URL="https://api.ayoubd.com"
 ENV NEXT_TELEMETRY_DISABLED 1
 RUN bun run build

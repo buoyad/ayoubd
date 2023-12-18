@@ -3,9 +3,23 @@ import { Server as WebSocketServer } from 'ws';
 import { createServer } from 'http';
 import url from 'url';
 
+const SITE_URL = process.env.SITE_URL;
+if (!SITE_URL) {
+    throw new Error('SITE_URL is not set');
+}
+
 const app = express();
 const server = createServer(app);
 const wss = new WebSocketServer({ noServer: true, path: '/api' });
+
+// Allow CORS from env.SITE_URL
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (origin === SITE_URL) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    next();
+});
 
 // HTTP GET endpoint
 app.get('/api/hello', (req, res) => {
