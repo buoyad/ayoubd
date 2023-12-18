@@ -39,11 +39,14 @@ server.on('request', app);
 
 // Intercept upgrade requests
 server.on('upgrade', (req, socket, head) => {
+    console.log('Received upgrade request');
     if (req.url?.startsWith('/api')) {
+        console.log('api route detected, upgrading to WebSocket');
         wss.handleUpgrade(req, socket, head, (ws) => {
             wss.emit('connection', ws, req);
         });
     } else {
+        console.log('no api route detected, destroying socket');
         socket.destroy();
     }
 });
