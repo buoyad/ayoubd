@@ -13,11 +13,14 @@ body {
 }
 
 
-div,
 body {
   background-color: var(--color-background);
   color: var(--color-text);
   transition: background 350ms, background-color 350ms, color 350ms;
+}
+
+div {
+  transition: background 350ms, background-color 350ms;
 }
 
 svg {
@@ -27,7 +30,8 @@ svg {
 main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 48px 12px;
+  max-width: 700px;
+  margin: 0 auto;
 }

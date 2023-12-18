@@ -3,7 +3,9 @@ import { DM_Sans } from 'next/font/google'
 import './globals.css'
 
 import { SetInitialColors } from './ui/dark-mode'
-import { ThemeProvider } from './ui/theme-context'
+import { ColorMode, ThemeProvider } from './ui/theme-context'
+import { Box } from './ui/components'
+import Nav from './nav'
 
 const bodyFont = DM_Sans({ subsets: ['latin'] })
 
@@ -24,7 +26,13 @@ export default function RootLayout({
       </head>
       <body className={bodyFont.className}>
         <ThemeProvider>
-          {children}
+          <main>
+            <Nav />
+            <Box>
+              {children}
+              <ColorMode />
+            </Box>
+          </main>
         </ThemeProvider>
       </body>
     </html>
