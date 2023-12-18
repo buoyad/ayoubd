@@ -22,8 +22,9 @@ server.on('upgrade', (req, socket, head) => {
     if (req.url.startsWith('/api')) {
         const target = API_URL.replace(/^http/, 'ws')
         console.log(`Forwarding socket upgrade request to ${target}`)
-        proxy.ws(req, socket, head, { target: API_URL, changeOrigin: true })
+        proxy.ws(req, socket, head, { target, changeOrigin: true })
     } else {
+        console.log(`Forwarding socket upgrade request to ${NEXT_APP_URL}`)
         proxy.ws(req, socket, head, { target: NEXT_APP_URL })
     }
 })
