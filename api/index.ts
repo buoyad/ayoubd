@@ -36,6 +36,7 @@ wss.on('connection', (ws) => {
     }, 1000);
 
     ws.on('close', () => {
+        console.log('WebSocket connection closed');
         clearInterval(interval); // Clear interval on connection close
     });
 });
