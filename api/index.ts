@@ -3,7 +3,19 @@ import { Server } from 'ws';
 import { createServer } from 'http';
 
 const app = express();
-const server = createServer();
+const server = createServer(app);
+
+// Middleware to handle upgrade requests
+app.get('/api/ws', (req, res, next) => {
+    if (req.headers.upgrade && req.headers.upgrade.toLowerCase() === 'websocket') {
+        // Skip to next router
+        console.log('detected websocket upgrade request')
+        next('router');
+    } else {
+        // Continue with current router
+        next();
+    }
+});
 
 // API endpoints
 app.get('/api/hello', (req, res) => {
@@ -15,7 +27,7 @@ app.get('/api/goodbye', (req, res) => {
 });
 
 // WebSocket server
-const wss = new Server({ noServer: true });
+const wss = new Server({ noServer: true, path: '/api/ws' });
 
 wss.on('connection', (ws, req) => {
     console.log('WebSocket connection established');
@@ -34,21 +46,12 @@ wss.on('connection', (ws, req) => {
     });
 });
 
-// Handle requests
-server.on('request', app);
-
 // Intercept upgrade requests
 server.on('upgrade', (req, socket, head) => {
     console.log('Received upgrade request');
-    if (req.url?.startsWith('/api')) {
-        console.log('api route detected, upgrading to WebSocket');
-        wss.handleUpgrade(req, socket, head, (ws) => {
-            wss.emit('connection', ws, req);
-        });
-    } else {
-        console.log('no api route detected, destroying socket');
-        socket.destroy();
-    }
+    wss.handleUpgrade(req, socket, head, (ws) => {
+        wss.emit('connection', ws, req);
+    });
 });
 
 // Start the server

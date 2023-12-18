@@ -4,7 +4,7 @@ if (!httpUrl) {
 }
 const wsUrl = new URL(httpUrl)
 wsUrl.protocol = wsUrl.protocol === 'https:' ? 'wss:' : 'ws:'
-wsUrl.pathname = '/api'
+wsUrl.pathname = '/api/ws'
 const apiURL = `${httpUrl}/api/hello`
 console.log('trying to connect to websocket at', wsUrl.toString())
 const apiSocketURL = wsUrl
