@@ -1,4 +1,4 @@
-import * as API from '@/../../api/types'
+// import * as API from '@/../../api/types'
 
 const httpUrl = process.env.NEXT_PUBLIC_API_URL
 const apiURL = `${httpUrl}/api`
