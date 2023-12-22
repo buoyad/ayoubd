@@ -14,10 +14,7 @@ const wss = new WebSocketServer({ noServer: true, path: '/api' });
 
 // Allow CORS from env.SITE_URL
 app.use((req, res, next) => {
-    const origin = req.headers.origin;
-    if (origin === SITE_URL) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    }
+    res.header('Access-Control-Allow-Origin', SITE_URL);
     next();
 });
 

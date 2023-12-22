@@ -1,6 +1,7 @@
 'use client'
 import * as React from 'react'
 import { fetchAPI, socketAPI } from '../lib/api'
+import { Box } from '../ui/components'
 
 
 export default function AdminPage() {
@@ -37,10 +38,10 @@ export default function AdminPage() {
     }, [])
 
     return (
-        <main>
+        <Box>
             <h1>Admin</h1>
             <p>{apiHello}</p>
             <p>websocket: {socketMsg}</p>
-        </main>
+        </Box>
     )
 }

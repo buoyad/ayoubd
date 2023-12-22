@@ -6,6 +6,7 @@ import { SetInitialColors } from './ui/dark-mode'
 import { ColorMode, ThemeProvider } from './ui/theme-context'
 import { Box } from './ui/components'
 import Nav from './nav'
+import Footer from './footer'
 
 const bodyFont = DM_Sans({ subsets: ['latin'] })
 
@@ -33,6 +34,7 @@ export default function RootLayout({
               <ColorMode />
             </Box>
           </main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

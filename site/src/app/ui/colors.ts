@@ -5,6 +5,7 @@ export const colors = {
         boxShadow: '#000',
         selectTrack: '#eaeaea',
         selectIndicator: '#efefef',
+        primary: '#4277FF',
     },
     dark: {
         background: 'black',
@@ -12,5 +13,6 @@ export const colors = {
         boxShadow: '#000',
         selectTrack: '#101010',
         selectIndicator: '#222222',
+        primary: '#4277FF',
     }
 }
