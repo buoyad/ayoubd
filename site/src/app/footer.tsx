@@ -6,7 +6,7 @@ import { useTheme } from "./ui/theme-context";
 export default function Footer() {
     const { theme } = useTheme()
     return (
-        <footer>
+        <footer style={{ boxShadow: '0 50vh 0 50vh var(--color-text)', }}>
             <Box row style={styles.container}>
                 <p>hey</p>
             </Box>
@@ -21,5 +21,6 @@ const styles = styleSheet({
         height: 'var(--footer-height)',
         justifyContent: 'center',
         alignItems: 'flex-start',
+
     },
 })
