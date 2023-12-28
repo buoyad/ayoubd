@@ -7,6 +7,5 @@ export default function Nav() {
         <Link href="/blog">Blog</Link>
         <Link href="/projects">Projects</Link>
         <Link href="/work">Work</Link>
-        <Link href="/admin">Admin</Link>
     </Box>
 }

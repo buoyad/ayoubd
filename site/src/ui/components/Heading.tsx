@@ -1,6 +1,6 @@
 
 type Props = {
-    children: React.ReactNode
+    children?: React.ReactNode
     className?: string
     style?: React.CSSProperties
 }

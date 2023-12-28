@@ -1,6 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import { compileMDX } from 'next-mdx-remote/rsc'
+import components from '@/ui/components/mdx'
+import rehypeMdxCodeProps from 'rehype-mdx-code-props'
 
 const blogContentDir = path.join(process.cwd(), 'content-blog')
 const projectsContentDir = path.join(process.cwd(), 'content-projects')
@@ -13,13 +15,24 @@ export type FrontMatter = {
     slug?: string,
 }
 
+const compile = async (source: string) => {
+    return await compileMDX<FrontMatter>({
+        source,
+        components,
+        options: {
+            parseFrontmatter: true,
+            mdxOptions: { rehypePlugins: [rehypeMdxCodeProps as any] }
+        },
+    })
+}
+
 const getMDXFiles = (dir: string) => {
     return fs.readdirSync(dir).filter(file => path.extname(file) === '.mdx')
 }
 
 const readMDXFile = async (filePath: string) => {
     const source = fs.readFileSync(filePath, 'utf8')
-    const { content, frontmatter } = await compileMDX<FrontMatter>({ source, options: { parseFrontmatter: true } })
+    const { content, frontmatter } = await compile(source)
     return { content, frontmatter }
 }
 
