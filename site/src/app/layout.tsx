@@ -29,7 +29,7 @@ export default function RootLayout({
         <ThemeProvider>
           <main>
             <Nav />
-            <Box className="content">
+            <Box className="content" gap="large">
               {children}
               <ColorMode />
             </Box>

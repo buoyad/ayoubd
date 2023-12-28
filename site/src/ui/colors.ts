@@ -1,6 +1,6 @@
 export const colors = {
     light: {
-        background: 'white',
+        background: '#f1f1f1',
         text: 'black',
         boxShadow: '#000',
         selectTrack: '#eaeaea',
@@ -8,7 +8,7 @@ export const colors = {
         primary: '#4277FF',
     },
     dark: {
-        background: 'black',
+        background: '#101010',
         text: 'white',
         boxShadow: '#000',
         selectTrack: '#101010',

@@ -3,8 +3,6 @@ import React from "react"
 import { getThemePreference, setThemePreference } from "./dark-mode"
 import { colors } from "./colors"
 import { Box } from "./components"
-import { animated, useSpring } from "@react-spring/web"
-import { styleSheet, useMeasure } from "./util"
 
 export type Theme = 'light' | 'dark'
 
@@ -66,78 +64,24 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 export const ColorMode = () => {
     const { theme, preference, setTheme } = useTheme()
 
-    const [rLight, dimLight] = useMeasure()
-    const [rDark, dimDark] = useMeasure()
-    const [rSys, dimSys] = useMeasure()
-
-
-    const [spring, api] = useSpring(() => ({
-        height: 0,
-        width: 0,
-        left: 0,
-    }))
-
-
-    const prevTheme = React.useRef<Theme | undefined>(theme)
-    React.useLayoutEffect(() => {
-        if (theme) {
-            const firstRender = prevTheme.current === undefined && !!theme
-            let target
-            switch (preference) {
-                case 'light': {
-                    target = dimLight
-                    break;
-                }
-                case 'dark': {
-                    target = dimDark
-                    break;
-                }
-                default: {
-                    target = dimSys
-                    break;
-                }
-            }
-            api.start({
-                height: (target.height ?? 0) + 4,
-                width: (target.width ?? 0) + 4,
-                left: (target.offsetLeft ?? 0) - 2.5,
-                immediate: firstRender,
-            })
-
-            prevTheme.current = theme
+    const style = (option: Theme | undefined) => {
+        const common = {
+            cursor: 'pointer',
+            color: 'var(--color-primary)',
+            transition: 'font-weight 350ms'
         }
-    }, [theme, preference, dimLight, dimDark, dimSys, api])
+        if (!theme) {
+            return common
+        }
+        if (preference === option) {
+            return { ...common, fontWeight: 'bold' }
+        }
+        return common
+    }
 
-    return <Box row={true} style={styles.switchTrack}>
-        <AnimatedBox row={true} style={{ ...styles.colorModeIndicator, ...spring }} />
-        <label title="light mode" ref={rLight} onClick={() => setTheme('light')} style={styles.label}>🔆</label>
-        <label title="dark mode" ref={rDark} onClick={() => setTheme('dark')} style={styles.label}>🌚</label>
-        <label title="follow system preference" ref={rSys} onClick={() => setTheme(undefined)} style={styles.label}>🖥️</label>
+    return <Box row={true}>
+        <p onClick={() => setTheme('light')} style={style('light')}>light</p>
+        <p onClick={() => setTheme('dark')} style={style('dark')}>dark</p>
+        <p onClick={() => setTheme(undefined)} style={style(undefined)}>system</p>
     </Box>
 }
-
-const AnimatedBox = animated(Box)
-
-const styles = styleSheet({
-    switchTrack: {
-        background: 'var(--color-selectTrack)',
-        boxShadow: '0 1px 1px var(--color-boxShadow) inset',
-        borderRadius: '2px',
-        padding: '4px',
-        position: 'relative',
-        zIndex: 0,
-    },
-    colorModeIndicator: {
-        background: 'var(--color-selectIndicator)',
-        boxShadow: '0px 1px 2px var(--color-boxShadow)',
-        borderRadius: '2px',
-        position: 'absolute',
-        zIndex: 1,
-    },
-    label: {
-        cursor: 'pointer',
-        zIndex: 2,
-        padding: '0px 2px',
-        fontSize: '1.2em'
-    }
-})

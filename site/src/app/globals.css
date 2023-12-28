@@ -1,5 +1,6 @@
 :root {
   --footer-height: 60px;
+  font-size: 16px;
 }
 
 * {
