@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import { DM_Sans } from 'next/font/google'
 import './globals.css'
 
-import { SetInitialColors } from './ui/dark-mode'
-import { ColorMode, ThemeProvider } from './ui/theme-context'
-import { Box } from './ui/components'
+import { SetInitialColors } from '../ui/dark-mode'
+import { ColorMode, ThemeProvider } from '../ui/theme-context'
+import { Box } from '../ui/components'
 import Nav from './nav'
 import Footer from './footer'
 
@@ -29,7 +29,7 @@ export default function RootLayout({
         <ThemeProvider>
           <main>
             <Nav />
-            <Box>
+            <Box className="content">
               {children}
               <ColorMode />
             </Box>

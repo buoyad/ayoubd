@@ -36,6 +36,10 @@ main {
   margin: 0 auto;
 }
 
+.content {
+  padding-top: 4rem;
+}
+
 a {
   color: var(--color-primary);
   text-decoration: none;

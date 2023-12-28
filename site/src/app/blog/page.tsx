@@ -1,4 +1,4 @@
-import { Box, Heading } from "../ui/components";
+import { Box, Heading } from "../../ui/components";
 
 export default function Page() {
     return <Box>

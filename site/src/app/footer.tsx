@@ -1,7 +1,7 @@
 'use client'
-import { Box } from "./ui/components";
-import { styleSheet } from "./ui/util";
-import { useTheme } from "./ui/theme-context";
+import { Box } from "../ui/components";
+import { styleSheet } from "../ui/util";
+import { useTheme } from "../ui/theme-context";
 
 export default function Footer() {
     const { theme } = useTheme()

@@ -8,3 +8,7 @@ export type Message = {
     type: MessageType,
     content: string,
 }
+
+export interface Chatter {
+
+}

@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { Box } from './ui/components'
-import { ColorMode } from './ui/theme-context'
+import { Box } from '../ui/components'
+import { ColorMode } from '../ui/theme-context'
 
 export default function Home() {
   return (
