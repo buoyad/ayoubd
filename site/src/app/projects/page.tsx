@@ -1,5 +1,22 @@
-import { Heading } from "@/ui/components";
+import { getProjectsContent } from "@/lib/content";
+import { Box, Heading, Subheading } from "../../ui/components";
+import Link from "next/link";
 
-export default function Page() {
-    return <Heading>Projects</Heading>
+type ArrayElement<ArrayType extends readonly unknown[]> =
+    ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+
+export default async function Page() {
+    const content = await getProjectsContent()
+    console.log(content)
+    return <Box>
+        <Heading>Projects</Heading>
+        {content.map((post) => <ProjectRow key={post.slug} {...post} />)}
+    </Box>
+}
+
+const ProjectRow = ({ frontmatter, slug }: ArrayElement<Awaited<ReturnType<typeof getProjectsContent>>>) => {
+    return <Box gap="none">
+        <Link href={`/projects/${slug}`}><Subheading>{frontmatter.title}</Subheading></Link>
+        {!!frontmatter.summary && <p>{frontmatter.summary}</p>}
+    </Box>
 }

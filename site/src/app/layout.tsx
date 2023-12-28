@@ -31,7 +31,7 @@ export default function RootLayout({
             <Nav />
             <Box className="content" gap="large">
               {children}
-              <ColorMode />
+              <ColorMode style={{ paddingTop: '48px' }} />
             </Box>
           </main>
           <Footer />

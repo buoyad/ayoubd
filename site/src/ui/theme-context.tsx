@@ -61,10 +61,10 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
-export const ColorMode = () => {
+export const ColorMode = ({ style }: { style?: React.CSSProperties }) => {
     const { theme, preference, setTheme } = useTheme()
 
-    const style = (option: Theme | undefined) => {
+    const optStyle = (option: Theme | undefined) => {
         const common = {
             cursor: 'pointer',
             color: 'var(--color-primary)',
@@ -79,9 +79,9 @@ export const ColorMode = () => {
         return common
     }
 
-    return <Box row={true}>
-        <p onClick={() => setTheme('light')} style={style('light')}>light</p>
-        <p onClick={() => setTheme('dark')} style={style('dark')}>dark</p>
-        <p onClick={() => setTheme(undefined)} style={style(undefined)}>system</p>
+    return <Box row={true} style={style}>
+        <p onClick={() => setTheme('light')} style={optStyle('light')}>light</p>
+        <p onClick={() => setTheme('dark')} style={optStyle('dark')}>dark</p>
+        <p onClick={() => setTheme(undefined)} style={optStyle(undefined)}>system</p>
     </Box>
 }

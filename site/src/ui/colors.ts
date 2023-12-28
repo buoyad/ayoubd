@@ -1,15 +1,15 @@
 export const colors = {
     light: {
-        background: '#f1f1f1',
-        text: 'black',
+        background: '#fafafa',
+        text: '#222222',
         boxShadow: '#000',
         selectTrack: '#eaeaea',
         selectIndicator: '#efefef',
         primary: '#4277FF',
     },
     dark: {
-        background: '#101010',
-        text: 'white',
+        background: '#111111',
+        text: '#fafafa',
         boxShadow: '#000',
         selectTrack: '#101010',
         selectIndicator: '#222222',

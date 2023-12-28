@@ -1,5 +1,5 @@
 import { getBlogContent } from "@/lib/content";
-import { Box, Heading } from "../../ui/components";
+import { Box, Heading, Subheading } from "../../ui/components";
 import Link from "next/link";
 
 type ArrayElement<ArrayType extends readonly unknown[]> =
@@ -15,7 +15,8 @@ export default async function Page() {
 }
 
 const PostRow = ({ content, frontmatter, slug }: ArrayElement<Awaited<ReturnType<typeof getBlogContent>>>) => {
-    return <Box>
-        <Link href={`/blog/${slug}`}>{frontmatter.title}</Link>
+    return <Box gap="none">
+        <Subheading><Link href={`/blog/${slug}`}>{frontmatter.title}</Link></Subheading>
+        {!!frontmatter.summary && <p>{frontmatter.summary}</p>}
     </Box>
 }

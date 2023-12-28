@@ -8,6 +8,7 @@ const projectsContentDir = path.join(process.cwd(), 'content-projects')
 export type FrontMatter = {
     title: string,
     published: Date,
+    summary?: string,
     keywords?: string,
     slug?: string,
 }
