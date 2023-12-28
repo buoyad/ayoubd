@@ -3,6 +3,7 @@ import path from 'path'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import components from '@/ui/components/mdx'
 import rehypeMdxCodeProps from 'rehype-mdx-code-props'
+import rehypeHighlight from 'rehype-highlight'
 
 const blogContentDir = path.join(process.cwd(), 'content-blog')
 const projectsContentDir = path.join(process.cwd(), 'content-projects')
@@ -21,7 +22,7 @@ const compile = async (source: string) => {
         components,
         options: {
             parseFrontmatter: true,
-            mdxOptions: { rehypePlugins: [rehypeMdxCodeProps as any] }
+            mdxOptions: { rehypePlugins: [rehypeHighlight, rehypeMdxCodeProps as any] }
         },
     })
 }

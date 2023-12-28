@@ -21,7 +21,7 @@ Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum. Sagittis
 aliquam malesuada bibendum arcu vitae elementum. Blandit volutpat maecenas
 volutpat blandit.
 
-```js title="hi"
+```js title="copy.ts"
 const a = 1
 const b = 2
 
@@ -63,7 +63,7 @@ suspendisse faucibus interdum. Enim ut tellus elementum sagittis vitae et leo.
 Iaculis eu non diam phasellus vestibulum. Lectus arcu bibendum at varius vel
 pharetra vel turpis.
 
-```js title="bye"
+```js title="copy2.ts"
 const a = 1
 const b = 2
 
@@ -102,7 +102,7 @@ lobortis mattis aliquam. Scelerisque eleifend donec pretium vulputate sapien nec
 sagittis. Sed felis eget velit aliquet sagittis. Mauris rhoncus aenean vel elit
 scelerisque. Odio aenean sed adipiscing diam donec.
 
-```js title="thry"
+```js title="copy3.ts"
 const a = 1
 const b = 2
 
@@ -120,5 +120,21 @@ const b = 2
 
 function aToB() {
     return a-b
+}
+```
+
+```go title="main.go"
+package main
+
+import "os"
+
+func main() {
+
+    panic("a problem")
+
+    _, err := os.Create("/tmp/file")
+    if err != nil {
+        panic(err)
+    }
 }
 ```

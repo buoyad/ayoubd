@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { DM_Sans } from 'next/font/google'
 import './globals.css'
+import './syntax.css'
 
 import { SetInitialColors } from '../ui/dark-mode'
 import { ColorMode, ThemeProvider } from '../ui/theme-context'
