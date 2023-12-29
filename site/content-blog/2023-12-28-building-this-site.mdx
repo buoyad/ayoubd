@@ -29,3 +29,142 @@ counts being a perfect example. My requirements for a new site were:
    rendering or not
 4. Simplify integrating client-side javascript on pages without needing to spin
    up a separate project to get typescript and react
+
+
+```js title="copy.ts"
+const a = 1
+const b = 2
+
+function aToB() {
+    return a-b
+}
+const a = 1
+const b = 2
+
+function aToB() {
+    return a-b
+}
+const a = 1
+const b = 2
+
+function aToB() {
+    return a-b
+}
+```
+
+Cras tincidunt lobortis feugiat vivamus. Quis auctor elit sed vulputate mi sit
+amet. Leo integer malesuada nunc vel risus commodo. Justo eget magna fermentum
+iaculis eu non diam phasellus. Pretium fusce id velit ut. Consequat nisl vel
+pretium lectus quam id. Urna condimentum mattis pellentesque id nibh tortor id
+aliquet. Metus dictum at tempor commodo ullamcorper a lacus. Sem integer vitae
+justo eget magna fermentum. Vitae ultricies leo integer malesuada nunc. Risus
+feugiat in ante metus dictum at tempor. Mattis pellentesque id nibh tortor id
+aliquet lectus proin nibh.
+
+At lectus urna duis convallis convallis tellus. Venenatis a condimentum vitae
+sapien. Eu consequat ac felis donec et odio pellentesque diam. Ipsum a arcu
+cursus vitae congue. Feugiat vivamus at augue eget arcu dictum varius. Dictum
+sit amet justo donec. Erat nam at lectus urna. Suspendisse sed nisi lacus sed
+viverra tellus. Non odio euismod lacinia at quis risus sed. Et malesuada fames
+ac turpis egestas maecenas pharetra convallis. Nisl tincidunt eget nullam non
+nisi est. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at.
+Phasellus vestibulum lorem sed risus ultricies tristique. Non quam lacus
+suspendisse faucibus interdum. Enim ut tellus elementum sagittis vitae et leo.
+Iaculis eu non diam phasellus vestibulum. Lectus arcu bibendum at varius vel
+pharetra vel turpis.
+
+```js title="copy2.ts"
+const a = 1
+const b = 2
+
+function aToB() {
+    return a-b
+}
+const a = 1
+const b = 2
+
+function aToB() {
+    return a-b
+}
+const a = 1
+const b = 2
+
+function aToB() {
+    return a-b
+}
+```
+
+Aliquam vestibulum morbi blandit cursus risus at ultrices mi tempus. Proin
+sagittis nisl rhoncus mattis rhoncus urna neque. Amet tellus cras adipiscing
+enim eu turpis egestas pretium aenean. Sed adipiscing diam donec adipiscing
+tristique risus nec feugiat. Ultricies integer quis auctor elit sed vulputate mi
+sit amet. Semper viverra nam libero justo laoreet sit amet cursus. Augue neque
+gravida in fermentum et. Nec sagittis aliquam malesuada bibendum arcu vitae
+elementum curabitur vitae. Cum sociis natoque penatibus et magnis dis
+parturient. Quam nulla porttitor massa id neque aliquam vestibulum. Maecenas sed
+enim ut sem.
+
+Mauris commodo quis imperdiet massa tincidunt nunc pulvinar sapien. Eget arcu
+dictum varius duis at. Massa vitae tortor condimentum lacinia quis vel eros
+donec ac. Mattis nunc sed blandit libero volutpat sed cras. Adipiscing elit duis
+tristique sollicitudin nibh sit amet commodo nulla. Eget felis eget nunc
+lobortis mattis aliquam. Scelerisque eleifend donec pretium vulputate sapien nec
+sagittis. Sed felis eget velit aliquet sagittis. Mauris rhoncus aenean vel elit
+scelerisque. Odio aenean sed adipiscing diam donec.
+
+```tsx title="copy3.ts"
+const a = 1
+const b = 2
+
+function aToB() {
+    return a-b
+}
+const a = 1
+const b = 2
+
+function aToB() {
+    return a-b
+}
+const a = 1
+const b = 2
+
+function aToB() {
+    return <HelloComponent hi={1} bye={() => console.log(2)} />
+}
+```
+
+```go title="main.go"
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func main() {
+    p := fmt.Println
+
+    t := time.Now()
+    p(t.Format(time.RFC3339))
+
+    t1, e := time.Parse(
+        time.RFC3339,
+        "2012-11-01T22:08:41+00:00")
+    p(t1)
+
+    p(t.Format("3:04PM"))
+    p(t.Format("Mon Jan _2 15:04:05 2006"))
+    p(t.Format("2006-01-02T15:04:05.999999-07:00")); p(t.Format("2006-01-02T15:04:05.999999-07:00")); p(t.Format("2006-01-02T15:04:05.999999-07:00"));  
+    form := "3 04 PM"
+    t2, e := time.Parse(form, "8 41 PM")
+    p(t2)
+
+    fmt.Printf("%d-%02d-%02dT%02d:%02d:%02d-00:00\n",
+        t.Year(), t.Month(), t.Day(),
+        t.Hour(), t.Minute(), t.Second())
+
+    ansic := "Mon Jan _2 15:04:05 2006"
+    _, e = time.Parse(ansic, "8:41PM")
+    p(e)
+}
+```

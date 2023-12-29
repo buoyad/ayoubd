@@ -11,11 +11,15 @@ export default function Footer() {
                 <p>this is the end</p>
                 <ColorMode />
             </Box>
-            <div style={{ ...styles.bottomBorder, opacity: .2 }} />
-            <div style={{ ...styles.bottomBorder, opacity: .4 }} />
-            <div style={{ ...styles.bottomBorder, opacity: .6 }} />
-            <div style={{ ...styles.bottomBorder, opacity: .8 }} />
-            <div style={{ ...styles.bottomBorder, opacity: 1 }} />
+            <div style={{ ...styles.bottomBorder, opacity: .1 }} />
+            <div style={{ ...styles.bottomBorder, opacity: .3 }} />
+            <div style={{ ...styles.bottomBorder, opacity: .5 }} />
+            <div style={{ ...styles.bottomBorder, opacity: .7 }} />
+            <div style={{ ...styles.bottomBorder, opacity: .9 }} />
+            <div style={{ ...styles.bottomBorder, opacity: .55 }} />
+            <div style={{ ...styles.bottomBorder, opacity: .35 }} />
+            <div style={{ ...styles.bottomBorder, opacity: .15 }} />
+            <div style={{ ...styles.bottomBorder, opacity: .05 }} />
         </footer>
     )
 }
@@ -23,13 +27,11 @@ export default function Footer() {
 const styles = styleSheet({
     bottomBorder: {
         width: '100%',
-        height: 20,
+        height: 10,
         backgroundColor: 'var(--color-text)',
     },
     footer: {
-        boxShadow: '0 50vh 0 50vh var(--color-text)',
-        paddingTop: '50vh',
-        transition: 'box-shadow 350ms'
+        paddingTop: '30vh',
     },
     container: {
         position: 'relative',

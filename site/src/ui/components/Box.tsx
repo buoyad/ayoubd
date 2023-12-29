@@ -1,3 +1,4 @@
+import React from 'react'
 import styles from './Box.module.css'
 
 type BoxProps = {
@@ -8,12 +9,13 @@ type BoxProps = {
     className?: string,
     id?: string,
 }
-export function Box({ children, gap = 'small', style, row = false, className: _className, id }: BoxProps) {
+export const Box = React.forwardRef<HTMLDivElement, BoxProps>(({ children, gap = 'small', style, row = false, className: _className, id }: BoxProps, ref) => {
     const className = `${styles.box} ${styles[`gap-${gap}`]} ${row ? styles.boxRow : ''} ${_className ?? ''}`
     return <div
+        ref={ref}
         className={className}
         id={id}
         style={style}>
         {children}
     </div>
-}
+})

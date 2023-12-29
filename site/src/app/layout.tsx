@@ -28,8 +28,8 @@ export default function RootLayout({
       </head>
       <body className={bodyFont.className}>
         <ThemeProvider>
+          <Nav />
           <main>
-            <Nav />
             <Box className="content" gap="large">
               {children}
             </Box>
