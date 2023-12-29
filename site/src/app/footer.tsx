@@ -1,14 +1,15 @@
 'use client'
 import { Box } from "../ui/components";
 import { styleSheet } from "../ui/util";
-import { useTheme } from "../ui/theme-context";
+import { ColorMode, useTheme } from "../ui/theme-context";
 
 export default function Footer() {
     const { theme } = useTheme()
     return (
         <footer style={styles.footer}>
-            <Box row style={styles.container}>
-                <p>hey</p>
+            <Box style={styles.container} gap="none">
+                <p>this is the end</p>
+                <ColorMode />
             </Box>
             <div style={{ ...styles.bottomBorder, opacity: .2 }} />
             <div style={{ ...styles.bottomBorder, opacity: .4 }} />
@@ -35,6 +36,6 @@ const styles = styleSheet({
         width: '100%',
         height: 'var(--footer-height)',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'center',
     },
 })

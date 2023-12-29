@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    overflow: hidden;
 }
 
 .boxRow {
@@ -28,4 +27,12 @@
 
 .gap-large {
     gap: 24px;
+}
+
+.gap-xlarge {
+    gap: 36px;
+}
+
+.gap-xxlarge {
+    gap: 48px;
 }

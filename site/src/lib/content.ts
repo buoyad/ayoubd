@@ -38,11 +38,13 @@ const readMDXFile = async (filePath: string) => {
 }
 
 const getMDXContent = async (dir: string) => {
-    return await Promise.all(getMDXFiles(dir).map(async (file) => {
+    const content = await Promise.all(getMDXFiles(dir).map(async (file) => {
         const filePath = path.join(dir, file)
         const { content, frontmatter } = await readMDXFile(filePath)
         return { content, frontmatter, slug: encodeURIComponent((frontmatter.slug || frontmatter.title).replace(/\s/g, '-')) }
     }))
+    content.sort((a, b) => (a.frontmatter.published > b.frontmatter.published) ? -1 : 1)
+    return content
 }
 
 export const getBlogContent = async () => await getMDXContent(blogContentDir)

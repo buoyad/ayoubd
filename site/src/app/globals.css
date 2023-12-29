@@ -21,6 +21,10 @@ body {
   transition: background 350ms, background-color 350ms, color 350ms;
 }
 
+*::marker {
+  color: var(--color-text);
+}
+
 div {
   transition: background 350ms, background-color 350ms;
 }
