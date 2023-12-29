@@ -16,10 +16,6 @@ export default function Footer() {
             <div style={{ ...styles.bottomBorder, opacity: .5 }} />
             <div style={{ ...styles.bottomBorder, opacity: .7 }} />
             <div style={{ ...styles.bottomBorder, opacity: .9 }} />
-            <div style={{ ...styles.bottomBorder, opacity: .55 }} />
-            <div style={{ ...styles.bottomBorder, opacity: .35 }} />
-            <div style={{ ...styles.bottomBorder, opacity: .15 }} />
-            <div style={{ ...styles.bottomBorder, opacity: .05 }} />
         </footer>
     )
 }

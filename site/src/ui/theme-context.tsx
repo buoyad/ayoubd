@@ -1,6 +1,6 @@
 'use client'
 import React from "react"
-import { getThemePreference, setThemePreference } from "./dark-mode"
+import { generateCSSVars, getThemePreference, setThemePreference } from "./dark-mode"
 import { colors } from "./colors"
 import { Box } from "./components"
 
@@ -48,9 +48,10 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         savePreference && setThemePreference(newValue)
 
         const root = window.document.documentElement
-        const c = newTheme === 'light' ? colors.light : colors.dark
-        Object.entries(c).forEach(([key, value]) => {
-            root.style.setProperty(`--color-${key}`, value)
+        const properties = generateCSSVars(newTheme === 'light')
+        properties.forEach(p => {
+            const [name, val] = p.split(':')
+            root.style.setProperty(name, val)
         })
     }
 
