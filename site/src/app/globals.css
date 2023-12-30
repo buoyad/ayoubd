@@ -51,6 +51,10 @@ main {
   font-size: 19px;
 }
 
+.project-content {
+  font-size: 19px;
+}
+
 a {
   color: var(--color-primary);
   text-decoration: none;

@@ -14,10 +14,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
     if (!post) {
         return <p>not found</p>
     }
-    return <Box gap="large" className="project-content" style={{ width: '100%' }}>
+    return <>
         {post.frontmatter.heroImage && <HeroImage src={post.frontmatter.heroImage} mode={post.frontmatter.heroImageMode} />}
         {post.content}
-    </Box>
+    </>
 }
 
 type Props = {

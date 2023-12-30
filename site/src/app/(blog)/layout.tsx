@@ -4,7 +4,7 @@ import '../syntax.css'
 import { dmSans } from '@/ui/fonts'
 
 import { SetInitialColors } from '../../ui/dark-mode'
-import { ColorMode, ThemeProvider } from '../../ui/theme-context'
+import { ThemeProvider } from '../../ui/theme-context'
 import { Box } from '../../ui/components'
 import Nav from '../nav'
 import Footer from '../footer'
@@ -27,9 +27,8 @@ export default function RootLayout({
             <body className={dmSans.className}>
                 <ThemeProvider>
                     <Nav />
-                    <p>blog layout</p>
                     <main>
-                        <Box className="content" gap="large">
+                        <Box className="content blog-content" gap="large">
                             {children}
                         </Box>
                     </main>

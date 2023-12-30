@@ -27,9 +27,8 @@ export default function RootLayout({
       <body className={dmSans.className}>
         <ThemeProvider>
           <Nav />
-          <p>project layout</p>
           <main>
-            <Box className="content" gap="large">
+            <Box className="content project-content" gap="large">
               {children}
             </Box>
           </main>

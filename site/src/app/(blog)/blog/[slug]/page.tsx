@@ -13,5 +13,5 @@ export default async function Page({ params }: { params: { slug: string } }) {
     if (!post) {
         return <p>not found</p>
     }
-    return <Box gap="large" className="blog-content" style={{ width: '100%' }}>{post.content}</Box>
+    return post.content
 }
