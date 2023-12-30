@@ -15,7 +15,7 @@ export default function Nav() {
                 <Link href="/work">Work</Link>
             </Box>
         </Box>
-        <div style={styles.line} />
+        {/* <div style={styles.line} /> */}
     </>
 }
 
@@ -27,7 +27,19 @@ const styles = styleSheet({
         padding: '12px',
         margin: '0 auto',
         maxWidth: 'var(--content-width)',
-        backgroundColor: 'var(--color-background)'
+        // backgroundColor: 'var(--color-background)',
+        backgroundColor: 'transparent',
+        backgroundImage: `radial-gradient(
+        circle at 50% 50%,
+        var(--color-background) 20%,
+        rgba(var(--color-background-rgb), .8) 20.5%,
+        rgba(var(--color-background-rgb), .8) 49.5%,
+        var(--color-background) 50%
+    )`,
+
+        backgroundSize: '15px 15px',
+        backdropFilter: 'blur(20px) hue-rotate(-50deg) saturate(130%)',
+        WebkitBackdropFilter: 'blur(20px) hue-rotate(-50deg) saturate(130%)',
     },
     spacer: { height: '36px' },
     line: {
