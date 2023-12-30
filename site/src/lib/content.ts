@@ -23,6 +23,7 @@ export type FrontMatter = {
     keywords?: string,
     slug?: string,
     heroImage?: string,
+    heroImageAlt?: string,
     heroImageMode?: 'contain' | 'cover',
 }
 
