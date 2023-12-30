@@ -1,6 +1,7 @@
 :root {
   --footer-height: 60px;
-  --content-width: 700px;
+  --content-width: min(calc(100% - 2*var(--content-padding-horizontal)), 65ch);
+  --content-padding-horizontal: 12px;
   font-size: 16px;
   font-weight: 300;
   line-height: 2rem;
@@ -36,11 +37,14 @@ svg {
 }
 
 main {
-  display: flex;
-  flex-direction: column;
-  padding: 0 12px 48px;
-  max-width: var(--content-width);
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr var(--content-width) 1fr;
+  column-gap: var(--content-padding-horizontal);
+  padding: 0 0 48px;
+}
+
+main>* {
+  grid-column: 2;
 }
 
 .content {

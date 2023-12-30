@@ -8,6 +8,7 @@ import { ColorMode, ThemeProvider } from '../../ui/theme-context'
 import { Box } from '../../ui/components'
 import Nav from '../nav'
 import Footer from '../footer'
+import { styleSheet } from '@/ui/util'
 
 export const metadata: Metadata = {
   title: 'Danny Ayoub',
@@ -27,10 +28,8 @@ export default function RootLayout({
       <body className={dmSans.className}>
         <ThemeProvider>
           <Nav />
-          <main>
-            <Box className="content project-content" gap="large">
-              {children}
-            </Box>
+          <main style={styles.main}>
+            {children}
           </main>
           <Footer />
         </ThemeProvider>
@@ -38,3 +37,11 @@ export default function RootLayout({
     </html>
   )
 }
+
+const styles = styleSheet({
+  main: {
+    display: 'grid',
+    maxWidth: 'unset',
+    gridTemplateColumns: '1fr var(--content-width) 1fr',
+  }
+})

@@ -17,7 +17,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
     }
     return <>
         {post.frontmatter.heroImage && <HeroImage alt={post.frontmatter.heroImageAlt} src={post.frontmatter.heroImage} mode={post.frontmatter.heroImageMode} />}
-        {post.content}
+        <Box className="content project-content" gap="large">
+            {post.content}
+        </Box>
     </>
 }
 

@@ -1,3 +1,4 @@
+'use client'
 import * as React from 'react'
 import Link from "next/link";
 import { Box } from "../ui/components";
@@ -24,7 +25,7 @@ const styles = styleSheet({
         width: '100%',
         position: 'sticky',
         top: 0,
-        padding: '12px',
+        padding: '12px 0',
         margin: '0 auto',
         maxWidth: 'var(--content-width)',
         // backgroundColor: 'var(--color-background)',
