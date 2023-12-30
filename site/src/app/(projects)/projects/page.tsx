@@ -1,5 +1,5 @@
 import { getProjectsContent } from "@/lib/content";
-import { Box, Heading, Subheading } from "../../ui/components";
+import { Box, Heading, Subheading } from "../../../ui/components";
 import Link from "next/link";
 
 type ArrayElement<ArrayType extends readonly unknown[]> =

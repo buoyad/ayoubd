@@ -1,16 +1,13 @@
 import type { Metadata } from 'next'
-import { DM_Sans } from 'next/font/google'
-import './globals.css'
-import './syntax.css'
+import '../globals.css'
+import '../syntax.css'
 import { dmSans } from '@/ui/fonts'
 
-import { SetInitialColors } from '../ui/dark-mode'
-import { ColorMode, ThemeProvider } from '../ui/theme-context'
-import { Box } from '../ui/components'
-import Nav from './nav'
-import Footer from './footer'
-
-const bodyFont = DM_Sans({ subsets: ['latin'] })
+import { SetInitialColors } from '../../ui/dark-mode'
+import { ColorMode, ThemeProvider } from '../../ui/theme-context'
+import { Box } from '../../ui/components'
+import Nav from '../nav'
+import Footer from '../footer'
 
 export const metadata: Metadata = {
   title: 'Danny Ayoub',
@@ -30,6 +27,7 @@ export default function RootLayout({
       <body className={dmSans.className}>
         <ThemeProvider>
           <Nav />
+          <p>project layout</p>
           <main>
             <Box className="content" gap="large">
               {children}

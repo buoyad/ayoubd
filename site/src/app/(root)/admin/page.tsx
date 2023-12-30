@@ -1,7 +1,7 @@
 'use client'
 import * as React from 'react'
-import { fetchAPI, socketAPI } from '../../lib/api'
-import { Box } from '../../ui/components'
+import { fetchAPI, socketAPI } from '../../../lib/api'
+import { Box } from '../../../ui/components'
 
 
 export default function AdminPage() {
