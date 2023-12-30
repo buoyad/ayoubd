@@ -15,7 +15,7 @@ export default async function Page() {
 
 const ProjectRow = ({ frontmatter, slug }: ArrayElement<Awaited<ReturnType<typeof getProjectsContent>>>) => {
     return <Box gap="none">
-        <Link href={`/projects/${slug}`}><Subheading>{frontmatter.title}</Subheading></Link>
+        <Link href={`/project/${slug}`}><Subheading>{frontmatter.title}</Subheading></Link>
         {!!frontmatter.summary && <p>{frontmatter.summary}</p>}
     </Box>
 }
