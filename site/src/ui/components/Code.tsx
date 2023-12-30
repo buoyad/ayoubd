@@ -1,11 +1,19 @@
 import { Box } from "."
 import { styleSheet } from "../util"
+import { firaCode } from "../fonts"
 
 export const Code = (props: any) => {
     return <Box style={styles.container} gap="medium">
         {!!props.title && <Box><p>{props.title}</p></Box>}
         <pre {...props} />
     </Box>
+}
+
+export const CodeInner = (props: any) => {
+    return <code {...props} style={{
+        ...firaCode.style,
+        fontFeatureSettings: '"liga" 1'
+    }} />
 }
 
 const styles = styleSheet({

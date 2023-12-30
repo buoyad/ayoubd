@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { DM_Sans } from 'next/font/google'
 import './globals.css'
 import './syntax.css'
+import { dmSans } from '@/ui/fonts'
 
 import { SetInitialColors } from '../ui/dark-mode'
 import { ColorMode, ThemeProvider } from '../ui/theme-context'
@@ -26,7 +27,7 @@ export default function RootLayout({
       <head>
         <SetInitialColors />
       </head>
-      <body className={bodyFont.className}>
+      <body className={dmSans.className}>
         <ThemeProvider>
           <Nav />
           <main>
