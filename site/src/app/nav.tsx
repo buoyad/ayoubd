@@ -9,10 +9,10 @@ export default function Nav() {
         <Box style={styles.spacer} />
         <Box style={styles.container}>
             <Box row gap="large">
-                <Link href="/">Home</Link>
-                <Link href="/blog">Blog</Link>
-                <Link href="/projects">Projects</Link>
-                <Link href="/work">Work</Link>
+                <Link style={styles.navItem} href="/">Home</Link>
+                <Link style={styles.navItem} href="/blog">Blog</Link>
+                <Link style={styles.navItem} href="/projects">Projects</Link>
+                <Link style={styles.navItem} href="/work">Work</Link>
             </Box>
         </Box>
         {/* <div style={styles.line} /> */}
@@ -30,18 +30,34 @@ const styles = styleSheet({
         // backgroundColor: 'var(--color-background)',
         backgroundColor: 'transparent',
         backgroundImage: `radial-gradient(
-        circle at 50% 50%,
-        var(--color-background) 20%,
-        rgba(var(--color-background-rgb), .8) 20.5%,
-        rgba(var(--color-background-rgb), .8) 49.5%,
-        var(--color-background) 50%
-    )`,
+            circle at 50% 50%,
+            var(--color-background) 10%,
+            rgba(var(--color-background-rgb), .5) 10.5%,
+            rgba(var(--color-background-rgb), .5) 24.5%,
+            var(--color-background) 25%,
+            var(--color-background) 35%,
+            rgba(var(--color-background-rgb), .5) 35.5%,
+            rgba(var(--color-background-rgb), .5) 49.5%,
+            var(--color-background) 50%,
+            var(--color-background) 60%,
+            rgba(var(--color-background-rgb), .5) 60.5%,
+            rgba(var(--color-background-rgb), .5) 74.5%,
+            var(--color-background) 75%,
+            var(--color-background) 85%,
+            rgba(var(--color-background-rgb), .5) 85.5%,
+            rgba(var(--color-background-rgb), .5) 99.5%,
+            var(--color-background) 100%
+        )`,
 
         backgroundSize: '15px 15px',
-        backdropFilter: 'blur(20px) hue-rotate(-50deg) saturate(130%)',
-        WebkitBackdropFilter: 'blur(20px) hue-rotate(-50deg) saturate(130%)',
+        backdropFilter: 'blur(5px) hue-rotate(-50deg) saturate(130%)',
+        WebkitBackdropFilter: 'blur(5px) hue-rotate(-50deg) saturate(130%)',
     },
     spacer: { height: '36px' },
+    navItem: {
+        backgroundColor: 'rgba(var(--color-background-rgb), .9)',
+        padding: '4px 8px',
+    },
     line: {
         width: '100%',
         position: 'sticky',
