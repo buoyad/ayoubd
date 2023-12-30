@@ -56,7 +56,7 @@ const styles = styleSheet({
     spacer: { height: '36px' },
     navItem: {
         backgroundColor: 'rgba(var(--color-background-rgb), .9)',
-        padding: '4px 8px',
+        padding: '0 8px',
     },
     line: {
         width: '100%',
