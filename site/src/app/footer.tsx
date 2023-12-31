@@ -8,7 +8,6 @@ export default function Footer() {
     return (
         <footer style={styles.footer}>
             <Box style={styles.container} gap="none">
-                <p>this is the end</p>
                 <ColorMode />
             </Box>
             <div style={{ ...styles.bottomBorder, opacity: .1 }} />
