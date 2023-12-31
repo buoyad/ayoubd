@@ -46,7 +46,10 @@ const Scene = ({ numStars = 100, container }: SceneProps) => {
         camera.lookAt(0, 0, 0)
     })
 
-    React.useLayoutEffect(() => gl.setPixelRatio(.3))
+    React.useLayoutEffect(() => {
+        gl.setClearColor('#ffbb00')
+        gl.setPixelRatio(.3)
+    })
 
     const stars = []
     for (let i = 0; i < numStars; i++) {
@@ -64,7 +67,7 @@ export const Orbit = () => {
     return <div style={styles.container} ref={scrollContainer}>
         <div style={styles.inner}>
             <div style={styles.canvas}>
-                <Canvas gl={{ antialias: false }} style={{ width: 'min(95vw, 600px)', height: 'min(95vw, 600px)' }}>
+                <Canvas gl={{ antialias: false }} style={{ width: 'var(--content-width)', height: 'var(--content-width)' }}>
                     <Scene container={scrollContainer} />
                 </Canvas>
             </div>
@@ -88,11 +91,10 @@ const styles = styleSheet({
     },
     container: {
         position: 'relative',
-        height: 'min(95vw, 600px)',
-        width: 'min(95vw, 600px)',
+        height: 'var(--content-width)',
+        width: 'var(--content-width)',
         overflowY: 'scroll',
         borderRadius: '4px',
-        backgroundColor: '#ffbb00',
     },
     inner: {
         height: '500%'

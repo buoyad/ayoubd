@@ -1,12 +1,11 @@
 import Link from 'next/link'
 import { Box, Heading, Text } from '../../ui/components'
-import { ColorMode } from '../../ui/theme-context'
-import { Orbit } from '@/ui/drawings/orbit'
+import { Diorama } from '@/ui/drawings/diorama'
 
 export default function Home() {
   return (
     <Box>
-      <Orbit />
+      <Diorama />
       <Heading>Hi, I'm Danny</Heading>
 
       <Text>
