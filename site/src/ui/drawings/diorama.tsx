@@ -2,15 +2,21 @@
 import * as React from 'react'
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { styleSheet } from '../util'
-import { BoxGeometry, Spherical } from 'three';
-import { OrbitControls, PerspectiveCamera, Sky, Stars, Stats } from '@react-three/drei';
+import { BoxGeometry, Spherical, Vector3 } from 'three';
+import { ContactShadows, OrbitControls, PerspectiveCamera, Sky, Stars, Stats, useGLTF } from '@react-three/drei';
 import { mix } from 'framer-motion';
 import { ImprovedNoise } from 'three/examples/jsm/Addons.js';
 
-const noise = new ImprovedNoise().noise
+const models = {
+    limeTree: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/tree-lime/model.gltf'
+}
+Object.values(models).forEach((url) => useGLTF.preload(url))
+
+const noiseSeed = Math.random()
+const _noise = new ImprovedNoise().noise
+const noise = (x: number, y: number, z: number) => _noise(x + noiseSeed, y + noiseSeed, z + noiseSeed)
 
 const pickRandom = <T extends unknown>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)]
-
 const grassColors = [
     '#136d15',
     '#117c13',
@@ -18,6 +24,11 @@ const grassColors = [
     '#268b07',
     '#41980a'
 ]
+
+function Model({ url, ...props }: { url: string, [key: string]: any }) {
+    const { scene } = useGLTF(url)
+    return <primitive object={scene} {...props} />
+}
 
 type SegmentProps = {
     p?: number,
@@ -44,22 +55,29 @@ const Landscape = () => {
     const boxes = []
 
     const genHeight = (ix: number, iz: number) => {
-        const spatialScale = 3
+        const spatialScale = 1
         const x = ix / (maxX - minX) * spatialScale, z = iz / (maxZ - minZ) * spatialScale
         const h = noise(x, 0, z) / 4 + 1
         return h
     }
 
+    const maxHeightPosition = new Vector3(0, 0, 0)
+
     let p = 0
     for (let ix = minX; ix <= maxX; ix += baseSize) {
         for (let iz = minZ; iz <= maxZ; iz += baseSize) {
-            boxes.push(<BoxSegment key={p} size={baseSize} posX={ix} posY={minY} posZ={iz} height={genHeight(ix, iz)} color={pickRandom(grassColors)} />)
+            const height = genHeight(ix, iz)
+            boxes.push(<BoxSegment key={p} size={baseSize} posX={ix} posY={minY} posZ={iz} height={height} color={pickRandom(grassColors)} />)
+            if (height > maxHeightPosition.y) {
+                maxHeightPosition.set(ix, height, iz)
+            }
             p++
         }
     }
 
     return <>
         {boxes}
+        <Model url={models.limeTree} scale={.1} position={[maxHeightPosition.x, 0, maxHeightPosition.z]} />
     </>
 }
 
@@ -81,10 +99,12 @@ const Scene = ({ numStars = 100, container }: SceneProps) => {
     })
 
     return <>
+        <hemisphereLight color="white" groundColor={pickRandom(grassColors)} intensity={5} />
+        <spotLight position={[1, 2, 1]} angle={0.5} penumbra={1} />
         <Landscape />
         <PerspectiveCamera makeDefault={true} position={[5, 0, 0]} />
         <OrbitControls target={[0, 0, 0]} enablePan={false} enableRotate={true} enabled minDistance={3} maxDistance={12} />
-        <Sky sunPosition={[0, 0, 2]} rayleigh={7} turbidity={100} />
+        <Sky sunPosition={[0, 1, 2]} rayleigh={.07} turbidity={1} />
         <Stars radius={900} factor={15} count={500} />
     </>
 }

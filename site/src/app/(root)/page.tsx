@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <Box>
       <Diorama />
-      <Heading>Hi, I'm Danny</Heading>
+      <Heading style={{ paddingTop: 64 }}>Hi, I'm Danny</Heading>
 
       <Text>
         I'm a software engineer, teacher, and amateur potter based in NYC.
