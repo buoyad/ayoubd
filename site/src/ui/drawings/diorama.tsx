@@ -104,18 +104,18 @@ const Scene = ({ numStars = 100, container }: SceneProps) => {
     useFrame(({ camera }) => {
         const prev = new Spherical().setFromCartesianCoords(camera.position.x, camera.position.y, camera.position.z)
         camera.position.setFromSphericalCoords(prev.radius, prev.phi, prev.theta + .003)
+        gl.setPixelRatio(.5)
     })
 
     React.useLayoutEffect(() => {
         gl.setClearColor('#00bbff')
-        gl.setPixelRatio(.5)
     })
 
     return <>
         <hemisphereLight color="white" groundColor={pickRandom(grassColors)} intensity={1} />
         <spotLight position={[0, 0, 2]} angle={Math.PI} penumbra={1} intensity={.1} />
         <Landscape />
-        <PerspectiveCamera makeDefault={true} position={[5, 0, 0]} />
+        <PerspectiveCamera makeDefault={true} position={[5, 2, 0]} />
         <OrbitControls target={[0, 0, 0]} enablePan={false} enableRotate={true} enabled minDistance={3} maxDistance={12} />
         <Sky sunPosition={[0, 0, 2]} rayleigh={10} turbidity={10} />
         <Stars radius={900} factor={15} count={500} />
