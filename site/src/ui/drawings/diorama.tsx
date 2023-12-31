@@ -3,11 +3,21 @@ import * as React from 'react'
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { styleSheet } from '../util'
 import { BoxGeometry, Spherical } from 'three';
-import { OrbitControls, PerspectiveCamera, Sky, Stars } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Sky, Stars, Stats } from '@react-three/drei';
 import { mix } from 'framer-motion';
 import { ImprovedNoise } from 'three/examples/jsm/Addons.js';
 
 const noise = new ImprovedNoise().noise
+
+const pickRandom = <T extends unknown>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)]
+
+const grassColors = [
+    '#136d15',
+    '#117c13',
+    '#138510',
+    '#268b07',
+    '#41980a'
+]
 
 type SegmentProps = {
     p?: number,
@@ -16,19 +26,13 @@ type SegmentProps = {
     posY: number,
     posZ: number,
     height: number,
+    color: string,
 }
-const BoxSegment = ({ p, size = .1, posX, posY, posZ, height }: SegmentProps) => {
-    const geometryRef = React.useRef<BoxGeometry>(null)
+const BoxSegment = ({ p, size = .1, posX, posY, posZ, height, color }: SegmentProps) => {
     return <group>
         <mesh position={[posX, posY + height / 2, posZ]}>
-            <boxGeometry args={[size, height, size]} ref={geometryRef} />
-            <meshBasicMaterial color={"green"} />
-        </mesh>
-        <mesh position={[posX, posY + height / 2, posZ]}>
-            <lineSegments position={[0, 0, 0]}>
-                <edgesGeometry attach="geometry" args={[geometryRef.current]} />
-                <lineBasicMaterial color="black" />
-            </lineSegments>
+            <boxGeometry args={[size, height, size]} />
+            <meshBasicMaterial color={color} />
         </mesh>
     </group>
 }
@@ -49,7 +53,7 @@ const Landscape = () => {
     let p = 0
     for (let ix = minX; ix <= maxX; ix += baseSize) {
         for (let iz = minZ; iz <= maxZ; iz += baseSize) {
-            boxes.push(<BoxSegment key={p} size={baseSize} posX={ix} posY={minY} posZ={iz} height={genHeight(ix, iz)} />)
+            boxes.push(<BoxSegment key={p} size={baseSize} posX={ix} posY={minY} posZ={iz} height={genHeight(ix, iz)} color={pickRandom(grassColors)} />)
             p++
         }
     }
@@ -73,7 +77,7 @@ const Scene = ({ numStars = 100, container }: SceneProps) => {
 
     React.useLayoutEffect(() => {
         gl.setClearColor('#00bbff')
-        gl.setPixelRatio(.3)
+        gl.setPixelRatio(.5)
     })
 
     return <>
@@ -81,7 +85,7 @@ const Scene = ({ numStars = 100, container }: SceneProps) => {
         <PerspectiveCamera makeDefault={true} position={[5, 0, 0]} />
         <OrbitControls target={[0, 0, 0]} enablePan={false} enableRotate={true} enabled minDistance={3} maxDistance={12} />
         <Sky sunPosition={[0, 0, 2]} rayleigh={7} turbidity={100} />
-        <Stars radius={900} />
+        <Stars radius={900} factor={15} count={500} />
     </>
 }
 
@@ -91,6 +95,7 @@ export const Diorama = () => {
         <div style={styles.canvas}>
             <Canvas gl={{ antialias: false }} style={{ width: 'var(--content-width)', height: 'var(--content-width)' }}>
                 <Scene container={scrollContainer} />
+                <Stats parent={scrollContainer} />
             </Canvas>
         </div>
         <style jsx global>{`
