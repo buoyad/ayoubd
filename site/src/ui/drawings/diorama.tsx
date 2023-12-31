@@ -149,5 +149,6 @@ const styles = styleSheet({
         width: dim.width,
         borderRadius: '4px',
         aspectRatio: '1 / 1',
+        boxShadow: '2px 2px 2px rgba(var(--color-boxShadow-rgb), .2)',
     }
 })
