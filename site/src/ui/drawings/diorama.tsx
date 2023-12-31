@@ -3,14 +3,45 @@ import * as React from 'react'
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { styleSheet } from '../util'
 import { mix, useScroll, useTime, useTransform } from 'framer-motion';
-import { BufferAttribute, Spherical } from 'three';
+import { BoxGeometry, BufferAttribute, Euler, Spherical } from 'three';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 
-const Landscape = () => {
-    return <mesh rotation-x={0.35}>
-        <icosahedronGeometry args={[1, 0]} />
-        <meshBasicMaterial color={"green"} wireframe />
+type SegmentProps = {
+    p?: number,
+    size: number,
+    posX: number,
+    posY: number,
+    posZ: number,
+    height: number,
+}
+const BoxSegment = ({ p, size = .1, posX, posY, posZ, height }: SegmentProps) => {
+    const geometryRef = React.useRef<BoxGeometry>(null)
+    return <mesh position={[posX, posY + height / 2, posZ]}>
+        <boxGeometry args={[size, height, size]} ref={geometryRef} />
+        <meshBasicMaterial color={"green"} />
+        <lineSegments>
+            <edgesGeometry attach="geometry" args={[geometryRef.current]} />
+            <lineBasicMaterial color={"black"} />
+        </lineSegments>
     </mesh>
+}
+
+const Landscape = () => {
+    const minX = -1, maxX = 1, minZ = -1, maxZ = 1, minY = -1, maxY = 1
+
+    const baseSize = .1
+    const boxes = []
+    let p = 0
+    for (let ix = minX; ix < maxX; ix += baseSize) {
+        for (let iz = minZ; iz < maxZ; iz += baseSize) {
+            boxes.push(<BoxSegment size={baseSize} posX={ix} posY={minY} posZ={iz} height={1 + Math.abs(ix) + Math.abs(iz)} />)
+            p++
+        }
+    }
+
+    return <>
+        {boxes}
+    </>
 }
 
 type SceneProps = {
@@ -23,7 +54,7 @@ const Scene = ({ numStars = 100, container }: SceneProps) => {
 
     useFrame(({ camera }) => {
         const prev = new Spherical().setFromCartesianCoords(camera.position.x, camera.position.y, camera.position.z)
-        camera.position.setFromSphericalCoords(prev.radius, prev.phi, prev.theta + .005)
+        camera.position.setFromSphericalCoords(prev.radius, prev.phi, prev.theta + .003)
     })
 
     React.useLayoutEffect(() => {
@@ -33,8 +64,8 @@ const Scene = ({ numStars = 100, container }: SceneProps) => {
 
     return <>
         <Landscape />
-        <PerspectiveCamera makeDefault={true} position={[3, 0, 0]} />
-        <OrbitControls target={[0, 0, 0]} enablePan={false} enableRotate={true} enabled minDistance={2} maxDistance={10} />
+        <PerspectiveCamera makeDefault={true} position={[5, 0, 0]} />
+        <OrbitControls target={[0, 0, 0]} enablePan={false} enableRotate={true} enabled minDistance={3} maxDistance={12} />
     </>
 }
 
