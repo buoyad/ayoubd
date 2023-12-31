@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { styleSheet } from '../util'
-import { Spherical, Vector3 } from 'three';
+import { type PointLight, Spherical, Vector3 } from 'three';
 import { OrbitControls, PerspectiveCamera, Sky, Stars, Stats, useGLTF } from '@react-three/drei';
 import { ImprovedNoise } from 'three/examples/jsm/Addons.js';
 import { dims } from './dimensions'
@@ -85,13 +85,19 @@ const Landscape = () => {
         lampPostPosition = pickRandom(positions)
     }
     const lampLightPosition = lampPostPosition.clone().add(new Vector3(0, .8, 0))
+    const lampRef = React.useRef<PointLight>(null)
+    const toggleLight = () => {
+        if (lampRef.current) {
+            lampRef.current.visible = !lampRef.current.visible
+        }
+    }
 
-    return <>
+    return <group onPointerDown={toggleLight}>
         {boxes}
         <Model url={models.limeTree} scale={.1} position={maxHeightPosition} />
         <Model url={models.lampPost} scale={.3} position={lampPostPosition} />
-        <pointLight position={lampLightPosition} color={'yellow'} intensity={1} />
-    </>
+        <pointLight position={lampLightPosition} color={'yellow'} intensity={1} ref={lampRef} />
+    </group>
 }
 
 type SceneProps = {
