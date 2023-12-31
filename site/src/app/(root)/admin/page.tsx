@@ -38,7 +38,7 @@ export default function AdminPage() {
     }, [])
 
     return (
-        <Box>
+        <Box className='content'>
             <h1>Admin</h1>
             <p>{apiHello}</p>
             <p>websocket: {socketMsg}</p>

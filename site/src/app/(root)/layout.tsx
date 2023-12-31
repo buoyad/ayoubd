@@ -26,9 +26,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Nav />
           <main>
-            <Box className="content" gap="large">
-              {children}
-            </Box>
+            {children}
           </main>
           <Footer />
         </ThemeProvider>

@@ -8,15 +8,16 @@ export default function Nav() {
 
     return <>
         <Box style={styles.spacer} />
-        <Box style={styles.container}>
-            <Box row gap="large">
-                <Link style={styles.navItem} href="/">Home</Link>
-                <Link style={styles.navItem} href="/blog">Blog</Link>
-                <Link style={styles.navItem} href="/projects">Projects</Link>
-                <Link style={styles.navItem} href="/work">Work</Link>
+        <Box style={styles.outer}>
+            <Box style={styles.container}>
+                <Box row gap="large">
+                    <Link style={styles.navItem} href="/">Home</Link>
+                    <Link style={styles.navItem} href="/blog">Blog</Link>
+                    <Link style={styles.navItem} href="/projects">Projects</Link>
+                    <Link style={styles.navItem} href="/work">Work</Link>
+                </Box>
             </Box>
         </Box>
-        {/* <div style={styles.line} /> */}
     </>
 }
 
@@ -29,6 +30,15 @@ const styles = styleSheet({
         margin: '0 auto',
         maxWidth: 'var(--content-width)',
         // backgroundColor: 'var(--color-background)',
+    },
+    spacer: { height: '36px' },
+    navItem: {
+        backgroundColor: 'rgba(var(--color-background-rgb), .9)',
+        padding: '0 8px',
+    },
+    outer: {
+        position: 'sticky',
+        top: 0,
         backgroundColor: 'transparent',
         backgroundImage: `radial-gradient(
             circle at 50% 50%,
@@ -53,17 +63,5 @@ const styles = styleSheet({
         backgroundSize: '15px 15px',
         backdropFilter: 'blur(5px) hue-rotate(-50deg) saturate(130%)',
         WebkitBackdropFilter: 'blur(5px) hue-rotate(-50deg) saturate(130%)',
-    },
-    spacer: { height: '36px' },
-    navItem: {
-        backgroundColor: 'rgba(var(--color-background-rgb), .9)',
-        padding: '0 8px',
-    },
-    line: {
-        width: '100%',
-        position: 'sticky',
-        top: 'calc(1lh + 24px)',
-        height: 1,
-        background: 'linear-gradient(90deg, rgba(var(--color-text-rgb), .2) 0%, rgba(var(--color-text-rgb), .3) 50%, rgba(var(--color-text-rgb), .2) 100%)'
     }
 })

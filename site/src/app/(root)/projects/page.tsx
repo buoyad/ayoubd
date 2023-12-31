@@ -7,7 +7,7 @@ type ArrayElement<ArrayType extends readonly unknown[]> =
 
 export default async function Page() {
     const content = await getProjectsContent()
-    return <Box>
+    return <Box className="content">
         <Heading>Projects</Heading>
         {content.map((post) => <ProjectRow key={post.slug} {...post} />)}
     </Box>

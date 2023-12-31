@@ -5,12 +5,15 @@ import { styleSheet } from '../util'
 import { Spherical, Vector3 } from 'three';
 import { OrbitControls, PerspectiveCamera, Sky, Stars, Stats, useGLTF } from '@react-three/drei';
 import { ImprovedNoise } from 'three/examples/jsm/Addons.js';
+import { dims } from './dimensions'
 
 const models = {
     limeTree: '/models/limetree.gltf',
     lampPost: '/models/lamppost.gltf'
 }
 Object.values(models).forEach((url) => useGLTF.preload(url))
+
+export const dim = dims.diorama
 
 const noiseSeed = Math.random()
 const _noise = new ImprovedNoise().noise
@@ -122,17 +125,18 @@ const Scene = ({ numStars = 100, container }: SceneProps) => {
 export const Diorama = () => {
     const scrollContainer = React.useRef<HTMLDivElement>(null)
     return <div style={styles.container} ref={scrollContainer}>
-        <div style={styles.canvas}>
-            <Canvas gl={{ antialias: false }} style={{ width: 'var(--content-width)', height: 'var(--content-width)' }}>
-                <Scene container={scrollContainer} />
-            </Canvas>
-        </div>
+        <Canvas gl={{ antialias: false }}>
+            <Scene container={scrollContainer} />
+        </Canvas>
         <style jsx global>{`
         canvas {
             image-rendering: -moz-crisp-edges;
             image-rendering: -webkit-optimize-contrast;
             image-rendering: pixelated;
             image-rendering: optimize-contrast;
+            border-radius: 4px;
+            position: relative;
+            z-index: -1;
         }
         `}</style>
     </div>
@@ -140,15 +144,10 @@ export const Diorama = () => {
 
 
 const styles = styleSheet({
-    canvas: {
-        position: 'sticky',
-        inset: 0
-    },
     container: {
         position: 'relative',
-        height: 'var(--content-width)',
-        width: 'var(--content-width)',
-        overflowY: 'scroll',
+        width: dim.width,
         borderRadius: '4px',
+        aspectRatio: '1 / 1',
     }
 })

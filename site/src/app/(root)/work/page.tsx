@@ -1,7 +1,7 @@
 import { Box, Heading, Subheading, Text } from "@/ui/components";
 
 export default function Page() {
-    return <Box>
+    return <Box className="content">
         <Heading>Work</Heading>
         <Box gap="xxlarge">
             <WorkEntry id="zoom">
