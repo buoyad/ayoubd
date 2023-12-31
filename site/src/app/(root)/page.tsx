@@ -1,11 +1,15 @@
+import * as React from 'react'
 import Link from 'next/link'
 import { Box, Heading, Text } from '../../ui/components'
-import { Diorama } from '@/ui/drawings/diorama'
+
+const Diorama = React.lazy(() => import('@/ui/drawings/diorama').then((m) => ({ default: m.Diorama })))
 
 export default function Home() {
   return (
     <Box>
-      <Diorama />
+      <React.Suspense fallback={<p>loading...</p>}>
+        <Diorama />
+      </React.Suspense>
       <Heading style={{ paddingTop: 64 }}>Hi, I'm Danny</Heading>
 
       <Text>

@@ -2,9 +2,8 @@
 import * as React from 'react'
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { styleSheet } from '../util'
-import { BoxGeometry, Spherical, Vector3 } from 'three';
-import { ContactShadows, OrbitControls, PerspectiveCamera, Sky, Stars, Stats, useGLTF } from '@react-three/drei';
-import { mix } from 'framer-motion';
+import { Spherical, Vector3 } from 'three';
+import { OrbitControls, PerspectiveCamera, Sky, Stars, Stats, useGLTF } from '@react-three/drei';
 import { ImprovedNoise } from 'three/examples/jsm/Addons.js';
 
 const models = {
