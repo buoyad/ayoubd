@@ -125,7 +125,6 @@ export const Diorama = () => {
         <div style={styles.canvas}>
             <Canvas gl={{ antialias: false }} style={{ width: 'var(--content-width)', height: 'var(--content-width)' }}>
                 <Scene container={scrollContainer} />
-                <Stats parent={scrollContainer} />
             </Canvas>
         </div>
         <style jsx global>{`
