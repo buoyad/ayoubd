@@ -2,9 +2,12 @@
 import * as React from 'react'
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { styleSheet } from '../util'
-import { mix, useScroll, useTime, useTransform } from 'framer-motion';
-import { BoxGeometry, BufferAttribute, Euler, Spherical } from 'three';
-import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import { BoxGeometry, Spherical } from 'three';
+import { OrbitControls, PerspectiveCamera, Sky, Stars } from '@react-three/drei';
+import { mix } from 'framer-motion';
+import { ImprovedNoise } from 'three/examples/jsm/Addons.js';
+
+const noise = new ImprovedNoise().noise
 
 type SegmentProps = {
     p?: number,
@@ -16,25 +19,37 @@ type SegmentProps = {
 }
 const BoxSegment = ({ p, size = .1, posX, posY, posZ, height }: SegmentProps) => {
     const geometryRef = React.useRef<BoxGeometry>(null)
-    return <mesh position={[posX, posY + height / 2, posZ]}>
-        <boxGeometry args={[size, height, size]} ref={geometryRef} />
-        <meshBasicMaterial color={"green"} />
-        <lineSegments>
-            <edgesGeometry attach="geometry" args={[geometryRef.current]} />
-            <lineBasicMaterial color={"black"} />
-        </lineSegments>
-    </mesh>
+    return <group>
+        <mesh position={[posX, posY + height / 2, posZ]}>
+            <boxGeometry args={[size, height, size]} ref={geometryRef} />
+            <meshBasicMaterial color={"green"} />
+        </mesh>
+        <mesh position={[posX, posY + height / 2, posZ]}>
+            <lineSegments position={[0, 0, 0]}>
+                <edgesGeometry attach="geometry" args={[geometryRef.current]} />
+                <lineBasicMaterial color="black" />
+            </lineSegments>
+        </mesh>
+    </group>
 }
 
 const Landscape = () => {
     const minX = -1, maxX = 1, minZ = -1, maxZ = 1, minY = -1, maxY = 1
 
-    const baseSize = .1
+    const baseSize = .2
     const boxes = []
+
+    const genHeight = (ix: number, iz: number) => {
+        const spatialScale = 3
+        const x = ix / (maxX - minX) * spatialScale, z = iz / (maxZ - minZ) * spatialScale
+        const h = noise(x, 0, z) / 4 + 1
+        return h
+    }
+
     let p = 0
-    for (let ix = minX; ix < maxX; ix += baseSize) {
-        for (let iz = minZ; iz < maxZ; iz += baseSize) {
-            boxes.push(<BoxSegment size={baseSize} posX={ix} posY={minY} posZ={iz} height={1 + Math.abs(ix) + Math.abs(iz)} />)
+    for (let ix = minX; ix <= maxX; ix += baseSize) {
+        for (let iz = minZ; iz <= maxZ; iz += baseSize) {
+            boxes.push(<BoxSegment key={p} size={baseSize} posX={ix} posY={minY} posZ={iz} height={genHeight(ix, iz)} />)
             p++
         }
     }
@@ -49,8 +64,7 @@ type SceneProps = {
     container: React.RefObject<HTMLDivElement>
 }
 const Scene = ({ numStars = 100, container }: SceneProps) => {
-    const { gl, viewport } = useThree(({ gl, viewport }) => ({ gl, viewport }))
-    const time = useTime()
+    const gl = useThree(({ gl }) => gl)
 
     useFrame(({ camera }) => {
         const prev = new Spherical().setFromCartesianCoords(camera.position.x, camera.position.y, camera.position.z)
@@ -66,6 +80,8 @@ const Scene = ({ numStars = 100, container }: SceneProps) => {
         <Landscape />
         <PerspectiveCamera makeDefault={true} position={[5, 0, 0]} />
         <OrbitControls target={[0, 0, 0]} enablePan={false} enableRotate={true} enabled minDistance={3} maxDistance={12} />
+        <Sky sunPosition={[0, 0, 2]} rayleigh={7} turbidity={100} />
+        <Stars radius={900} />
     </>
 }
 
