@@ -12,7 +12,7 @@ type Props = {
 export const BadgeLink = (props: Props) => {
     const external = props.href.toString().includes('http')
     return (
-        <Link style={styles.container} href={props.href} target={external ? '_blank' : 'undefined'}>
+        <Link style={styles.container} href={props.href} target={external ? '_blank' : '_self'}>
             <Icon name={props.icon} style={styles.icon} />
             {props.text}
         </Link>
