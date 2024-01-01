@@ -22,10 +22,11 @@ export const BadgeLink = (props: Props) => {
 const styles = styleSheet({
     container: {
         backgroundColor: 'var(--color-dimHighlight)',
-        padding: '1px 2px',
+        padding: '0 2px',
         border: '1px solid var(--color-dimBorder)',
         borderRadius: '4px',
         color: 'var(--color-text)',
+        whiteSpace: 'nowrap',
     },
     icon: {
         position: 'relative',
