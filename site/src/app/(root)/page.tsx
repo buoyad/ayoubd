@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Box, Heading, Icon, Text } from '../../ui/components'
 import Diorama from './diorama-loader'
 import { styleSheet } from '@/ui/util'
-import meJPG from '@/../public/images/me_sq.jpeg'
+import meJPG from '@/../public/images/me_sq_thumb.jpeg'
 import Image from 'next/image'
 
 export default function Home() {

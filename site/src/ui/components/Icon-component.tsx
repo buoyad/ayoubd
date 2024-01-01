@@ -2,7 +2,7 @@ import * as React from 'react'
 
 // this file is named icon-component because next.js reserves icon.tsx
 
-type IconName = 'warning'
+type IconName = 'warning' | 'color_zoom' | 'color_keybase'
 
 type Props = {
     name: IconName,
@@ -23,6 +23,16 @@ export const Icon = (props: Props) => {
         fill = 'none',
         className,
     } = props
+
+    if (name.startsWith('color')) {
+        return <img
+            src={`/sprites/${name}.svg`}
+            width={width}
+            height={height}
+            className={className}
+            role="img" />
+    }
+
     return <svg
         width={width}
         height={height}

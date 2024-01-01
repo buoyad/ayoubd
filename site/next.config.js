@@ -10,11 +10,6 @@ const nextConfig = {
     experimental: {
         typedRoutes: true
     },
-    logging: {
-        fetches: {
-            fullUrl: true
-        }
-    }
 }
 
 module.exports = (phase, { defaultConfig }) => {
