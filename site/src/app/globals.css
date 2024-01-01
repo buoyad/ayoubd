@@ -29,9 +29,11 @@ ol {
   gap: 1rem;
 }
 
-*:target {
+/* TODO: get this working with Next.js `Link`s
+https://github.com/vercel/next.js/issues/51346 */
+/* *:target {
   scroll-margin-top: var(--header-height);
-}
+} */
 
 body {
   background-color: var(--color-background);

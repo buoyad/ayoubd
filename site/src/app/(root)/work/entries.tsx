@@ -11,7 +11,7 @@ type WorkEntryProps = {
 }
 const WorkEntry = (props: WorkEntryProps) => {
     const { id, dates, company, title, children } = props
-    return <Box id={id}>
+    return <Box id={id} style={{ marginTop: 'calc(-1 * var(--header-height))', paddingTop: 'var(--header-height)' }}>
         <Text bold>{dates}</Text>
         <Box row>
             {props.icon && <Icon name={props.icon} width={28} height={28} />}
