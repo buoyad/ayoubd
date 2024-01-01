@@ -9,6 +9,7 @@ import { Box } from '../../ui/components'
 import Nav from '../nav'
 import Footer from '../footer'
 import { styleSheet } from '@/ui/util'
+import { Analytics } from '../metadata'
 
 export { metadata } from '../metadata'
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <SetInitialColors />
+        <Analytics />
       </head>
       <body className={dmSans.className}>
         <ThemeProvider>

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { Box, Heading, Text } from '../../ui/components'
+import { Box, Heading, Icon, Text } from '../../ui/components'
 import Diorama from './diorama-loader'
 import { styleSheet } from '@/ui/util'
 import meJPG from '@/../public/images/me_sq.jpeg'
@@ -10,6 +10,12 @@ export default function Home() {
   return (
     <Box className="content" gap="large" style={styles.container}>
       <Box style={styles.innerGrid}>
+        <Box row style={styles.warningText}>
+          <Icon name="warning" strokeWidth={0} fill="#ffdd00" />
+          <Text>
+            I am in the process of migrating content from my old website to this new one.<br />Please excuse the mess.
+          </Text>
+        </Box>
         <Image
           src={meJPG}
           style={styles.profilePic}
@@ -28,7 +34,7 @@ export default function Home() {
             and <Link href="/work#keybase">Keybase</Link>.
           </Text>
           <Text>
-            I currently work on personal projects and experiments under the company I founded, <Link href="https://scratchingpost.net" target="_blank">Scratching Post</Link>.
+            I currently work on personal projects and experiments under the company I started, <Link href="https://scratchingpost.net" target="_blank">Scratching Post</Link>.
           </Text>
         </Box>
         <Diorama />
@@ -44,6 +50,12 @@ const styles = styleSheet({
     padding: '4rem 0 0',
     columnGap: 'var(--content-padding-horizontal)',
     gridTemplateColumns: '1fr min(calc(100vw - 2*var(--content-padding-horizontal)), 110ch) 1fr',
+  },
+  warningText: {
+    gridColumn: '1/ -1',
+    placeSelf: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
   },
   innerGrid: {
     display: 'grid',

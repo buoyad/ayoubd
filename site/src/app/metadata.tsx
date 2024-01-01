@@ -53,3 +53,6 @@ const meStructuredData: WithContext<Person> = {
 }
 
 export const InsertStructuredData = () => <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(meStructuredData) }} />
+
+export const Analytics = () => <script data-goatcounter="https://ayoubd.goatcounter.com/count"
+    async src="//gc.zgo.at/count.js"></script>

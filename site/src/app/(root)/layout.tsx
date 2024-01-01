@@ -5,7 +5,7 @@ import { SetInitialColors } from '../../ui/dark-mode'
 import { ThemeProvider } from '../../ui/theme-context'
 import Nav from '../nav'
 import Footer from '../footer'
-import { InsertStructuredData, metadata } from '../metadata'
+import { Analytics, InsertStructuredData, metadata } from '../metadata'
 
 export { metadata } from '../metadata'
 
@@ -19,6 +19,7 @@ export default function RootLayout({
       <head>
         <SetInitialColors />
         <InsertStructuredData />
+        <Analytics />
       </head>
       <body className={dmSans.className}>
         <ThemeProvider>
