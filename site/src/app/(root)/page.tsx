@@ -13,7 +13,7 @@ export default function Home() {
         <Box row style={styles.warningText}>
           <Icon name="warning" strokeWidth={0} fill="#ffdd00" />
           <Text>
-            I am in the process of migrating content from my old website to this new one.<br />Please excuse the mess.
+            I am in the process of migrating content from my <Link href="https://old.ayoubd.com">old website</Link> to this new one.<br />Please excuse the mess.
           </Text>
         </Box>
         <Image
