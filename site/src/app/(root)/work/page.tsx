@@ -1,9 +1,14 @@
 import { Box, Heading, Subheading, Text } from "@/ui/components"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: 'Work',
+}
 
 export default function Page() {
     return <Box className="content">
         <Heading>Work</Heading>
-        <Text bold style={{ paddingBottom: '48px' }}>You can download my resume (PDF) <a href="/docs/resume.pdf" download>here</a></Text>
+        <Text bold style={{ paddingBottom: '48px' }}>You can view my resume (PDF) <a href="/docs/resume.pdf">here</a></Text>
         <Box gap="xxlarge">
             <WorkEntry id="zoom" dates="May 2020 - October 2021" company="Zoom Video Communications">
                 <Text>Bringing end-to-end encryption to Zoom video calls.</Text>

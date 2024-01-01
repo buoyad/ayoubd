@@ -10,10 +10,7 @@ import Nav from '../nav'
 import Footer from '../footer'
 import { styleSheet } from '@/ui/util'
 
-export const metadata: Metadata = {
-  title: 'Danny Ayoub',
-  description: 'Software engineer. Internet person.',
-}
+export { metadata } from '../metadata'
 
 export default function RootLayout({
   children,

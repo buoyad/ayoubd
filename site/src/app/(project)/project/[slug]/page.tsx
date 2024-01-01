@@ -1,7 +1,25 @@
-import React from "react";
-import { getProjectsContent } from "@/lib/content";
-import { Box } from "@/ui/components";
-import Image from "next/image";
+import React from "react"
+import { getProjectsContent } from "@/lib/content"
+import { Box } from "@/ui/components"
+import Image from "next/image"
+import { Metadata, ResolvingMetadata } from "next"
+
+type Props = {
+    params: { slug: string }
+}
+
+export async function generateMetadata(
+    { params }: Props,
+    _parent: ResolvingMetadata
+): Promise<Metadata> {
+    const { title, description } = await _parent
+    const post = (await getProjectsContent()).find((post) => post.slug === params.slug)
+
+    return {
+        title: post?.frontmatter.title ?? title,
+        description: post?.frontmatter.summary ?? description,
+    }
+}
 
 export const dynamic = 'error'
 export const dynamicParams = false
@@ -10,7 +28,7 @@ export async function generateStaticParams() {
     return content.map((post) => ({ slug: post.slug }))
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: Props) {
     const post = (await getProjectsContent()).find((post) => post.slug === params.slug)
     if (!post) {
         return <p>not found</p>
@@ -23,13 +41,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
     </>
 }
 
-type Props = {
+type HeroProps = {
     src: string,
     alt?: string,
     mode?: 'contain' | 'cover',
     style?: React.CSSProperties,
 }
-const HeroImage = (props: Props) => {
+const HeroImage = (props: HeroProps) => {
     const { src, alt = 'a large image representing this project', mode = 'contain', style } = props
     const sizeMatch = src.match(/([0-9]*)x([0-9]*)/)
     let imgComponent

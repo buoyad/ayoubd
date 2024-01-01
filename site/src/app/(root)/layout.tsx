@@ -3,14 +3,11 @@ import '../globals.css'
 import { dmSans } from '@/ui/fonts'
 import { SetInitialColors } from '../../ui/dark-mode'
 import { ThemeProvider } from '../../ui/theme-context'
-import { Box } from '../../ui/components'
 import Nav from '../nav'
 import Footer from '../footer'
+import { InsertStructuredData, metadata } from '../metadata'
 
-export const metadata: Metadata = {
-  title: 'Danny Ayoub',
-  description: 'Software engineer. Internet person.',
-}
+export { metadata } from '../metadata'
 
 export default function RootLayout({
   children,
@@ -21,6 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <SetInitialColors />
+        <InsertStructuredData />
       </head>
       <body className={dmSans.className}>
         <ThemeProvider>
