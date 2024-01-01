@@ -1,17 +1,14 @@
-import { Box, Heading, Subheading, Text } from "@/ui/components";
+import { Box, Heading, Subheading, Text } from "@/ui/components"
 
 export default function Page() {
     return <Box className="content">
         <Heading>Work</Heading>
+        <Text bold style={{ paddingBottom: '48px' }}>You can download my resume (PDF) <a href="/docs/resume.pdf" download>here</a></Text>
         <Box gap="xxlarge">
-            <WorkEntry id="zoom">
-                <Text>May 2020 - October 2021</Text>
-                <Subheading>Zoom</Subheading>
-                <Text>At Zoom I was on the Security Engineering and Security Devops teams.</Text>
+            <WorkEntry id="zoom" dates="May 2020 - October 2021" company="Zoom Video Communications">
+                <Text>Bringing end-to-end encryption to Zoom video calls.</Text>
             </WorkEntry>
-            <WorkEntry id="keybase">
-                <Text>September 2017 - May 2020</Text>
-                <Subheading>Keybase</Subheading>
+            <WorkEntry id="keybase" dates="September 2017 - May 2020" company="Keybase">
                 <Text>At Keybase I was mainly on the desktop team{' '}
                     working on the cross-platform Keybase app. One{' '}
                     codebase was used to build apps for macOS, Windows, Linux, iOS, and Android.</Text>
@@ -20,8 +17,17 @@ export default function Page() {
     </Box>
 }
 
-const WorkEntry = ({ id, children }: { id: string, children: React.ReactNode }) => {
+type WorkEntryProps = {
+    id: string,
+    dates: string,
+    company: string,
+    children?: React.ReactNode,
+}
+const WorkEntry = (props: WorkEntryProps) => {
+    const { id, dates, company, children } = props
     return <Box id={id}>
+        <Text>{dates}</Text>
+        <Subheading>{company}</Subheading>
         {children}
     </Box>
 }

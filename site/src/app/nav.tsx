@@ -1,8 +1,20 @@
 'use client'
 import * as React from 'react'
-import Link from "next/link";
-import { Box } from "../ui/components";
-import { styleSheet } from '@/ui/util';
+import Link from "next/link"
+import { Box } from "../ui/components"
+import { styleSheet } from '@/ui/util'
+
+type ValidHref = React.ComponentProps<typeof Link>['href']
+
+const navItems: { title: string, href: ValidHref }[] = [
+    { title: 'Home', href: '/' },
+    { title: 'Work', href: '/work' },
+    { title: 'Projects', href: '/projects' },
+]
+
+const disabled = [
+    { title: 'Blog', href: '/blog' }
+]
 
 export default function Nav() {
 
@@ -11,14 +23,17 @@ export default function Nav() {
         <Box style={styles.outer}>
             <Box style={styles.container}>
                 <Box row gap="large">
-                    <Link style={styles.navItem} href="/">Home</Link>
-                    <Link style={styles.navItem} href="/blog">Blog</Link>
-                    <Link style={styles.navItem} href="/projects">Projects</Link>
-                    <Link style={styles.navItem} href="/work">Work</Link>
+                    {navItems.map((item) =>
+                        <NavItem key={item.title} {...item} />
+                    )}
                 </Box>
             </Box>
         </Box>
     </>
+}
+
+const NavItem = ({ title, href }: { title: string, href: ValidHref }) => {
+    return <Link style={styles.navItem} href={href}>{title}</Link>
 }
 
 const styles = styleSheet({
@@ -29,7 +44,6 @@ const styles = styleSheet({
         padding: '12px 0',
         margin: '0 auto',
         maxWidth: 'var(--content-width)',
-        // backgroundColor: 'var(--color-background)',
     },
     spacer: { height: '36px' },
     navItem: {

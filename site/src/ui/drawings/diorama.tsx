@@ -1,10 +1,10 @@
 'use client'
 import * as React from 'react'
-import { Canvas, useThree, useFrame } from "@react-three/fiber";
+import { Canvas, useThree, useFrame } from "@react-three/fiber"
 import { styleSheet } from '../util'
-import { type PointLight, Spherical, Vector3 } from 'three';
-import { OrbitControls, PerspectiveCamera, Sky, Stars, Stats, useGLTF } from '@react-three/drei';
-import { ImprovedNoise } from 'three/examples/jsm/Addons.js';
+import { type PointLight, Spherical, Vector3 } from 'three'
+import { OrbitControls, PerspectiveCamera, Sky, Stars, Stats, useGLTF } from '@react-three/drei'
+import { ImprovedNoise } from 'three/examples/jsm/Addons.js'
 import { dims } from './dimensions'
 
 const models = {
