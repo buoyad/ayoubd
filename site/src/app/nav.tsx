@@ -56,5 +56,6 @@ const styles = styleSheet({
         backgroundColor: `rgba(var(--color-background-rgb), .9)`,
         backdropFilter: 'blur(5px) hue-rotate(-50deg) saturate(130%)',
         WebkitBackdropFilter: 'blur(5px) hue-rotate(-50deg) saturate(130%)',
+        height: 'var(--header-height)'
     }
 })

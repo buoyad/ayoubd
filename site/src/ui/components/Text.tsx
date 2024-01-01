@@ -1,10 +1,13 @@
 import { styleSheet } from "../util"
 
 type Props = {
-    bold?: boolean
+    bold?: boolean,
+    inline?: boolean
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>
 export const Text = (_props: Props) => {
-    const { bold, style: propStyle, ...props } = _props
+    const { bold, inline, style: propStyle, ...props } = _props
+
+    const TextComponent = inline ? 'span' : 'p'
 
     const st = []
     if (bold) {
@@ -12,7 +15,7 @@ export const Text = (_props: Props) => {
     }
 
     const style = Object.assign({}, ...st, propStyle)
-    return <p style={style} {...props} />
+    return <TextComponent style={style} {...props} />
 }
 
 const styles = styleSheet({
