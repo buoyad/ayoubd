@@ -9,6 +9,11 @@ const nextConfig = {
     poweredByHeader: false,
     experimental: {
         typedRoutes: true
+    },
+    logging: {
+        fetches: {
+            fullUrl: true
+        }
     }
 }
 
