@@ -2,7 +2,7 @@ import * as React from 'react'
 
 // this file is named icon-component because next.js reserves icon.tsx
 
-type IconName = 'warning' | 'color_zoom' | 'color_keybase'
+export type IconName = 'warning' | 'color_zoom' | 'color_keybase'
 
 type Props = {
     name: IconName,
@@ -12,6 +12,7 @@ type Props = {
     fill?: string,
     strokeWidth?: number,
     className?: string,
+    style?: React.CSSProperties
 }
 export const Icon = (props: Props) => {
     const {
@@ -21,6 +22,7 @@ export const Icon = (props: Props) => {
         stroke = 'var(--color-text)',
         strokeWidth = 1,
         fill = 'none',
+        style,
         className,
     } = props
 
@@ -30,6 +32,7 @@ export const Icon = (props: Props) => {
             width={width}
             height={height}
             className={className}
+            style={style}
             role="img" />
     }
 
@@ -40,6 +43,7 @@ export const Icon = (props: Props) => {
         strokeWidth={strokeWidth}
         className={className}
         color={fill}
+        style={style}
         role="img">
         <use href={`/sprite.svg#${name}`} />
     </svg>

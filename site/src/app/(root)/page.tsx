@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { Box, Heading, Icon, Text } from '../../ui/components'
+import { BadgeLink, Box, Heading, Icon, Text } from '../../ui/components'
 import Diorama from './diorama-loader'
 import { styleSheet } from '@/ui/util'
 import meJPG from '@/../public/images/me_sq_thumb.jpeg'
@@ -30,8 +30,8 @@ export default function Home() {
             I create usable, secure-by-default software that respects user privacy and is delightful to use.
           </Text>
           <Text>
-            I've previously worked at <Link href="/work#zoom">Zoom</Link>{' '}
-            and <Link href="/work#keybase">Keybase</Link>.
+            I've previously worked at <BadgeLink href="/work#zoom" icon="color_zoom" text="Zoom" />{' '}
+            and <BadgeLink icon="color_keybase" href="/work#keybase" text="Keybase" />.
           </Text>
           <Text>
             I currently work on personal projects and experiments under the company I started, <Link href="https://scratchingpost.net" target="_blank">Scratching Post</Link>.
