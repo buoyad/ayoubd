@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { styleSheet } from '../util'
 
 // this file is named icon-component because next.js reserves icon.tsx
 
@@ -32,7 +33,7 @@ export const Icon = (props: Props) => {
             width={width}
             height={height}
             className={className}
-            style={style}
+            style={{ ...styles.icon, ...style }}
             role="img" />
     }
 
@@ -43,8 +44,14 @@ export const Icon = (props: Props) => {
         strokeWidth={strokeWidth}
         className={className}
         color={fill}
-        style={style}
+        style={{ ...styles.icon, ...style }}
         role="img">
         <use href={`/sprite.svg#${name}`} />
     </svg>
 }
+
+const styles = styleSheet({
+    icon: {
+        flexShrink: 0,
+    }
+})

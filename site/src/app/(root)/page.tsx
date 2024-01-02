@@ -5,17 +5,18 @@ import Diorama from './diorama-loader'
 import { styleSheet } from '@/ui/util'
 import meJPG from '@/../public/images/me_sq_thumb.jpeg'
 import Image from 'next/image'
+import { Callout } from '@/ui/components/Callout'
 
 export default function Home() {
   return (
     <Box className="content" gap="large" style={styles.container}>
       <Box style={styles.innerGrid}>
-        <Box row style={styles.warningText}>
-          <Icon name="warning" strokeWidth={0} fill="#ffdd00" />
+        <Callout icon={<Icon name="warning" strokeWidth={0} fill="#ffdd00" />} style={styles.warningText}>
           <Text>
-            I am in the process of migrating content from my <Link href="https://old.ayoubd.com">old website</Link> to this new one.<br />Please excuse the mess.
+            I am in the process of migrating content from
+            my <Link href="https://old.ayoubd.com">old website</Link>.<br />Please excuse the mess.
           </Text>
-        </Box>
+        </Callout>
         <Image
           src={meJPG}
           style={styles.profilePic}
@@ -54,8 +55,6 @@ const styles = styleSheet({
   warningText: {
     gridColumn: '1/ -1',
     placeSelf: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
   },
   innerGrid: {
     display: 'grid',
