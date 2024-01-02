@@ -9,7 +9,7 @@ import { Callout } from '@/ui/components/Callout'
 
 export default function Home() {
   return (
-    <Box className="content" gap="large" style={styles.container}>
+    <Box className="content" style={styles.container}>
       <Box style={styles.innerGrid}>
         <Callout icon={<Icon name="warning" strokeWidth={0} fill="#ffdd00" />} style={styles.warningText}>
           <Text>
