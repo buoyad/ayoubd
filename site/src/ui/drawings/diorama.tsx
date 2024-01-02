@@ -92,10 +92,10 @@ const Landscape = () => {
         }
     }
 
-    return <group onPointerUp={toggleLight}>
+    return <group>
         {boxes}
         <Model url={models.limeTree} scale={.1} position={maxHeightPosition} />
-        <Model url={models.lampPost} scale={.3} position={lampPostPosition} />
+        <Model url={models.lampPost} scale={.3} position={lampPostPosition} onPointerDown={toggleLight} />
         <pointLight position={lampLightPosition} color={'yellow'} intensity={1} ref={lampRef} />
     </group>
 }
