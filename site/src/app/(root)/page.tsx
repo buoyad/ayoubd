@@ -12,7 +12,7 @@ export default function Home() {
     <Box className="content">
       <Box gap="large" style={{ alignItems: 'center' }}>
         <Callout
-          icon={<Icon name="warning" strokeWidth={0} fill="#ffdd00" />}
+          icon={<Icon name="warning" strokeWidth={0} className="text-yellow" />}
           style={styles.warningText}
         >
           <Text>

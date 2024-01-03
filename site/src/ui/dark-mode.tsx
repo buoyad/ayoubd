@@ -84,6 +84,9 @@ export const SetInitialColors = () => {
         ).join('; ')}' + '}';
         style.appendChild(document.createTextNode(colorMode === 'light' ? cssLight : cssDark));
         head.appendChild(style);
+        if (colorMode === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
     })()
     `
 

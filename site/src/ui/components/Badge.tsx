@@ -13,30 +13,15 @@ export const BadgeLink = (props: Props) => {
   const external = props.href.toString().includes('http')
   return (
     <Link
-      style={styles.container}
+      className="rounded border border-gray-200 bg-gray-100 p-0.5 font-medium dark:border-gray-700 dark:bg-gray-800"
       href={props.href}
       target={external ? '_blank' : '_self'}
     >
-      <Icon name={props.icon} style={styles.icon} />
+      <Icon
+        name={props.icon}
+        className="relative top-[-1px] mr-1 inline max-h-[.9em] max-w-[.9em]"
+      />
       {props.text}
     </Link>
   )
 }
-
-const styles = styleSheet({
-  container: {
-    backgroundColor: 'var(--color-dimHighlight)',
-    padding: '2px',
-    border: '1px solid var(--color-dimBorder)',
-    borderRadius: '4px',
-    color: 'var(--color-text)',
-    whiteSpace: 'nowrap',
-  },
-  icon: {
-    position: 'relative',
-    maxHeight: '.9em',
-    maxWidth: '.9em',
-    marginRight: '4px',
-    top: '2px',
-  },
-})

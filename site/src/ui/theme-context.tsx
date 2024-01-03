@@ -69,6 +69,11 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
       const [name, val] = p.split(':')
       root.style.setProperty(name, val)
     })
+    if (newTheme === 'dark') {
+      root.classList.add('dark')
+    } else {
+      root.classList.remove('dark')
+    }
   }
 
   return (
