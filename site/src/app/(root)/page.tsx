@@ -30,9 +30,7 @@ export default function Home() {
           alt={`An image of Danny Ayoub, a man with short black hair and glasses, smiling at the camera sitting at a brown wooden table. His elbows are resting on the table and his arms are crossed. A few tall landscaping trees stand in the background.`}
         />
         <Box>
-          <Text>
-            I'm a software engineer, teacher, and amateur potter based in NYC.
-          </Text>
+          <Text>I'm a software engineer and amateur potter based in NYC.</Text>
           <Text>
             I specialize in product and front-end development for high security
             applications. I create usable, secure-by-default software that
