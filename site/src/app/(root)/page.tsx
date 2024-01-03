@@ -21,7 +21,7 @@ export default function Home() {
             Please excuse the mess.
           </Text>
         </Callout>
-        <Heading style={{ alignSelf: 'flex-start' }}>Hi, I'm Danny</Heading>
+        <Heading className="self-start">Hi, I'm Danny</Heading>
         <Image
           src={meJPG}
           style={styles.profilePic}

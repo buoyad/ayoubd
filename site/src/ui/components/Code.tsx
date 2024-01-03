@@ -15,10 +15,11 @@ export const Code = (props: any) => {
   )
 }
 
-export const CodeInner = (props: any) => {
+export const CodeInner = ({ className, ...props }: any) => {
   return (
     <code
       {...props}
+      className="text-base"
       style={{
         ...firaCode.style,
         fontFeatureSettings: '"liga" 1',

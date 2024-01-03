@@ -10,7 +10,7 @@ type ValidHref = string
 const navItems = [
   { title: 'Home', href: '/' },
   { title: 'Work', href: '/work' },
-  // { title: 'Writing', href: '/blog' },
+  { title: 'Writing', href: '/blog' },
   { title: 'Projects', href: '/projects' },
 ] as const
 
