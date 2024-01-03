@@ -18,6 +18,7 @@ export async function generateMetadata(
   return {
     title: post?.frontmatter.title ?? title,
     description: post?.frontmatter.summary ?? description,
+    keywords: post?.frontmatter.keywords?.split(',') ?? [],
   }
 }
 

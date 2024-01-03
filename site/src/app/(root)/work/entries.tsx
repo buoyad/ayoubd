@@ -12,15 +12,9 @@ type WorkEntryProps = {
 const WorkEntry = (props: WorkEntryProps) => {
   const { id, dates, company, title, children } = props
   return (
-    <Box
-      id={id}
-      style={{
-        marginTop: 'calc(-1 * var(--header-height))',
-        paddingTop: 'var(--header-height)',
-      }}
-    >
-      <Box row style={{ width: '100%' }}>
-        <Box style={{ marginRight: 'auto' }}>
+    <Box id={id}>
+      <Box row className="w-full justify-between">
+        <Box>
           <Text bold>{dates}</Text>
           <H2 style={{ padding: 0 }}>{company}</H2>
           <Subheading>{title}</Subheading>

@@ -3,16 +3,18 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Box } from '../ui/components'
 import { styleSheet } from '@/ui/util'
+import { usePathname } from 'next/navigation'
 
-type ValidHref = React.ComponentProps<typeof Link>['href']
+type ValidHref = string
 
-const navItems: { title: string; href: ValidHref }[] = [
+const navItems = [
   { title: 'Home', href: '/' },
   { title: 'Work', href: '/work' },
+  // { title: 'Writing', href: '/blog' },
   { title: 'Projects', href: '/projects' },
-]
+] as const
 
-const disabled = [{ title: 'Blog', href: '/blog' }]
+const disabled = []
 
 export default function Nav() {
   return (
@@ -41,14 +43,13 @@ export default function Nav() {
       </style>
       <Box
         style={styles.backgroundImage}
-        className="nav-background-1 absolute left-0 right-0 top-0 z-[2] h-[calc(2*var(--header-height))]"
+        className="nav-background-1 absolute left-0 right-0 top-0 h-[calc(2*var(--header-height))]"
       />
       <Box
         style={styles.backgroundImage2}
-        className="nav-background-2 absolute left-0 right-0 top-0 z-[2] h-[calc(2*var(--header-height))]"
+        className="nav-background-2 absolute left-0 right-0 top-0 h-[calc(2*var(--header-height))]"
       />
-      <Box className="sticky top-0 z-[1] h-[--header-height] w-full backdrop-blur backdrop-filter" />
-      <Box className="sticky top-0 z-10 mx-auto my-0 max-w-[--content-width] py-3 mix-blend-luminosity">
+      <Box className="mx-auto my-0 h-[--header-height] max-w-[--content-width] py-3 mix-blend-luminosity">
         <Box row gap="small">
           {navItems.map((item) => (
             <NavItem key={item.title} {...item} />
@@ -59,10 +60,21 @@ export default function Nav() {
   )
 }
 
-const NavItem = ({ title, href }: { title: string; href: ValidHref }) => {
+const NavItem = ({
+  title,
+  href,
+}: {
+  title: string
+  href: (typeof navItems)[number]['href']
+}) => {
+  const pathname = usePathname()
+  const isCurrent = pathname.includes(href) || (href === '/' && pathname === '')
+  const color = isCurrent
+    ? ' text-gray-900 dark:text-gray-100'
+    : ' text-gray-700 dark:text-gray-300'
   return (
     <Link
-      className="px-2 font-bold text-gray-900 mix-blend-multiply dark:text-gray-50"
+      className={'px-2 font-bold  mix-blend-luminosity' + color}
       href={href}
     >
       {title}

@@ -17,12 +17,15 @@ const cache =
     ? unstable_cache
     : <T extends Function>(fn: T) => fn
 
+const includeDrafts = process.env.NODE_ENV !== 'production'
+
 export type FrontMatter = {
   title: string
   published: Date
   summary?: string
   keywords?: string
   slug?: string
+  draft?: boolean
   heroImage?: string
   heroImageAlt?: string
   heroImageMode?: 'contain' | 'cover'
@@ -66,10 +69,12 @@ const getMDXContent = async (dir: string) => {
       return { content, frontmatter, slug: frontmatter.slug }
     }),
   )
-  content.sort((a, b) =>
-    a.frontmatter.published > b.frontmatter.published ? -1 : 1,
-  )
-  return content
+  const ret = content
+    .filter((a) => (includeDrafts ? true : !a.frontmatter.draft))
+    .sort((a, b) =>
+      a.frontmatter.published > b.frontmatter.published ? 1 : -1,
+    )
+  return ret
 }
 
 export const getBlogContent = async () => await getMDXContent(blogContentDir)
