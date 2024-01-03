@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Blog',
+  title: 'Writing',
 }
 
 type ArrayElement<ArrayType extends readonly unknown[]> =
@@ -14,7 +14,7 @@ export default async function Page() {
   const content = await getBlogContent()
   return (
     <Box className="content">
-      <Heading>Blog</Heading>
+      <Heading>Writing</Heading>
       {content.map((post) => (
         <PostRow key={post.slug} {...post} />
       ))}

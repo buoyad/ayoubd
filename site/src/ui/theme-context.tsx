@@ -81,31 +81,14 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-export const ColorMode = ({ style }: { style?: React.CSSProperties }) => {
+export const ColorMode = ({ className }: { className?: string }) => {
   const { theme, preference, setTheme } = useTheme()
-
-  const optStyle = (option: Theme | undefined) => {
-    const common = {
-      cursor: 'pointer',
-      color: 'var(--color-primary)',
-      transition: 'font-weight 350ms',
-    }
-    if (!theme) {
-      return common
-    }
-    if (preference === option) {
-      return { ...common, fontWeight: 'bold' }
-    }
-    return common
-  }
 
   const options = [
     { label: 'Light', value: 'light', icon: 'sun' },
     { label: 'Dark', value: 'dark', icon: 'moon' },
     { label: 'System', value: undefined, icon: 'gear' },
   ] as const
-
-  const selected = options.find((o) => o.value === preference)!
 
   if (!theme) {
     return null
@@ -117,6 +100,7 @@ export const ColorMode = ({ style }: { style?: React.CSSProperties }) => {
       selected={preference}
       options={options}
       onSelect={setTheme}
+      className={className}
     />
   )
 }

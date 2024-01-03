@@ -7,6 +7,7 @@ type Props<T> = {
   selected: T
   options: readonly { label: string; value: T; icon: IconName }[]
   onSelect: (value: T) => void
+  className?: string
 }
 export function Dropdown<T>(props: Props<T>) {
   const { ariaLabel, selected, options, onSelect } = props
@@ -29,7 +30,7 @@ export function Dropdown<T>(props: Props<T>) {
         }
           `}
       </style>
-      <DropdownMenu.Trigger asChild>
+      <DropdownMenu.Trigger asChild className={props.className}>
         <button
           className={`flex flex-row items-center rounded border
             border-gray-300 py-2 pl-3 pr-1 text-sm font-semibold text-gray-600
