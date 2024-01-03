@@ -5,9 +5,7 @@ import {
   getThemePreference,
   setThemePreference,
 } from './dark-mode'
-import { Box } from './components'
-import { Listbox } from '@headlessui/react'
-import { styleSheet } from './util'
+import { Dropdown } from './components'
 
 export type Theme = 'light' | 'dark'
 
@@ -101,25 +99,24 @@ export const ColorMode = ({ style }: { style?: React.CSSProperties }) => {
     return common
   }
 
-  // return <Listbox value={theme} onChange={setTheme}>
-  //     <Listbox.Button style={}>{theme}</Listbox.Button>
-  // </Listbox>
+  const options = [
+    { label: 'Light', value: 'light', icon: 'sun' },
+    { label: 'Dark', value: 'dark', icon: 'moon' },
+    { label: 'System', value: undefined, icon: 'gear' },
+  ] as const
+
+  const selected = options.find((o) => o.value === preference)!
+
+  if (!theme) {
+    return null
+  }
 
   return (
-    <Box row={true} style={style}>
-      <p onClick={() => setTheme('light')} style={optStyle('light')}>
-        light
-      </p>
-      <p onClick={() => setTheme('dark')} style={optStyle('dark')}>
-        dark
-      </p>
-      <p onClick={() => setTheme(undefined)} style={optStyle(undefined)}>
-        system
-      </p>
-    </Box>
+    <Dropdown
+      ariaLabel="Select site theme"
+      selected={preference}
+      options={options}
+      onSelect={setTheme}
+    />
   )
 }
-
-const styles = styleSheet({
-  dropdownButton: {},
-})

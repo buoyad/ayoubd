@@ -1,5 +1,8 @@
 {
   "javascript.format.semicolons": "remove",
   "typescript.format.semicolons": "remove",
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  }
 }

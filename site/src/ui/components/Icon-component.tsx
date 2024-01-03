@@ -3,7 +3,14 @@ import { styleSheet } from '../util'
 
 // this file is named icon-component because next.js reserves icon.tsx
 
-export type IconName = 'warning' | 'color_zoom' | 'color_keybase'
+export type IconName =
+  | 'warning'
+  | 'sun'
+  | 'moon'
+  | 'gear'
+  | 'chevron-down'
+  | 'color_zoom'
+  | 'color_keybase'
 
 type Props = {
   name: IconName
@@ -20,7 +27,7 @@ export const Icon = (props: Props) => {
     name,
     width = 32,
     height = 32,
-    stroke = 'var(--color-text)',
+    stroke,
     strokeWidth = 1,
     fill = 'none',
     style,

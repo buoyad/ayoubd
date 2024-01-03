@@ -10,8 +10,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "1.7.17",
     "@next/bundle-analyzer": "14.0.4",
+    "@radix-ui/react-dropdown-menu": "2.0.6",
     "@react-three/drei": "9.92.7",
     "@react-three/fiber": "8.15.12",
     "@types/three": "0.160.0",

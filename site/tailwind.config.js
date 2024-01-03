@@ -10,6 +10,8 @@ module.exports = {
       yellow: '#FFDD00',
       gray: colors.gray,
       blue: colors.blue,
+      white: colors.white,
+      black: colors.black,
     },
   },
   plugins: [],
