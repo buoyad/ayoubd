@@ -11,10 +11,14 @@ export default function Home() {
   return (
     <Box className="content">
       <Box gap="large" style={{ alignItems: 'center' }}>
-        <Callout icon={<Icon name="warning" strokeWidth={0} fill="#ffdd00" />} style={styles.warningText}>
+        <Callout
+          icon={<Icon name="warning" strokeWidth={0} fill="#ffdd00" />}
+          style={styles.warningText}
+        >
           <Text>
-            I am in the process of migrating content from
-            my <Link href="https://old.ayoubd.com">old website</Link>.<br />Please excuse the mess.
+            I am in the process of migrating content from my{' '}
+            <Link href="https://old.ayoubd.com">old website</Link>.<br />
+            Please excuse the mess.
           </Text>
         </Callout>
         <Heading style={{ alignSelf: 'flex-start' }}>Hi, I'm Danny</Heading>
@@ -23,21 +27,34 @@ export default function Home() {
           style={styles.profilePic}
           width={600}
           height={600}
-          alt={`An image of Danny Ayoub, a man with short black hair and glasses, smiling at the camera sitting at a brown wooden table. His elbows are resting on the table and his arms are crossed. A few tall landscaping trees stand in the background.`} />
+          alt={`An image of Danny Ayoub, a man with short black hair and glasses, smiling at the camera sitting at a brown wooden table. His elbows are resting on the table and his arms are crossed. A few tall landscaping trees stand in the background.`}
+        />
         <Box>
           <Text>
             I'm a software engineer, teacher, and amateur potter based in NYC.
           </Text>
           <Text>
-            I specialize in product and front-end development for high security applications.
-            I create usable, secure-by-default software that respects user privacy and is delightful to use.
+            I specialize in product and front-end development for high security
+            applications. I create usable, secure-by-default software that
+            respects user privacy and is delightful to use.
           </Text>
           <Text>
-            I've previously worked at <BadgeLink href="/work#zoom" icon="color_zoom" text="Zoom" />{' '}
-            and <BadgeLink icon="color_keybase" href="/work#keybase" text="Keybase" />.
+            I've previously worked at{' '}
+            <BadgeLink href="/work#zoom" icon="color_zoom" text="Zoom" /> and{' '}
+            <BadgeLink
+              icon="color_keybase"
+              href="/work#keybase"
+              text="Keybase"
+            />
+            .
           </Text>
           <Text>
-            I currently work on personal projects and experiments under the company I started, <Link href="https://scratchingpost.net" target="_blank">Scratching Post</Link>.
+            I currently work on personal projects and experiments under the
+            company I started,{' '}
+            <Link href="https://scratchingpost.net" target="_blank">
+              Scratching Post
+            </Link>
+            .
           </Text>
         </Box>
       </Box>
@@ -51,7 +68,8 @@ const styles = styleSheet({
     gridColumn: '1 / -1',
     padding: '4rem 0 0',
     columnGap: 'var(--content-padding-horizontal)',
-    gridTemplateColumns: '1fr min(calc(100vw - 2*var(--content-padding-horizontal)), 80ch) 1fr',
+    gridTemplateColumns:
+      '1fr min(calc(100vw - 2*var(--content-padding-horizontal)), 80ch) 1fr',
   },
   warningText: {
     gridColumn: '1/ -1',
@@ -72,5 +90,5 @@ const styles = styleSheet({
     borderRadius: '4px',
     boxShadow: '2px 2px 2px rgba(var(--color-boxShadow-rgb), .2)',
     aspectRatio: '1 / 1',
-  }
+  },
 })

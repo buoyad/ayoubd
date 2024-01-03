@@ -13,27 +13,27 @@ import { Analytics } from '../metadata'
 export { metadata } from '../metadata'
 
 export default function RootLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode
+  children: React.ReactNode
 }) {
-    return (
-        <html lang="en">
-            <head>
-                <SetInitialColors />
-                <Analytics />
-            </head>
-            <body>
-                <ThemeProvider>
-                    <Nav />
-                    <main>
-                        <Box className="content blog-content" gap="large">
-                            {children}
-                        </Box>
-                    </main>
-                    <Footer />
-                </ThemeProvider>
-            </body>
-        </html>
-    )
+  return (
+    <html lang="en">
+      <head>
+        <SetInitialColors />
+        <Analytics />
+      </head>
+      <body>
+        <ThemeProvider>
+          <Nav />
+          <main>
+            <Box className="content blog-content" gap="large">
+              {children}
+            </Box>
+          </main>
+          <Footer />
+        </ThemeProvider>
+      </body>
+    </html>
+  )
 }

@@ -1,22 +1,22 @@
 main {
-    display: grid;
-    grid-template-columns: 1fr var(--content-width) 1fr;
-    column-gap: var(--content-padding-horizontal);
-    padding: 0 0 48px;
+  display: grid;
+  grid-template-columns: 1fr var(--content-width) 1fr;
+  column-gap: var(--content-padding-horizontal);
+  padding: 0 0 48px;
 }
 
-main>* {
-    grid-column: 2;
+main > * {
+  grid-column: 2;
 }
 
 .content {
-    padding-top: 4rem;
+  padding-top: 4rem;
 }
 
 .blog-content {
-    font-size: 19px;
+  font-size: 19px;
 }
 
 .project-content {
-    font-size: 19px;
+  font-size: 19px;
 }

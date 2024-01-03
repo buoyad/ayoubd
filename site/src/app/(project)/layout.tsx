@@ -27,9 +27,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <Nav />
-          <main style={styles.main}>
-            {children}
-          </main>
+          <main style={styles.main}>{children}</main>
           <Footer />
         </ThemeProvider>
       </body>
@@ -42,5 +40,5 @@ const styles = styleSheet({
     display: 'grid',
     maxWidth: 'unset',
     gridTemplateColumns: '1fr var(--content-width) 1fr',
-  }
+  },
 })

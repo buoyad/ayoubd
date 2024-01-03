@@ -24,9 +24,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <Nav />
-          <main>
-            {children}
-          </main>
+          <main>{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

@@ -1,38 +1,38 @@
 .box {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .boxRow {
-    flex-direction: row;
-    align-items: center;
+  flex-direction: row;
+  align-items: center;
 }
 
-.box>* {
-    min-width: 0;
+.box > * {
+  min-width: 0;
 }
 
 .gap-none {
-    gap: 0;
+  gap: 0;
 }
 
 .gap-small {
-    gap: 8px;
+  gap: 8px;
 }
 
 .gap-medium {
-    gap: 16px;
+  gap: 16px;
 }
 
 .gap-large {
-    gap: 24px;
+  gap: 24px;
 }
 
 .gap-xlarge {
-    gap: 36px;
+  gap: 36px;
 }
 
 .gap-xxlarge {
-    gap: 48px;
+  gap: 48px;
 }
