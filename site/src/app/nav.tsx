@@ -17,14 +17,42 @@ const disabled = [{ title: 'Blog', href: '/blog' }]
 export default function Nav() {
   return (
     <>
-      <Box style={styles.spacer} />
-      <Box style={styles.outer}>
-        <Box style={styles.container}>
-          <Box row gap="small">
-            {navItems.map((item) => (
-              <NavItem key={item.title} {...item} />
-            ))}
-          </Box>
+      <style>
+        {`
+        @keyframes rotateHue {
+          from {
+            filter: hue-rotate(0deg) blur(10px);
+            background-position: 0 0;
+          }
+          to {
+            filter: hue-rotate(360deg) blur(10px);
+            background-position: 700px 0;
+          }
+        }
+
+        .nav-background-1 {
+          animation: rotateHue 60s linear infinite;
+        }
+
+        .nav-background-2 {
+          animation: rotateHue 30s linear -9s reverse infinite;
+        }
+      `}
+      </style>
+      <Box
+        style={styles.backgroundImage}
+        className="nav-background-1 absolute left-0 right-0 top-0 z-[2] h-[calc(2*var(--header-height))]"
+      />
+      <Box
+        style={styles.backgroundImage2}
+        className="nav-background-2 absolute left-0 right-0 top-0 z-[2] h-[calc(2*var(--header-height))]"
+      />
+      <Box className="sticky top-0 z-[1] h-[--header-height] w-full backdrop-blur backdrop-filter" />
+      <Box className="sticky top-0 z-10 mx-auto my-0 max-w-[--content-width] py-3 mix-blend-luminosity">
+        <Box row gap="small">
+          {navItems.map((item) => (
+            <NavItem key={item.title} {...item} />
+          ))}
         </Box>
       </Box>
     </>
@@ -33,36 +61,22 @@ export default function Nav() {
 
 const NavItem = ({ title, href }: { title: string; href: ValidHref }) => {
   return (
-    <Link style={styles.navItem} href={href}>
+    <Link
+      className="px-2 font-bold text-gray-900 mix-blend-multiply dark:text-gray-50"
+      href={href}
+    >
       {title}
     </Link>
   )
 }
 
 const styles = styleSheet({
-  container: {
-    width: '100%',
-    position: 'sticky',
-    top: 0,
-    padding: '12px 0',
-    margin: '0 auto',
-    maxWidth: 'var(--content-width)',
-    mixBlendMode: 'luminosity',
+  backgroundImage: {
+    backgroundImage: 'url(/sprites/header.svg)',
+    backgroundRepeat: 'repeat-x',
   },
-  spacer: { height: '36px' },
-  navItem: {
-    // backgroundColor: 'rgba(var(--color-background-rgb), .9)',
-    fontWeight: 'bold',
-    color: 'var(--color-text)',
-    padding: '0 8px',
-    mixBlendMode: 'luminosity',
-  },
-  outer: {
-    position: 'sticky',
-    top: 0,
-    backgroundColor: `rgba(var(--color-background-rgb), .2)`,
-    backdropFilter: 'blur(5px) saturate(130%)',
-    WebkitBackdropFilter: 'blur(5px) saturate(130%)',
-    height: 'var(--header-height)',
+  backgroundImage2: {
+    backgroundImage: 'url(/sprites/header2.svg)',
+    backgroundRepeat: 'repeat-x',
   },
 })

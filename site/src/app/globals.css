@@ -27,7 +27,7 @@
   }
 
   *::marker {
-    @apply text-gray-950 dark:text-gray-50;
+    @apply text-gray-900 dark:text-gray-50;
   }
 
   ul,
