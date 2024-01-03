@@ -7,9 +7,9 @@ const components: MDXRemoteProps['components'] = {
   h1: (props) => <Heading {...props} />,
   pre: (props) => <Code {...props} />,
   code: (props) => <CodeInner {...props} />,
-  // @ts-ignore
   a: ({ ref, href, ...props }) => (
     <Link
+      // @ts-ignore
       href={href!}
       target={href!.includes('http') ? '_blank' : '_self'}
       {...props}
