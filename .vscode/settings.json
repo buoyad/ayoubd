@@ -1,4 +1,5 @@
 {
-    "javascript.format.semicolons": "remove",
-    "typescript.format.semicolons": "remove"
+  "javascript.format.semicolons": "remove",
+  "typescript.format.semicolons": "remove",
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
