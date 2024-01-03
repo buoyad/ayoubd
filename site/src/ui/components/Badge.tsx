@@ -13,7 +13,7 @@ export const BadgeLink = (props: Props) => {
   const external = props.href.toString().includes('http')
   return (
     <Link
-      className="rounded border border-gray-200 bg-gray-100 p-0.5 font-medium dark:border-gray-700 dark:bg-gray-800"
+      className="whitespace-nowrap rounded border border-gray-200 bg-gray-100 p-0.5 font-medium dark:border-gray-700 dark:bg-gray-800"
       href={props.href}
       target={external ? '_blank' : '_self'}
     >
