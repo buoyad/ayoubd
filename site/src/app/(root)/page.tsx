@@ -25,6 +25,7 @@ export default function Home() {
         <Image
           src={meJPG}
           style={styles.profilePic}
+          className="w-10/12 sm:w-2/6"
           width={600}
           height={600}
           alt={`An image of Danny Ayoub, a man with short black hair and glasses, smiling at the camera sitting at a brown wooden table. His elbows are resting on the table and his arms are crossed. A few tall landscaping trees stand in the background.`}
@@ -81,9 +82,6 @@ const styles = styleSheet({
     gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
   },
   profilePic: {
-    maxWidth: '600px',
-    width: '100%',
-    height: '100%',
     objectFit: 'cover',
     borderRadius: '4px',
     boxShadow: '2px 2px 2px rgba(var(--color-boxShadow-rgb), .2)',
