@@ -25,3 +25,30 @@ export const BadgeLink = (props: Props) => {
     </Link>
   )
 }
+
+type IconBadgeProps = {
+  icon: IconName
+  children?: React.ReactNode
+  href?: string
+}
+
+export const IconBadge = (props: IconBadgeProps) => {
+  const Container = !!props.href ? 'a' : 'div'
+  const containerProps = !!props.href ? { href: props.href } : {}
+
+  return (
+    <Container
+      {...containerProps}
+      className={`flex flex-row items-center rounded border border-gray-300 px-2 py-2 text-sm font-semibold text-gray-600 hover:bg-gray-200 active:border-gray-400 active:bg-gray-300 dark:border-gray-700 dark:text-gray-400
+    dark:hover:bg-gray-800 dark:active:border-gray-600 active:dark:bg-gray-700`}
+    >
+      <Icon
+        name={props.icon}
+        width={20}
+        height={20}
+        className="stroke-gray-600 dark:stroke-gray-400"
+      />
+      {props.children}
+    </Container>
+  )
+}

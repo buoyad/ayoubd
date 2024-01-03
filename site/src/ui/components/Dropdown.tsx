@@ -60,7 +60,7 @@ export function Dropdown<T>(props: Props<T>) {
           {options.map((option, idx) => (
             <DropdownMenu.Item
               key={idx}
-              className="flex flex-row items-center rounded stroke-gray-600 py-2 pl-2 pr-6 hover:bg-gray-800 hover:stroke-gray-50 hover:text-gray-50 dark:stroke-gray-400 dark:hover:bg-gray-50 dark:hover:stroke-gray-800 dark:hover:text-gray-800"
+              className="flex flex-row items-center rounded stroke-gray-600 py-2 pl-2 pr-6 font-medium hover:bg-gray-800 hover:stroke-gray-50 hover:text-gray-50 dark:stroke-gray-400 dark:hover:bg-gray-50 dark:hover:stroke-gray-800 dark:hover:text-gray-800"
               onSelect={() => onSelect(option.value)}
             >
               <Icon

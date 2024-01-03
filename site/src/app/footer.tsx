@@ -1,5 +1,5 @@
 'use client'
-import { Box } from '../ui/components'
+import { IconBadge, Box } from '../ui/components'
 import { styleSheet } from '../ui/util'
 import { ColorMode, useTheme } from '../ui/theme-context'
 
@@ -8,7 +8,13 @@ export default function Footer() {
   return (
     <footer style={styles.footer}>
       <Box row style={styles.container} gap="none">
-        <p>hi</p>
+        <Box row>
+          <IconBadge href="https://github.com/buoyad" icon="github" />
+          <IconBadge
+            href="https://www.threads.net/@dannybuoya"
+            icon="threads"
+          />
+        </Box>
         <ColorMode />
       </Box>
     </footer>
