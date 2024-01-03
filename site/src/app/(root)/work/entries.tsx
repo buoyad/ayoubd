@@ -1,4 +1,4 @@
-import { Icon, Box, Text, Heading, Subheading } from '@/ui/components'
+import { Icon, Box, Text, Heading, Subheading, H2 } from '@/ui/components'
 import Link from 'next/link'
 
 type WorkEntryProps = {
@@ -12,12 +12,14 @@ type WorkEntryProps = {
 const WorkEntry = (props: WorkEntryProps) => {
     const { id, dates, company, title, children } = props
     return <Box id={id} style={{ marginTop: 'calc(-1 * var(--header-height))', paddingTop: 'var(--header-height)' }}>
-        <Text bold>{dates}</Text>
-        <Box row>
-            {props.icon && <Icon name={props.icon} width={28} height={28} />}
-            <Heading style={{ padding: 0 }}>{company}</Heading>
+        <Box row style={{ width: '100%', }}>
+            <Box style={{ marginRight: 'auto' }}>
+                <Text bold>{dates}</Text>
+                <H2 style={{ padding: 0 }}>{company}</H2>
+                <Subheading>{title}</Subheading>
+            </Box>
+            {props.icon && <Icon name={props.icon} width={64} height={64} />}
         </Box>
-        <Subheading>{title}</Subheading>
         {children}
     </Box>
 }

@@ -21,7 +21,7 @@ export default function RootLayout({
         <InsertStructuredData />
         <Analytics />
       </head>
-      <body className={dmSans.className}>
+      <body>
         <ThemeProvider>
           <Nav />
           <main>

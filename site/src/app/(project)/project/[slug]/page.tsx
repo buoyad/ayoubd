@@ -1,6 +1,6 @@
 import React from "react"
 import { getProjectsContent } from "@/lib/content"
-import { Box } from "@/ui/components"
+import { Box, Heading } from "@/ui/components"
 import Image from "next/image"
 import { Metadata, ResolvingMetadata } from "next"
 import { styleSheet } from "@/ui/util"
@@ -38,6 +38,7 @@ export default async function Page({ params }: Props) {
         <Box row gap="large" style={styles.inner}>
             {post.frontmatter.heroImage && <HeroImage alt={post.frontmatter.heroImageAlt} src={post.frontmatter.heroImage} mode={post.frontmatter.heroImageMode} style={styles.heroImage} />}
             <Box className="project-content" gap="large" style={styles.content}>
+                <Heading>{post.frontmatter.title}</Heading>
                 {post.content}
             </Box>
         </Box>
@@ -70,7 +71,7 @@ const styles = styleSheet({
         gridColumn: '1 / -1',
         padding: '4rem 0 0',
         columnGap: 'var(--content-padding-horizontal)',
-        gridTemplateColumns: '1fr min(calc(100vw - 2*var(--content-padding-horizontal)), 110ch) 1fr',
+        gridTemplateColumns: '1fr min(calc(100vw - 2*var(--content-padding-horizontal)), 120ch) 1fr',
     },
     inner: {
         gridColumn: 2,

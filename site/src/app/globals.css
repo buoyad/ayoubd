@@ -1,6 +1,9 @@
+@import './css/font.css';
+@import './css/layout.css';
+
 :root {
   --footer-height: 60px;
-  --content-width: min(calc(100vw - 2*var(--content-padding-horizontal)), 65ch);
+  --content-width: min(calc(100vw - 2*var(--content-padding-horizontal)), 80ch);
   --content-padding-horizontal: 12px;
   --header-height: 56px;
   font-size: 16px;
@@ -38,42 +41,10 @@ https://github.com/vercel/next.js/issues/51346 */
 body {
   background-color: var(--color-background);
   color: var(--color-text);
-  transition: background 350ms, background-color 350ms, color 350ms;
 }
 
 *::marker {
   color: var(--color-text);
-}
-
-div {
-  transition: background 350ms, background-color 350ms;
-}
-
-svg {
-  transition: stroke 350ms, stroke-width 150ms;
-}
-
-main {
-  display: grid;
-  grid-template-columns: 1fr var(--content-width) 1fr;
-  column-gap: var(--content-padding-horizontal);
-  padding: 0 0 48px;
-}
-
-main>* {
-  grid-column: 2;
-}
-
-.content {
-  padding-top: 4rem;
-}
-
-.blog-content {
-  font-size: 19px;
-}
-
-.project-content {
-  font-size: 19px;
 }
 
 a {

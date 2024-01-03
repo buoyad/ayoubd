@@ -1,5 +1,5 @@
 export { Box } from './Box'
-export { Heading } from './Heading'
+export { Heading, H2 } from './Heading'
 export { Subheading } from './Subheading'
 export { Code, CodeInner } from './Code'
 export { Text } from './Text'

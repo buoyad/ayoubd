@@ -23,7 +23,7 @@ export default function RootLayout({
                 <SetInitialColors />
                 <Analytics />
             </head>
-            <body className={dmSans.className}>
+            <body>
                 <ThemeProvider>
                     <Nav />
                     <main>

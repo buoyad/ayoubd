@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "@next/bundle-analyzer": "^14.0.4",
     "@react-three/drei": "^9.92.7",
     "@react-three/fiber": "^8.15.12",

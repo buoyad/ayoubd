@@ -22,7 +22,7 @@ export default function Nav() {
         <Box style={styles.spacer} />
         <Box style={styles.outer}>
             <Box style={styles.container}>
-                <Box row gap="large">
+                <Box row gap="small">
                     {navItems.map((item) =>
                         <NavItem key={item.title} {...item} />
                     )}
@@ -44,18 +44,22 @@ const styles = styleSheet({
         padding: '12px 0',
         margin: '0 auto',
         maxWidth: 'var(--content-width)',
+        mixBlendMode: 'luminosity',
     },
     spacer: { height: '36px' },
     navItem: {
-        backgroundColor: 'rgba(var(--color-background-rgb), .9)',
+        // backgroundColor: 'rgba(var(--color-background-rgb), .9)',
+        fontWeight: 'bold',
+        color: 'var(--color-text)',
         padding: '0 8px',
+        mixBlendMode: 'luminosity'
     },
     outer: {
         position: 'sticky',
         top: 0,
-        backgroundColor: `rgba(var(--color-background-rgb), .9)`,
-        backdropFilter: 'blur(5px) hue-rotate(-50deg) saturate(130%)',
-        WebkitBackdropFilter: 'blur(5px) hue-rotate(-50deg) saturate(130%)',
+        backgroundColor: `rgba(var(--color-background-rgb), .2)`,
+        backdropFilter: 'blur(5px) saturate(130%)',
+        WebkitBackdropFilter: 'blur(5px) saturate(130%)',
         height: 'var(--header-height)'
     }
 })

@@ -1,8 +1,9 @@
 'use client'
 import React from "react"
 import { generateCSSVars, getThemePreference, setThemePreference } from "./dark-mode"
-import { colors } from "./colors"
 import { Box } from "./components"
+import { Listbox } from "@headlessui/react"
+import { styleSheet } from "./util"
 
 export type Theme = 'light' | 'dark'
 
@@ -80,9 +81,19 @@ export const ColorMode = ({ style }: { style?: React.CSSProperties }) => {
         return common
     }
 
+    // return <Listbox value={theme} onChange={setTheme}>
+    //     <Listbox.Button style={}>{theme}</Listbox.Button>
+    // </Listbox>
+
     return <Box row={true} style={style}>
         <p onClick={() => setTheme('light')} style={optStyle('light')}>light</p>
         <p onClick={() => setTheme('dark')} style={optStyle('dark')}>dark</p>
         <p onClick={() => setTheme(undefined)} style={optStyle(undefined)}>system</p>
     </Box>
 }
+
+const styles = styleSheet({
+    dropdownButton: {
+
+    }
+})
