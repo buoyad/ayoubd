@@ -66,7 +66,7 @@ Below is some information about Danny's personal life, surrounded by triple quot
 
 """
 Danny has a grey long-haired cat named Casper who he loves very much. 
-He enjoys video games, critiquing movies with friends, riding his bike, and playing guitar.
+He enjoys wheel-throwing pottery, critiquing movies with friends, riding his bike, and playing guitar.
 In late 2022 his mother got into a very severe car accident and he became a full time caretaker for her for over 6 months.
 """
 `;
