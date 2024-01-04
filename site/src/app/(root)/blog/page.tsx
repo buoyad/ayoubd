@@ -1,5 +1,5 @@
 import { getBlogContent } from '@/lib/content'
-import { Box, Heading, Subheading } from '../../../ui/components'
+import { Box, Heading, Subheading, Text } from '../../../ui/components'
 import Link from 'next/link'
 import { Metadata } from 'next'
 
@@ -28,10 +28,15 @@ const PostRow = ({
   slug,
 }: ArrayElement<Awaited<ReturnType<typeof getBlogContent>>>) => {
   return (
-    <Box gap="none">
-      <Subheading>
-        <Link href={`/blog/${slug}`}>{frontmatter.title}</Link>
-      </Subheading>
+    <Box gap="none" className="w-full">
+      <Box row className="w-full justify-between">
+        <Subheading>
+          <Link href={`/blog/${slug}`}>{frontmatter.title}</Link>
+        </Subheading>
+        {frontmatter.draft && (
+          <Text className="text-sm font-normal">draft</Text>
+        )}
+      </Box>
       {!!frontmatter.summary && <p>{frontmatter.summary}</p>}
     </Box>
   )

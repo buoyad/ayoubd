@@ -1,4 +1,5 @@
 'use client'
+import { Button } from './Button'
 import { Icon, IconName } from './Icon-component'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
@@ -31,13 +32,7 @@ export function Dropdown<T>(props: Props<T>) {
           `}
       </style>
       <DropdownMenu.Trigger asChild className={props.className}>
-        <button
-          className={`flex flex-row items-center rounded border
-            border-gray-300 py-2 pl-3 pr-1 text-sm font-semibold text-gray-600
-            hover:bg-gray-200 active:border-gray-400 active:bg-gray-300 dark:border-gray-700 dark:text-gray-400
-            dark:hover:bg-gray-800 dark:active:border-gray-600 active:dark:bg-gray-700`}
-          aria-label={ariaLabel}
-        >
+        <Button aria-label={ariaLabel} className="pl-3 pr-1">
           <Icon
             name={selectedOption.icon}
             width={16}
@@ -51,7 +46,7 @@ export function Dropdown<T>(props: Props<T>) {
             height={16}
             className="mr-1 stroke-gray-600 dark:stroke-gray-400"
           />
-        </button>
+        </Button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content

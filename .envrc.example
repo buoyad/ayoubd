@@ -2,4 +2,4 @@ export NODE_ENV=development
 export SITE_URL=http://localhost:3000
 export NEXT_PUBLIC_API_URL=http://localhost:3001
 
-export ADMIN_PW_HASH=<sha256 hash>
+export OPENAI_API_KEY=<key>
