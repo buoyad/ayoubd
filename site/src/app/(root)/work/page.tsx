@@ -14,7 +14,6 @@ export default function Page() {
       <Text bold style={{ paddingBottom: '48px' }}>
         You can view my resume (PDF) <a href="/docs/resume.pdf">here</a>
       </Text>
-      <ChatThread />
       <Box gap="xxlarge">
         <ZoomEntry />
         <KeybaseEntry />
