@@ -39,7 +39,7 @@ class Client {
   ws: WebSocket;
   chatter: Chatter;
 
-  _idleTimeoutSeconds = 60;
+  _idleTimeoutSeconds = 120;
   _idleTimeout: ReturnType<typeof setTimeout> | null = null;
 
   constructor(
@@ -57,6 +57,9 @@ class Client {
     if (this._idleTimeout) {
       clearTimeout(this._idleTimeout);
     }
+    if (this.ws.readyState !== this.ws.OPEN) {
+      return;
+    }
     this._idleTimeout = setTimeout(() => {
       console.log(`idle timeout: ${this.id}`);
       this.sendMessage({
@@ -71,6 +74,7 @@ class Client {
 
   sendFromChatter = (m: Message) => {
     this.sendMessage(m);
+    this.resetIdleTimeout();
   };
 
   sendMessage = (data: Message) => {

@@ -2,6 +2,7 @@
 import * as React from 'react'
 import { socketAPI } from './api'
 import { usePathname } from 'next/navigation'
+import debounce from 'lodash/debounce'
 
 type Message = {
   type: 'system' | 'user'
@@ -9,20 +10,32 @@ type Message = {
   message: string
 }
 
+export const maxThreadLength = 10
+
 export const useChat = () => {
   // set up websocket and chat thread state
   const [socket, setSocket] = React.useState<WebSocket | null>(null)
   const [thread, setThread] = React.useState<Message[]>([])
   const [canSend, setCanSend] = React.useState(false)
+  const [status, _setStatus] = React.useState<
+    'waiting' | 'ready' | 'disconnected' | 'connecting'
+  >('connecting')
+
+  const setStatus = React.useCallback(debounce(_setStatus, 100), [])
 
   // watch pathname to disconnect on route change
   const pathname = usePathname()
 
   const sendMessage = (message: string) => {
+    if (thread.length >= maxThreadLength) {
+      disconnect()
+      return
+    }
     const newMsg = { type: 'user', sender: 'client', message } as const
     setThread((prevChat) => [...prevChat, newMsg])
     if (socket) {
       socket.send(JSON.stringify(newMsg))
+      setStatus('waiting')
     }
   }
 
@@ -33,6 +46,12 @@ export const useChat = () => {
       ...prevChat,
       { type: message.type, sender: 'server', message: message.message },
     ])
+    if (message.type === 'user') {
+      setStatus('ready')
+    }
+    if (thread.length >= maxThreadLength) {
+      disconnect()
+    }
   }
 
   const connect = () => {
@@ -47,15 +66,19 @@ export const useChat = () => {
     if (socket) {
       socket.close()
       setCanSend(false)
-      console.log('disconnected')
+      setStatus('disconnected')
     }
   }
 
   const checkReadyState = () => {
-    if (socket) {
-      setCanSend(socket.readyState === socket.OPEN)
+    if (socket?.readyState === socket?.OPEN) {
+      setCanSend(true)
+      setStatus('ready')
     } else {
       setCanSend(false)
+    }
+    if (socket?.readyState === socket?.CLOSED) {
+      setStatus('disconnected')
     }
   }
 
@@ -70,5 +93,5 @@ export const useChat = () => {
     return () => disconnect()
   }, [pathname])
 
-  return { thread, sendMessage, canSend }
+  return { thread, sendMessage, canSend: canSend && status === 'ready', status }
 }

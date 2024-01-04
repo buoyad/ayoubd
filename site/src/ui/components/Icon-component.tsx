@@ -11,6 +11,7 @@ export type IconName =
   | 'chevron-down'
   | 'github'
   | 'threads'
+  | 'openai'
   | 'color_zoom'
   | 'color_keybase'
 

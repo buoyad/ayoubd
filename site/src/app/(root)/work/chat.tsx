@@ -1,10 +1,20 @@
 'use client'
-import { useChat } from '@/lib/chat'
-import { Box, Button } from '@/ui/components'
+import { maxThreadLength, useChat } from '@/lib/chat'
+import { Box, Button, Icon, Text } from '@/ui/components'
 import * as React from 'react'
 
+const usernames = { server: '@Ai', client: '@You' }
+
+const placeholders = [
+  'What can you tell me about Danny?',
+  'What professional accomplishment is Danny most proud of?',
+  'What does Danny enjoy in his free time?',
+]
+const randPlaceholder =
+  placeholders[Math.floor(Math.random() * placeholders.length)]
+
 export const ChatThread = () => {
-  const { thread, sendMessage, canSend } = useChat()
+  const { thread, sendMessage, canSend, status } = useChat()
   const scrollRef = React.useRef<HTMLDivElement>(null)
 
   const [message, setMessage] = React.useState('')
@@ -22,21 +32,48 @@ export const ChatThread = () => {
     })
   }, [thread])
 
+  const userMessages = thread.filter((m) => m.type === 'user')
+  const idleMessage = thread.filter(
+    (m) => m.type === 'system' && m.message === 'idle',
+  )
   return (
-    <Box className="max-h-64 w-full shrink-0 rounded bg-gray-100 dark:bg-gray-900">
+    <Box className="mb-8 max-h-[500px] w-full shrink-0 rounded bg-gray-100 dark:bg-gray-900">
       <Box
-        className="w-full overflow-y-auto border-b border-gray-500 p-4"
+        className="w-full overflow-y-auto border-b border-gray-200 p-4 dark:border-gray-800"
         ref={scrollRef}
       >
-        {thread
-          .filter((m) => m.type === 'user')
-          .map((message, index) => (
-            <Box key={index}>
-              {message.sender}: {message.message}
-            </Box>
-          ))}
+        {userMessages.map((message, index) => (
+          <Box row className="!items-start" key={index}>
+            <Text inline bold className="shrink-0">
+              {usernames[message.sender]}:
+            </Text>
+            <Text inline className="flex-1">
+              {message.message}
+            </Text>
+          </Box>
+        ))}
+        {!userMessages.length && (
+          <Text>Ask an AI assistant about my experience</Text>
+        )}
+        {idleMessage.length > 0 && (
+          <Text className="italic">
+            AI chat is idle. Refresh the page to reconnect.
+          </Text>
+        )}
       </Box>
-      <Box className="w-full shrink-0 p-4">
+      <Box className="w-full shrink-0 px-4 pb-4">
+        <Text
+          className={
+            'text-xs italic ' + (status !== 'ready' ? 'visible' : 'invisible')
+          }
+        >
+          {status === 'connecting' && 'connecting...'}
+          {status === 'waiting' && 'waiting for response...'}
+          {status === 'disconnected' && 'disconnected'}
+          {status === 'ready' && 'ready'}
+          {thread.length >= maxThreadLength &&
+            `. Threads are limited to ${maxThreadLength} messages.`}
+        </Text>
         <form
           onSubmit={(e) => e.preventDefault()}
           className="flex w-full flex-row items-start items-center justify-between gap-2"
@@ -44,8 +81,10 @@ export const ChatThread = () => {
           <input
             type="text"
             value={message}
-            className="grow p-2 text-gray-900"
+            placeholder={randPlaceholder}
+            className="grow rounded px-2 py-0.5 font-medium text-gray-900"
             onChange={(e) => setMessage(e.target.value)}
+            disabled={status === 'disconnected'}
           />
           <Button
             disabled={!canSend || !message.trim()}
@@ -55,6 +94,22 @@ export const ChatThread = () => {
             Send
           </Button>
         </form>
+        <Box row>
+          <Icon name="openai" width={30} height={30} />
+          <Box gap="none" className="flex-1 items-start">
+            <Text className="text-xs italic">
+              Powered by GPT-4. Output cannot be trusted, especially if it says
+              something inflammatory about me.
+            </Text>
+            <Text className="text-xs italic">
+              UI is a work in progress. Last updated 1/4/2023. This is just for
+              fun. Seriously, not to be trusted!
+            </Text>
+            <Text className="text-xs italic">
+              Threads are limited to 10 messages.
+            </Text>
+          </Box>
+        </Box>
       </Box>
     </Box>
   )
