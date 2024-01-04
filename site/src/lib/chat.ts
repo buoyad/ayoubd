@@ -41,7 +41,7 @@ export const useChat = () => {
 
   const handleMessage = (event: MessageEvent) => {
     const message = JSON.parse(event.data.toString())
-    console.log('message: ', message)
+    // console.log('message: ', message)
     setThread((prevChat) => [
       ...prevChat,
       { type: message.type, sender: 'server', message: message.message },
@@ -88,7 +88,7 @@ export const useChat = () => {
 
   // connect on mount
   React.useEffect(() => {
-    console.log('pathname is', pathname)
+    // console.log('pathname is', pathname)
     connect()
     return () => disconnect()
   }, [pathname])

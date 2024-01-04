@@ -37,7 +37,10 @@ export const ChatThread = () => {
     (m) => m.type === 'system' && m.message === 'idle',
   )
   return (
-    <Box className="mb-8 max-h-[500px] w-full shrink-0 rounded bg-gray-100 dark:bg-gray-900">
+    <Box
+      className="mb-8 max-h-[500px] w-full shrink-0 scroll-m-4 rounded bg-gray-100 dark:bg-gray-900"
+      id="chat"
+    >
       <Box
         className="w-full overflow-y-auto border-b border-gray-200 p-4 dark:border-gray-800"
         ref={scrollRef}
@@ -102,11 +105,8 @@ export const ChatThread = () => {
               something inflammatory about me.
             </Text>
             <Text className="text-xs italic">
-              UI is a work in progress. Last updated 1/4/2023. This is just for
-              fun. Seriously, not to be trusted!
-            </Text>
-            <Text className="text-xs italic">
-              Threads are limited to 10 messages.
+              UI is a work in progress. Last updated 1/4/2023. Threads are
+              limited to 10 messages.
             </Text>
           </Box>
         </Box>

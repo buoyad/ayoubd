@@ -26,6 +26,7 @@ export default function Home() {
           src={meJPG}
           style={styles.profilePic}
           className="w-10/12 sm:w-2/6"
+          priority={true}
           width={600}
           height={600}
           alt={`An image of Danny Ayoub, a man with short black hair and glasses, smiling at the camera sitting at a brown wooden table. His elbows are resting on the table and his arms are crossed. A few tall landscaping trees stand in the background.`}
@@ -45,7 +46,9 @@ export default function Home() {
               href="/work#keybase"
               text="Keybase"
             />
-            .
+            . You can ask{' '}
+            <BadgeLink href="/work#chat" icon="openai" text="GPT-4" /> about my
+            professional experience.
           </Text>
           <Text>
             I currently work on personal projects and experiments under the
