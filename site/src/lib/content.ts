@@ -72,7 +72,7 @@ const getMDXContent = async (dir: string) => {
   const ret = content
     .filter((a) => (includeDrafts ? true : !a.frontmatter.draft))
     .sort((a, b) =>
-      a.frontmatter.published > b.frontmatter.published ? 1 : -1,
+      a.frontmatter.published > b.frontmatter.published ? -1 : 1,
     )
   return ret
 }
