@@ -105,8 +105,8 @@ export const ChatThread = () => {
               something inflammatory about me.
             </Text>
             <Text className="text-xs italic">
-              UI is a work in progress. Last updated 1/4/2023. Threads are
-              limited to 10 messages.
+              UI and model are a work in progress. Last updated 1/4/2023.
+              Threads are limited to 10 messages.
             </Text>
           </Box>
         </Box>
