@@ -18,7 +18,7 @@ export const PageTitle = ({
 }: Props) => {
   const pub = !!published && dayjs(published)
   return (
-    <Box style={{ paddingBottom: '48px' }} ref={ref as any} {...props}>
+    <Box className="w-full pb-12" ref={ref as any} {...props}>
       <Box row className="w-full items-end justify-between overflow-hidden">
         <Heading style={{ paddingBottom: 0 }}>{title}</Heading>
         {pub && (
