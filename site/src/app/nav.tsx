@@ -68,10 +68,10 @@ const NavItem = ({
   href: (typeof navItems)[number]['href']
 }) => {
   const pathname = usePathname()
-  const isCurrent = pathname.includes(href) || (href === '/' && pathname === '')
-  const color = isCurrent
-    ? ' text-gray-900 dark:text-gray-100'
-    : ' text-gray-700 dark:text-gray-300'
+  const isCurrent =
+    (href !== '/' && pathname.includes(href)) ||
+    (href === '/' && ['/', ''].includes(pathname))
+  const color = isCurrent ? ' text-body' : ' text-gray-500 dark:text-gray-300'
   return (
     <Link
       className={'px-2 font-bold  mix-blend-luminosity' + color}

@@ -1,5 +1,5 @@
 import { getBlogContent } from '@/lib/content'
-import { Box, Heading, Subheading, Text } from '../../../ui/components'
+import { Box, Heading, Icon, Subheading, Text } from '../../../ui/components'
 import Link from 'next/link'
 import { Metadata } from 'next'
 
@@ -34,7 +34,12 @@ const PostRow = ({
           <Link href={`/blog/${slug}`}>{frontmatter.title}</Link>
         </Subheading>
         {frontmatter.draft && (
-          <Text className="text-sm font-normal">draft</Text>
+          <Icon
+            name="eye-none"
+            width={24}
+            height={24}
+            className="stroke-gray-500"
+          />
         )}
       </Box>
       {!!frontmatter.summary && <p>{frontmatter.summary}</p>}

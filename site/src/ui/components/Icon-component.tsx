@@ -9,6 +9,8 @@ export type IconName =
   | 'moon'
   | 'gear'
   | 'chevron-down'
+  | 'pencil-square'
+  | 'eye-none'
   | 'github'
   | 'threads'
   | 'openai'

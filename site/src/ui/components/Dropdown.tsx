@@ -37,7 +37,7 @@ export function Dropdown<T>(props: Props<T>) {
             name={selectedOption.icon}
             width={16}
             height={16}
-            className="mr-1 stroke-gray-600 dark:stroke-gray-400"
+            className="mr-1.5 stroke-gray-600 dark:stroke-gray-400"
           />
           <span className="pr-1">{selectedOption.label}</span>
           <Icon
@@ -51,12 +51,12 @@ export function Dropdown<T>(props: Props<T>) {
       <DropdownMenu.Portal>
         <DropdownMenu.Content
           sideOffset={10}
-          className={`DropdownContent rounded bg-gray-200 p-1 text-sm dark:bg-gray-800`}
+          className={`DropdownContent bg-body rounded-lg border border-gray-300 p-1 text-sm dark:border-gray-800`}
         >
           {options.map((option, idx) => (
             <DropdownMenu.Item
               key={idx}
-              className="flex flex-row items-center rounded stroke-gray-600 py-2 pl-2 pr-6 font-medium hover:bg-gray-800 hover:stroke-gray-50 hover:text-gray-50 dark:stroke-gray-400 dark:hover:bg-gray-50 dark:hover:stroke-gray-800 dark:hover:text-gray-800"
+              className="flex flex-row items-center rounded stroke-gray-600 py-2 pl-2 pr-12 font-medium text-gray-700 hover:bg-gray-800 hover:stroke-gray-50 hover:text-gray-50 dark:stroke-gray-400 dark:text-gray-400 dark:hover:bg-gray-50 dark:hover:stroke-gray-800 dark:hover:text-gray-800"
               onSelect={() => onSelect(option.value)}
             >
               <Icon

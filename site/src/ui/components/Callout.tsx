@@ -20,30 +20,15 @@ export const Callout = (props: Props) => {
     <Box
       row
       gap="none"
-      style={{ ...styles.container, ...props.style }}
-      className={props.className}
+      style={props.style}
+      className={
+        'items-start divide-x divide-[--color-dimBorder] rounded-lg border border-[--color-dimBorder] bg-[--color-dimHighlight]' +
+        ' ' +
+        props.className
+      }
     >
-      <Box style={styles.leftCol}>{icon}</Box>
-      <Box style={styles.rightCol}>{props.children}</Box>
+      <Box className="h-full shrink-0 p-3">{icon}</Box>
+      <Box className="px-3 py-1.5">{props.children}</Box>
     </Box>
   )
 }
-
-const styles = styleSheet({
-  container: {
-    alignItems: 'flex-start',
-    backgroundColor: 'var(--color-dimHighlight)',
-    borderRadius: '8px',
-    border: '1px solid var(--color-dimBorder)',
-  },
-  leftCol: {
-    padding: '12px',
-    height: '100%',
-    borderRight: '1px solid var(--color-dimBorder)',
-    flexShrink: 0,
-  },
-  rightCol: {
-    padding: '6px 12px',
-    boxShadow: '-1px 0px var(--color-dimBorder)',
-  },
-})
