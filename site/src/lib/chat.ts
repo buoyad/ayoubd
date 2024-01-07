@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import debounce from 'lodash/debounce'
 
 type Message = {
+  id: string
   type: 'system' | 'user'
   sender: 'server' | 'client'
   message: string
@@ -31,7 +32,12 @@ export const useChat = () => {
       disconnect()
       return
     }
-    const newMsg = { type: 'user', sender: 'client', message } as const
+    const newMsg = {
+      id: thread.length.toString(),
+      type: 'user',
+      sender: 'client',
+      message,
+    } as const
     setThread((prevChat) => [...prevChat, newMsg])
     if (socket) {
       socket.send(JSON.stringify(newMsg))
@@ -40,12 +46,22 @@ export const useChat = () => {
   }
 
   const handleMessage = (event: MessageEvent) => {
-    const message = JSON.parse(event.data.toString())
-    // console.log('message: ', message)
-    setThread((prevChat) => [
-      ...prevChat,
-      { type: message.type, sender: 'server', message: message.message },
-    ])
+    const message = JSON.parse(event.data.toString()) as Message
+    console.log('message: ', message)
+    setThread((prevChat) => {
+      const res = [...prevChat]
+      if (res.length > 1 && res[res.length - 1]?.id === message.id) {
+        res[res.length - 1].message += message.message
+      } else {
+        res.push({
+          id: message.id,
+          type: message.type,
+          sender: 'server',
+          message: message.message,
+        })
+      }
+      return res
+    })
     if (message.type === 'user') {
       setStatus('ready')
     }
