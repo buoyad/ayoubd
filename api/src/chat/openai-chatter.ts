@@ -79,7 +79,6 @@ export class OpenAIChatter implements Chatter {
       const id = uuidv4()
       let fullMessage = ''
       for await (const chunk of stream) {
-        console.log('openai response', chunk)
         if (!chunk.answer) continue
         fullMessage += chunk.answer
         this.receivedMessageCb({
@@ -89,6 +88,7 @@ export class OpenAIChatter implements Chatter {
           message: (chunk.answer as string) || 'No response',
         })
       }
+      console.log('openai sent message', fullMessage)
       this.thread.push(new AIMessage(fullMessage))
     })
   }
