@@ -101,11 +101,11 @@ export const ChatThread = () => {
           <Icon name="openai" width={30} height={30} />
           <Box gap="none" className="flex-1 items-start">
             <Text className="text-xs italic">
-              Powered by GPT-4. Output cannot be trusted, especially if it says
-              something inflammatory about me.
+              Powered by OpenAI and Retrieval Augmented Generation (RAG). This
+              chatbot may lie.
             </Text>
             <Text className="text-xs italic">
-              UI and model are a work in progress. Last updated 1/4/2023.
+              UI and model are a work in progress. Last updated 1/6/2023.
               Threads are limited to 10 messages.
             </Text>
           </Box>
