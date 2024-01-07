@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { BadgeLink, Box, Heading, Icon, Text } from '../../ui/components'
+import { BadgeLink, Box, Heading, Icon, Text } from '../ui/components'
 import Diorama from './diorama-loader'
 import { styleSheet } from '@/ui/util'
 import meJPG from '@/../public/images/me_sq.jpeg'

@@ -36,5 +36,9 @@ export default async function Page({ params }: Props) {
   if (!post) {
     return <p>not found</p>
   }
-  return post.content
+  return (
+    <Box className="content blog-content" gap="large">
+      {post.content}
+    </Box>
+  )
 }

@@ -1,5 +1,5 @@
 import { getBlogContent } from '@/lib/content'
-import { Box, Heading, Icon, Subheading, Text } from '../../../ui/components'
+import { Box, Heading, Icon, Subheading, Text } from '../../ui/components'
 import Link from 'next/link'
 import { Metadata } from 'next'
 

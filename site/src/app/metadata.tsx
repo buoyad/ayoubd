@@ -1,6 +1,11 @@
 import { Metadata } from 'next'
 import type { Person, WithContext } from 'schema-dts'
 
+// See favicon guide here:
+// https://dev.to/masakudamatsu/favicon-nightmare-how-to-maintain-sanity-3al7
+// Icons generated with:
+// https://realfavicongenerator.net/
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://ayoubd.com/'),
   title: {
@@ -8,7 +13,23 @@ export const metadata: Metadata = {
     default: 'Danny Ayoub',
   },
   description: 'Software engineer. Internet person.',
-  icons: ['/images/favicon.png', '/images/icon.png'],
+  icons: [
+    { rel: 'apple-touch-icon', url: '/images/icons/apple-touch-icon.png?v=2' },
+    { sizes: '48x48', url: '/images/icons/favicon.ico?v=2' },
+    {
+      sizes: 'any',
+      type: 'image/svg+xml',
+      url: '/images/icons/favicon.svg?v=2',
+    },
+    {
+      rel: 'manifest',
+      url: '/images/icons/site.webmanifest?v=2',
+    },
+    {
+      rel: 'shortcut icon',
+      url: '/images/icons/favicon.ico?v=2',
+    },
+  ],
   openGraph: {
     title: 'Danny Ayoub',
     description: 'Software engineer. Internet person.',

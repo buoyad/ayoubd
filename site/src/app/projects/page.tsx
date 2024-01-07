@@ -1,5 +1,5 @@
 import { getProjectsContent } from '@/lib/content'
-import { Box, Heading, Subheading } from '../../../ui/components'
+import { Box, Heading, Subheading } from '../../ui/components'
 import Link from 'next/link'
 import { Metadata } from 'next'
 
@@ -28,7 +28,7 @@ const ProjectRow = ({
 }: ArrayElement<Awaited<ReturnType<typeof getProjectsContent>>>) => {
   return (
     <Box gap="none">
-      <Link href={`/project/${slug}`}>
+      <Link href={`/projects/${slug}`}>
         <Subheading>{frontmatter.title}</Subheading>
       </Link>
       {!!frontmatter.summary && <p>{frontmatter.summary}</p>}
