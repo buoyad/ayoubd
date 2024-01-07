@@ -3,7 +3,6 @@ import type { Person, WithContext } from 'schema-dts'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ayoubd.com/'),
-  alternates: { canonical: 'https://ayoubd.com/' },
   title: {
     template: '%s | Danny Ayoub',
     default: 'Danny Ayoub',
