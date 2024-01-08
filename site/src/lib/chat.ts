@@ -12,6 +12,7 @@ export const useChat = () => {
   const [socket, setSocket] = React.useState<WebSocket | null>(null)
   const [thread, setThread] = React.useState<T.OpenAIMessage[]>([])
   const [canSend, setCanSend] = React.useState(false)
+  const [isIdle, setIsIdle] = React.useState(false)
   const [status, _setStatus] = React.useState<
     'waiting' | 'ready' | 'disconnected' | 'connecting' | 'idle'
   >('connecting')
@@ -89,7 +90,7 @@ export const useChat = () => {
     if (ev) {
       console.log(`socket closed: ${ev.code} ${ev.reason}`)
       if (ev.reason === 'idle') {
-        setStatus('idle')
+        setIsIdle(true)
       }
     }
     if (socket?.readyState === socket?.OPEN) {
@@ -114,5 +115,11 @@ export const useChat = () => {
     return () => disconnect()
   }, [pathname])
 
-  return { thread, sendMessage, canSend: canSend && status === 'ready', status }
+  return {
+    thread,
+    sendMessage,
+    canSend: canSend && status === 'ready',
+    status,
+    isIdle,
+  }
 }

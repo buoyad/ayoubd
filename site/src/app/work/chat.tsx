@@ -14,7 +14,7 @@ const randPlaceholder =
   placeholders[Math.floor(Math.random() * placeholders.length)]
 
 export const ChatThread = () => {
-  const { thread, sendMessage, canSend, status } = useChat()
+  const { thread, sendMessage, canSend, status, isIdle } = useChat()
   const scrollRef = React.useRef<HTMLDivElement>(null)
 
   const [message, setMessage] = React.useState('')
@@ -56,7 +56,7 @@ export const ChatThread = () => {
         {!userMessages.length && (
           <Text>Ask an AI assistant about my experience</Text>
         )}
-        {status === 'idle' && (
+        {isIdle && (
           <Text className="italic">
             AI chat is idle. Refresh the page to reconnect.
           </Text>
