@@ -33,9 +33,7 @@ export const ChatThread = () => {
   }, [thread])
 
   const userMessages = thread.filter((m) => m.type === 'user')
-  const idleMessage = thread.filter(
-    (m) => m.type === 'system' && m.message === 'idle',
-  )
+
   return (
     <Box
       className="mb-8 max-h-[500px] w-full shrink-0 scroll-m-4 rounded bg-gray-100 dark:bg-gray-900"
@@ -51,14 +49,14 @@ export const ChatThread = () => {
               {usernames[message.sender]}:
             </Text>
             <Text inline className="flex-1">
-              {message.message}
+              {message.messageType === 'text' && message.message}
             </Text>
           </Box>
         ))}
         {!userMessages.length && (
           <Text>Ask an AI assistant about my experience</Text>
         )}
-        {idleMessage.length > 0 && (
+        {status === 'idle' && (
           <Text className="italic">
             AI chat is idle. Refresh the page to reconnect.
           </Text>
@@ -79,7 +77,7 @@ export const ChatThread = () => {
         </Text>
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="flex w-full flex-row items-start items-center justify-between gap-2"
+          className="flex w-full flex-row items-center justify-between gap-2"
         >
           <input
             type="text"

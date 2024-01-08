@@ -1,7 +1,7 @@
 import express from 'express'
 import { createServer } from 'http'
-import { createOpenAIChatClient, createSocketServer } from './src/socket'
-import url from 'url'
+import { createSocketServer } from './src/socket'
+import { OpenAIHandler } from './src/chat/openai-handler'
 
 const SITE_URL = process.env.SITE_URL
 if (!SITE_URL) {
@@ -12,15 +12,13 @@ console.log('accepting connections from ' + SITE_URL)
 
 const app = express()
 const server = createServer(app)
-const wss = createSocketServer('/api', createOpenAIChatClient)
+const wss = createSocketServer('/api', (id, ws) => new OpenAIHandler(id, ws))
 
-// Allow CORS from env.SITE_URL
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', SITE_URL)
   next()
 })
 
-// HTTP GET endpoint
 app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello from API!' })
 })
@@ -32,14 +30,11 @@ server.on('upgrade', (request, socket, head) => {
     socket.destroy()
   }
 
-  const pathname = url.parse(request.url || '').pathname
-
   if (wss.shouldHandle(request)) {
     wss.handleUpgrade(request, socket, head, (ws) => {
       wss.emit('connection', ws, request)
     })
   } else {
-    console.log('socket path not allowed: ', pathname, wss.path)
     socket.destroy()
   }
 })

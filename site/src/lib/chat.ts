@@ -2,24 +2,18 @@
 import * as React from 'react'
 import { socketAPI } from './api'
 import { usePathname } from 'next/navigation'
+import * as T from '@/protocol/types'
 import debounce from 'lodash/debounce'
 
-type Message = {
-  id: string
-  type: 'system' | 'user'
-  sender: 'server' | 'client'
-  message: string
-}
-
-export const maxThreadLength = 10
+export const maxThreadLength = process.env.NODE_ENV === 'production' ? 10 : 100
 
 export const useChat = () => {
   // set up websocket and chat thread state
   const [socket, setSocket] = React.useState<WebSocket | null>(null)
-  const [thread, setThread] = React.useState<Message[]>([])
+  const [thread, setThread] = React.useState<T.OpenAIMessage[]>([])
   const [canSend, setCanSend] = React.useState(false)
   const [status, _setStatus] = React.useState<
-    'waiting' | 'ready' | 'disconnected' | 'connecting'
+    'waiting' | 'ready' | 'disconnected' | 'connecting' | 'idle'
   >('connecting')
 
   const setStatus = React.useCallback(debounce(_setStatus, 100), [])
@@ -32,12 +26,14 @@ export const useChat = () => {
       disconnect()
       return
     }
-    const newMsg = {
+    const newMsg: T.OpenAIStreamingTextMessage = {
       id: thread.length.toString(),
       type: 'user',
+      messageType: 'text',
       sender: 'client',
       message,
-    } as const
+      done: true,
+    }
     setThread((prevChat) => [...prevChat, newMsg])
     if (socket) {
       socket.send(JSON.stringify(newMsg))
@@ -46,24 +42,27 @@ export const useChat = () => {
   }
 
   const handleMessage = (event: MessageEvent) => {
-    const message = JSON.parse(event.data.toString()) as Message
-    console.log('message: ', message)
+    const message = JSON.parse(event.data.toString())
+    if (!T.IsOpenAIMessage(message)) return
+    if (message.messageType !== 'text') {
+      // only text handled right now
+      return
+    }
     setThread((prevChat) => {
       const res = [...prevChat]
       if (res.length > 1 && res[res.length - 1]?.id === message.id) {
-        res[res.length - 1].message += message.message
+        const prevMessage = res[res.length - 1] as T.OpenAIStreamingTextMessage
+        prevMessage.message += message.message
+        prevMessage.done = message.done
       } else {
-        res.push({
-          id: message.id,
-          type: message.type,
-          sender: 'server',
-          message: message.message,
-        })
+        res.push(message)
       }
       return res
     })
-    if (message.type === 'user') {
+    if (message.done) {
       setStatus('ready')
+    } else {
+      setStatus('waiting')
     }
     if (thread.length >= maxThreadLength) {
       disconnect()
@@ -86,14 +85,20 @@ export const useChat = () => {
     }
   }
 
-  const checkReadyState = () => {
+  const checkReadyState = (ev?: CloseEvent) => {
+    if (ev) {
+      console.log(`socket closed: ${ev.code} ${ev.reason}`)
+      if (ev.reason === 'idle') {
+        setStatus('idle')
+      }
+    }
     if (socket?.readyState === socket?.OPEN) {
       setCanSend(true)
       setStatus('ready')
     } else {
       setCanSend(false)
     }
-    if (socket?.readyState === socket?.CLOSED) {
+    if (socket?.readyState && socket?.readyState === socket?.CLOSED) {
       setStatus('disconnected')
     }
   }
