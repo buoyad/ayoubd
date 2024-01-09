@@ -1,6 +1,7 @@
 'use client'
 import { maxThreadLength, useChat } from '@/lib/chat'
 import { Box, Button, Icon, Text } from '@/ui/components'
+import * as T from '@/protocol/types'
 import * as React from 'react'
 
 const usernames = { server: '@Ai', client: '@You' }
@@ -44,14 +45,7 @@ export const ChatThread = () => {
         ref={scrollRef}
       >
         {userMessages.map((message, index) => (
-          <Box row className="!items-start" key={index}>
-            <Text inline bold className="shrink-0">
-              {usernames[message.sender]}:
-            </Text>
-            <Text inline className="flex-1">
-              {message.messageType === 'text' && message.message}
-            </Text>
-          </Box>
+          <ChatMessage key={index} message={message} />
         ))}
         {!userMessages.length && (
           <Text>Ask an AI assistant about my experience</Text>
@@ -109,6 +103,20 @@ export const ChatThread = () => {
           </Box>
         </Box>
       </Box>
+    </Box>
+  )
+}
+
+const ChatMessage = ({ message }: { message: T.OpenAIMessage }) => {
+  return (
+    <Box row className="!items-start">
+      <Text inline bold className="shrink-0">
+        {usernames[message.sender]}:
+      </Text>
+      <Text inline className="flex-1">
+        {message.messageType === 'text' &&
+          message.message.replace('\n', '<br/>')}
+      </Text>
     </Box>
   )
 }

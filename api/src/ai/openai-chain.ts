@@ -22,10 +22,7 @@ const historyAwarePrompt = ChatPromptTemplate.fromMessages([
   ],
 ])
 const historyAwareRetrievalPrompt = ChatPromptTemplate.fromMessages([
-  [
-    'system',
-    "Answer the user's questions based on the below context:\n\n{context}",
-  ],
+  ['system', 'Respond to the user based on the below context:\n\n{context}'],
   new MessagesPlaceholder('chat_history'),
   ['user', '{input}'],
 ])

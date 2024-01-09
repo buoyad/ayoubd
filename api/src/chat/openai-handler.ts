@@ -23,14 +23,22 @@ export class OpenAIHandler extends ChatHandler {
     if (!T.IsOpenAIMessage(message)) return
 
     if (message.messageType === 'text') {
-      this.thread.push(new HumanMessage(message.message))
       this.handleTextMessage(message)
+      this.thread.push(new HumanMessage(message.message))
     } else if (message.messageType === 'image') {
       this.handleImageMessage(message)
     }
   }
 
-  sendText = (m: T.OpenAIStreamingTextMessage) => {
+  sendText = (id: string, content: string, done: boolean) => {
+    const m: T.OpenAIStreamingTextMessage = {
+      id,
+      type: 'user',
+      sender: 'server',
+      messageType: 'text',
+      message: content,
+      done,
+    }
     this.send(m)
   }
 
@@ -47,23 +55,9 @@ export class OpenAIHandler extends ChatHandler {
     for await (const chunk of stream) {
       if (!chunk.answer) continue
       fullMessage += chunk.answer
-      this.sendText({
-        id,
-        type: 'user',
-        sender: 'server',
-        messageType: 'text',
-        message: chunk.answer,
-        done: false,
-      })
+      this.sendText(id, chunk.answer, false)
     }
-    this.sendText({
-      id,
-      type: 'user',
-      sender: 'server',
-      messageType: 'text',
-      message: '',
-      done: true,
-    })
+    this.sendText(id, '', true)
     console.log(`${this.id} sent message: ${fullMessage}`)
     this.thread.push(new AIMessage(fullMessage))
   }

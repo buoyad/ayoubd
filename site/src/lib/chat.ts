@@ -3,9 +3,8 @@ import * as React from 'react'
 import { socketAPI } from './api'
 import { usePathname } from 'next/navigation'
 import * as T from '@/protocol/types'
-import debounce from 'lodash/debounce'
 
-export const maxThreadLength = process.env.NODE_ENV === 'production' ? 10 : 100
+export const maxThreadLength = process.env.NODE_ENV === 'production' ? 10 : 10
 
 export const useChat = () => {
   // set up websocket and chat thread state
@@ -13,20 +12,11 @@ export const useChat = () => {
   const [thread, setThread] = React.useState<T.OpenAIMessage[]>([])
   const [canSend, setCanSend] = React.useState(false)
   const [isIdle, setIsIdle] = React.useState(false)
-  const [status, _setStatus] = React.useState<
+  const [status, setStatus] = React.useState<
     'waiting' | 'ready' | 'disconnected' | 'connecting' | 'idle'
   >('connecting')
 
-  const setStatus = React.useCallback(debounce(_setStatus, 100), [])
-
-  // watch pathname to disconnect on route change
-  const pathname = usePathname()
-
   const sendMessage = (message: string) => {
-    if (thread.length >= maxThreadLength) {
-      disconnect()
-      return
-    }
     const newMsg: T.OpenAIStreamingTextMessage = {
       id: thread.length.toString(),
       type: 'user',
@@ -36,10 +26,8 @@ export const useChat = () => {
       done: true,
     }
     setThread((prevChat) => [...prevChat, newMsg])
-    if (socket) {
-      socket.send(JSON.stringify(newMsg))
-      setStatus('waiting')
-    }
+    socket?.send(JSON.stringify(newMsg))
+    setStatus('waiting')
   }
 
   const handleMessage = (event: MessageEvent) => {
@@ -51,7 +39,7 @@ export const useChat = () => {
     }
     setThread((prevChat) => {
       const res = [...prevChat]
-      if (res.length > 1 && res[res.length - 1]?.id === message.id) {
+      if (!!res.length && res[res.length - 1]?.id === message.id) {
         const prevMessage = res[res.length - 1] as T.OpenAIStreamingTextMessage
         prevMessage.message += message.message
         prevMessage.done = message.done
@@ -62,11 +50,6 @@ export const useChat = () => {
     })
     if (message.done) {
       setStatus('ready')
-    } else {
-      setStatus('waiting')
-    }
-    if (thread.length >= maxThreadLength) {
-      disconnect()
     }
   }
 
@@ -110,10 +93,15 @@ export const useChat = () => {
 
   // connect on mount
   React.useEffect(() => {
-    // console.log('pathname is', pathname)
     connect()
     return () => disconnect()
-  }, [pathname])
+  }, [])
+
+  React.useEffect(() => {
+    if (thread.length >= maxThreadLength && status !== 'waiting') {
+      disconnect()
+    }
+  }, [thread, status])
 
   return {
     thread,
