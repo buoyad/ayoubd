@@ -6,15 +6,71 @@ import * as T from '@/protocol/types'
 
 export const maxThreadLength = process.env.NODE_ENV === 'production' ? 10 : 10
 
-export const useChat = () => {
-  // set up websocket and chat thread state
+const useChatSocket = (onMessage: (evt: T.OpenAIMessage) => void) => {
   const [socket, setSocket] = React.useState<WebSocket | null>(null)
-  const [thread, setThread] = React.useState<T.OpenAIMessage[]>([])
-  const [canSend, setCanSend] = React.useState(false)
-  const [isIdle, setIsIdle] = React.useState(false)
   const [status, setStatus] = React.useState<
-    'waiting' | 'ready' | 'disconnected' | 'connecting' | 'idle'
+    'connecting' | 'connected' | 'disconnected'
   >('connecting')
+  const [reason, setReason] = React.useState('')
+
+  const onMessageRaw = (evt: MessageEvent) => {
+    if (typeof evt.data !== 'string') return
+    const messageObj = JSON.parse(evt.data)
+    if (!T.IsOpenAIMessage(messageObj)) return
+    onMessage(messageObj)
+  }
+
+  const socketSend = (message: T.OpenAIMessage) => {
+    socket?.send(JSON.stringify(message))
+  }
+
+  const disconnect = () => {
+    socket?.close()
+  }
+
+  React.useEffect(() => {
+    const socket = socketAPI()
+
+    socket.onopen = () => {
+      setStatus('connected')
+    }
+    socket.onclose = (ev: CloseEvent) => {
+      setReason(ev.reason)
+      setStatus('disconnected')
+    }
+    socket.onmessage = onMessageRaw
+
+    setSocket(socket)
+    return () => socket.close()
+  }, [])
+
+  return { status, reason, socketSend, disconnect }
+}
+
+export const useChat = () => {
+  const [thread, setThread] = React.useState<T.OpenAIMessage[]>([])
+  const [waiting, setWaiting] = React.useState(false)
+  const { status, reason, socketSend, disconnect } = useChatSocket(
+    (message: T.OpenAIMessage) => {
+      if (message.messageType !== 'text') {
+        return
+      }
+      setThread((prevChat) => {
+        const res = [...prevChat]
+        if (!!res.length && res[res.length - 1]?.id === message.id) {
+          const prevMessage = res[
+            res.length - 1
+          ] as T.OpenAIStreamingTextMessage
+          prevMessage.message += message.message
+          prevMessage.done = message.done
+        } else {
+          res.push(message)
+        }
+        return res
+      })
+      setWaiting(!message.done)
+    },
+  )
 
   const sendMessage = (message: string) => {
     const newMsg: T.OpenAIStreamingTextMessage = {
@@ -26,88 +82,21 @@ export const useChat = () => {
       done: true,
     }
     setThread((prevChat) => [...prevChat, newMsg])
-    socket?.send(JSON.stringify(newMsg))
-    setStatus('waiting')
-  }
-
-  const handleMessage = (event: MessageEvent) => {
-    const message = JSON.parse(event.data.toString())
-    if (!T.IsOpenAIMessage(message)) return
-    if (message.messageType !== 'text') {
-      // only text handled right now
-      return
-    }
-    setThread((prevChat) => {
-      const res = [...prevChat]
-      if (!!res.length && res[res.length - 1]?.id === message.id) {
-        const prevMessage = res[res.length - 1] as T.OpenAIStreamingTextMessage
-        prevMessage.message += message.message
-        prevMessage.done = message.done
-      } else {
-        res.push(message)
-      }
-      return res
-    })
-    if (message.done) {
-      setStatus('ready')
-    }
-  }
-
-  const connect = () => {
-    const socket = socketAPI()
-    socket.onmessage = handleMessage
-    socket.onclose = checkReadyState
-    setSocket(socket)
-  }
-
-  // disconnect from websocket server
-  const disconnect = () => {
-    if (socket) {
-      socket.close()
-      setCanSend(false)
-      setStatus('disconnected')
-    }
-  }
-
-  const checkReadyState = (ev?: CloseEvent) => {
-    if (ev) {
-      console.log(`socket closed: ${ev.code} ${ev.reason}`)
-      if (ev.reason === 'idle') {
-        setIsIdle(true)
-      }
-    }
-    if (socket?.readyState === socket?.OPEN) {
-      setCanSend(true)
-      setStatus('ready')
-    } else {
-      setCanSend(false)
-    }
-    if (socket?.readyState && socket?.readyState === socket?.CLOSED) {
-      setStatus('disconnected')
-    }
+    socketSend(newMsg)
+    setWaiting(true)
   }
 
   React.useEffect(() => {
-    checkReadyState()
-  }, [socket?.readyState])
-
-  // connect on mount
-  React.useEffect(() => {
-    connect()
-    return () => disconnect()
-  }, [])
-
-  React.useEffect(() => {
-    if (thread.length >= maxThreadLength && status !== 'waiting') {
+    if (thread.length >= maxThreadLength && !waiting) {
       disconnect()
     }
-  }, [thread, status])
+  }, [thread, waiting])
 
   return {
-    thread,
     sendMessage,
-    canSend: canSend && status === 'ready',
+    thread,
+    waiting,
     status,
-    isIdle,
+    idle: reason === 'idle',
   }
 }

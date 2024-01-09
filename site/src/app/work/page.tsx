@@ -11,10 +11,10 @@ export default function Page() {
   return (
     <Box className="content">
       <Heading>Work</Heading>
-      <Text bold style={{ paddingBottom: '48px' }}>
+      <ChatThread />
+      <Text bold className="pb-10">
         You can view my resume (PDF) <a href="/docs/resume.pdf">here</a>
       </Text>
-      <ChatThread />
       <Box gap="xxlarge">
         <ZoomEntry />
         <KeybaseEntry />
