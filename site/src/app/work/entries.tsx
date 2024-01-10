@@ -70,7 +70,7 @@ export const ZoomEntry = () => (
           Monitoring -{' '}
         </Text>
         <Text inline>
-          Build Grafana dashboards and prometheus alert configurations to
+          Built Grafana dashboards and prometheus alert configurations to
           monitor deployments and scheduled jobs and alert on-call engineers
           when issues arise, increasing S/N ratio of alerts to approach 100%,
           and enabling near perfect uptime guarantee.
