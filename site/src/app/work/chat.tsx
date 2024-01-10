@@ -82,6 +82,10 @@ const ChatMessage = ({
   message: T.OpenAIMessage | 'placeholder'
   inProgress?: boolean
 }) => {
+  const messageText =
+    typeof message === 'object' && message.messageType === 'text'
+      ? message.message.split('\n')
+      : ''
   const content =
     message === 'placeholder' ? (
       <>
@@ -98,8 +102,13 @@ const ChatMessage = ({
           {usernames[message.sender]}:
         </Text>
         <Text inline className="flex-1">
-          {message.messageType === 'text' &&
-            message.message.replace('\n', '<br/>')}
+          {!!messageText &&
+            messageText.map((text, index, arr) => (
+              <React.Fragment key={index}>
+                <Text>{text}</Text>
+                {index !== arr.length - 1 && <br />}
+              </React.Fragment>
+            ))}
           {inProgress && <Waiting className="ml-2" />}
         </Text>
       </>
