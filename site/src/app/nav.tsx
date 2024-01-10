@@ -23,11 +23,11 @@ export default function Nav() {
         {`
         @keyframes rotateHue {
           from {
-            filter: hue-rotate(0deg) blur(10px);
+            filter: hue-rotate(0deg) blur(20px);
             background-position: 0 0;
           }
           to {
-            filter: hue-rotate(360deg) blur(10px);
+            filter: hue-rotate(360deg) blur(20px);
             background-position: 700px 0;
           }
         }
