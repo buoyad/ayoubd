@@ -10,11 +10,10 @@ type ValidHref = string
 const navItems = [
   { title: 'Home', href: '/' },
   { title: 'Work', href: '/work' },
-  { title: 'Writing', href: '/blog' },
   { title: 'Projects', href: '/projects' },
 ] as const
 
-const disabled = []
+const disabled = [{ title: 'Writing', href: '/blog' }]
 
 export default function Nav() {
   return (
