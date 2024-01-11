@@ -16,7 +16,12 @@ const loader = new DirectoryLoader(dataDir, {
 const splitter = new RecursiveCharacterTextSplitter()
 
 export class Retrieval {
-  static instance: { [embeddingKey: string]: Retrieval } = {}
+  private static instance: { [embeddingKey: string]: Retrieval } = {}
+
+  private constructor(embeddings: EmbeddingsInterface) {
+    this.embeddings = embeddings
+    this.retriever = this.#loadDocuments()
+  }
 
   static getInstance(embeddingKey: string, embeddings: EmbeddingsInterface) {
     if (!Retrieval.instance[embeddingKey]) {
@@ -27,11 +32,6 @@ export class Retrieval {
 
   embeddings: EmbeddingsInterface
   retriever: Promise<VectorStoreRetriever>
-
-  private constructor(embeddings: EmbeddingsInterface) {
-    this.embeddings = embeddings
-    this.retriever = this.#loadDocuments()
-  }
 
   #loadDocuments = async () => {
     const documents = await loader.load()

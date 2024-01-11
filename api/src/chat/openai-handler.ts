@@ -64,3 +64,49 @@ export class OpenAIHandler extends ChatHandler {
 
   handleImageMessage = async (message: T.OpenAIImageMessage) => {}
 }
+
+const testMessage = 'all work and no play makes jack a dull boy '
+export class TestHandler extends ChatHandler {
+  intervalID?: NodeJS.Timeout
+
+  constructor(id: string, ws: WebSocket) {
+    super(id, ws)
+    ws.onmessage = this.onmessage
+  }
+
+  onmessage = (evt: MessageEvent) => {
+    const message = JSON.parse(evt.data.toString())
+    console.log('received: ' + message)
+    if (!T.IsOpenAIMessage(message)) return
+    if (message.messageType === 'text') {
+      this.handleTextMessage(message)
+    }
+  }
+
+  sendText = (id: string, content: string, done: boolean) => {
+    const m: T.OpenAIStreamingTextMessage = {
+      id,
+      type: 'user',
+      sender: 'server',
+      messageType: 'text',
+      message: content,
+      done,
+    }
+    this.send(m)
+  }
+
+  handleTextMessage = (message: T.OpenAIStreamingTextMessage) => {
+    const numIterations = Math.floor(Math.random() * 10)
+    let iter = 0
+    const msgID = uuidv4()
+    this.intervalID = setInterval(() => {
+      if (iter > numIterations) {
+        clearInterval(this.intervalID)
+        this.sendText(msgID, '', true)
+        return
+      }
+      this.sendText(msgID, testMessage, false)
+      iter++
+    }, 200)
+  }
+}
