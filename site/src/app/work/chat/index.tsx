@@ -22,7 +22,7 @@ export const ChatThread = () => {
       top: scrollRef.current.scrollHeight,
       behavior: 'smooth',
     })
-  }, [thread])
+  }, [thread.length])
 
   const userMessages = thread.filter((m) => m.type === 'user')
 
