@@ -1,4 +1,4 @@
-import { getBlogContent, getProjectsContent } from '@/lib/content'
+import { getBlogContent, getProjectsContent } from '@/lib/mdx-content'
 import { MetadataRoute } from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -7,7 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: post.frontmatter.published.toISOString().split('T')[0],
   }))
   const projectPosts = (await getProjectsContent()).map((post) => ({
-    url: `https://ayoubd.com/project/${post.slug}`,
+    url: `https://ayoubd.com/projects/${post.slug}`,
     lastModified: post.frontmatter.published.toISOString().split('T')[0],
   }))
 

@@ -1,4 +1,4 @@
-import { getBlogContent } from '@/lib/content'
+import { getBlogContent } from '@/lib/mdx-content'
 import { Box, Heading, Icon, Subheading, Text } from '../../ui/components'
 import Link from 'next/link'
 import { Metadata } from 'next'

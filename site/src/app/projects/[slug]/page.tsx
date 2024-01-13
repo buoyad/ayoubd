@@ -1,5 +1,5 @@
 import React from 'react'
-import { getProjectsContent } from '@/lib/content'
+import { getProjectsContent } from '@/lib/mdx-content'
 import { Box, Heading } from '@/ui/components'
 import Image from 'next/image'
 import { Metadata, ResolvingMetadata } from 'next'

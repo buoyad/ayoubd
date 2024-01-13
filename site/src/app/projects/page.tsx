@@ -1,4 +1,4 @@
-import { getProjectsContent } from '@/lib/content'
+import { getProjectsContent } from '@/lib/mdx-content'
 import { Box, Heading, Subheading } from '../../ui/components'
 import Link from 'next/link'
 import { Metadata } from 'next'

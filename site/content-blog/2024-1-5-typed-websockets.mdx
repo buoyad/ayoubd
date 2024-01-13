@@ -1,0 +1,22 @@
+---
+title: Strongly typed Typescript websocket server with a monorepo
+published: 2024-01-04
+slug: websocket-protocol
+draft: true
+summary: Getting those sweet sweet compile-time guarantees
+keywords: websocket, typescript, protocol
+---
+
+<PageTitle
+  title="Strongly typed websocket protocol"
+  subtitle=""
+  published="2024-01-05"
+/>
+
+I built this site using a Node.js Typescript server and a Next.js client. When I
+was building the [chat](/work#chat) feature, I decided to use websockets for
+easily extensible real-time communication between the server and client. With
+this setup, I wouldn't need to create new endpoints for every type of operation,
+and could just pass messages with different `type`s across the wire. However,
+things quickly got unwieldy when I built the initial version of chat without any
+typings on the websocket.

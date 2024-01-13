@@ -1,4 +1,4 @@
-import { getBlogContent } from '@/lib/content'
+import { getBlogContent } from '@/lib/mdx-content'
 import { Box } from '@/ui/components'
 import { Metadata, ResolvingMetadata } from 'next'
 
