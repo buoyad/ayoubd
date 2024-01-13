@@ -1,26 +1,14 @@
 'use client'
 import * as React from 'react'
 import * as Accordion from '@radix-ui/react-accordion'
-import { maxThreadLength, useChat } from '@/lib/chat'
+import { useChat } from '@/lib/chat'
 import { Box, Button, Icon, Text } from '@/ui/components'
 import * as T from '@/protocol/types'
-import {
-  AnimatePresence,
-  LazyMotion,
-  Variants,
-  domAnimation,
-  m,
-} from 'framer-motion'
+import { ChatInput, Status } from './input'
+import { Waiting } from './waiting'
+import { AnimatePresence, m } from 'framer-motion'
 
 const usernames = { server: '@Ai', client: '@You' }
-
-const placeholders = [
-  'What can you tell me about Danny?',
-  'What professional accomplishment is Danny most proud of?',
-  'What does Danny enjoy in his free time?',
-]
-const randPlaceholder =
-  placeholders[Math.floor(Math.random() * placeholders.length)]
 
 export const ChatThread = () => {
   const { sendMessage, thread, waiting, status, idle } = useChat()
@@ -51,6 +39,9 @@ export const ChatThread = () => {
           className="w-full overflow-y-auto border-b border-gray-200 p-4 dark:border-gray-800"
           ref={scrollRef}
         >
+          <Box row className="w-full items-center justify-center">
+            <Status status={status} idle={idle} />
+          </Box>
           {userMessages.map((message, index) => (
             <ChatMessage
               key={index}
@@ -118,118 +109,6 @@ const ChatMessage = ({
     <Box row className="!items-start">
       {content}
     </Box>
-  )
-}
-
-type ChatInputProps = Pick<
-  ReturnType<typeof useChat>,
-  'status' | 'thread' | 'sendMessage'
-> & { canSend: boolean }
-const ChatInput = ({
-  status,
-  thread,
-  sendMessage,
-  canSend,
-}: ChatInputProps) => {
-  const [message, setMessage] = React.useState('')
-
-  const onSend = () => {
-    sendMessage(message)
-    setMessage('')
-  }
-
-  return (
-    <Box className="w-full shrink-0 px-4 pb-4">
-      <Text
-        className={
-          'text-xs italic ' + (status !== 'connected' ? 'visible' : 'invisible')
-        }
-      >
-        {status === 'connecting' && 'connecting...'}
-        {status === 'disconnected' && 'disconnected'}
-        {status === 'connected' && 'ready'} {/* preserve height */}
-        {thread.length >= maxThreadLength &&
-          `. Threads are limited to ${maxThreadLength} messages.`}
-      </Text>
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        className="flex w-full flex-row items-center justify-between gap-2"
-      >
-        <input
-          type="text"
-          value={message}
-          placeholder={randPlaceholder}
-          className="grow rounded px-2 py-0.5 font-medium text-gray-900"
-          onChange={(e) => setMessage(e.target.value)}
-          disabled={status === 'disconnected'}
-          autoFocus
-        />
-        <Button
-          disabled={!canSend || !message.trim()}
-          onClick={onSend}
-          className=""
-        >
-          Send
-        </Button>
-      </form>
-      <PoweredBy />
-    </Box>
-  )
-}
-
-const PoweredBy = () => {
-  return (
-    <Box row>
-      <Icon name="openai" width={30} height={30} />
-      <Box gap="none" className="flex-1 items-start">
-        <Text className="text-xs italic">
-          Powered by OpenAI and Retrieval Augmented Generation (RAG). This
-          chatbot may lie.
-        </Text>
-        <Text className="text-xs italic">
-          UI and model are a work in progress. Last updated 1/9/2023. Threads
-          are limited to 10 messages.
-        </Text>
-      </Box>
-    </Box>
-  )
-}
-
-const Waiting = ({ className }: { className?: string }) => {
-  const parent: Variants = {
-    bounce: {
-      transition: { staggerChildren: 0.1 },
-    },
-  }
-  const dots: Variants = {
-    bounce: {
-      y: [0, -5, 0, 0],
-      transition: {
-        repeat: Infinity,
-        bounce: 0.25,
-        duration: 1,
-        times: [0, 0.3, 0.7, 1],
-      },
-    },
-  }
-  return (
-    <LazyMotion features={domAnimation}>
-      <div className={`inline-block ${className ?? ''}`}>
-        <m.div
-          variants={parent}
-          animate="bounce"
-          className="flex flex-row items-center gap-1"
-        >
-          {[0, 1, 2].map((i) => (
-            <m.div
-              key={i}
-              variants={dots}
-              className="h-2 w-2 rounded-xl bg-gray-300 dark:bg-gray-700"
-            />
-          ))}
-        </m.div>
-      </div>
-    </LazyMotion>
   )
 }
 
