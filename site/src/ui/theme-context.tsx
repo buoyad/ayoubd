@@ -5,7 +5,8 @@ import {
   getThemePreference,
   setThemePreference,
 } from './dark-mode'
-import { Dropdown } from './components'
+import { Button, Dropdown } from './components'
+import { Icon, IconName } from './components/Icon-component'
 
 export type Theme = 'light' | 'dark'
 
@@ -93,6 +94,17 @@ export const ColorMode = ({ className }: { className?: string }) => {
   if (!theme) {
     return null
   }
+
+  const icon: IconName = theme === 'light' ? 'sun' : 'moon'
+
+  return (
+    <Button
+      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      className={className}
+    >
+      <Icon name={icon} width={16} height={16} />
+    </Button>
+  )
 
   return (
     <Dropdown

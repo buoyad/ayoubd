@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Box } from '../ui/components'
 import { styleSheet } from '@/ui/util'
 import { usePathname } from 'next/navigation'
+import { ColorMode } from '@/ui/theme-context'
 
 type ValidHref = string
 
@@ -48,11 +49,13 @@ export default function Nav() {
         style={styles.backgroundImage2}
         className="nav-background-2 absolute left-0 right-0 top-0 h-[calc(2*var(--header-height))]"
       />
-      <Box className="mx-auto my-0 h-[--header-height] max-w-[--content-width] py-3 mix-blend-luminosity">
-        <Box row gap="small">
+      <Box className="mx-auto my-0 h-[--header-height] w-full max-w-[--content-width] py-3">
+        <Box row gap="small" className="w-full">
           {navItems.map((item) => (
             <NavItem key={item.title} {...item} />
           ))}
+          <Box className="flex-grow" />
+          <ColorMode className="z-10" />
         </Box>
       </Box>
     </>

@@ -30,11 +30,13 @@ const BookmarkRow = ({
 }: Awaited<ReturnType<typeof getBookmarks>>[number]) => {
   return (
     <a
-      className="text-body w-full cursor-pointer hover:no-underline"
+      className="text-body group w-full cursor-pointer hover:no-underline"
       href={url}
       rel="noopener"
     >
-      <Text className="text-base font-semibold">{title}</Text>
+      <Text className="text-base font-semibold group-hover:underline">
+        {title}
+      </Text>
       <Box row className="w-full !gap-1">
         <img src={favicon} width={15} height="15" />
         <Text className="text-xs">{domain}</Text>
@@ -51,5 +53,4 @@ const BookmarkRow = ({
       </Box>
     </a>
   )
-  return <img src={favicon} width={15} height={15} />
 }

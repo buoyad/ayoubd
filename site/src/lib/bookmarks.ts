@@ -20,7 +20,7 @@ export const getBookmarks = async (): Promise<Bookmark[]> => {
       const favicon = await getFavicon(bm[i].url)
       bm[i].favicon = favicon
       bm[i].domain = new URL(bm[i].url).hostname
-      bm[i].date = new Date(bm[i].date)
+      bm[i].date = new Date(bm[i].date + 'T00:00')
     }
     return bm
   } catch (err) {
