@@ -38,7 +38,22 @@ const BookmarkRow = ({
         {title}
       </Text>
       <Box row className="w-full !gap-1">
-        <img src={favicon} width={15} height="15" />
+        <Box
+          className="relative h-[15px] w-[15px] rounded"
+          role="img"
+          aria-label="Favicon"
+        >
+          {/* inset here is to fix background color peeking */}
+          <Box
+            className="absolute inset-[.5px] rounded bg-gray-200"
+            aria-hidden
+          />
+          <img
+            className="absolute inset-0 rounded"
+            src={favicon}
+            alt="Favicon"
+          />
+        </Box>
         <Text className="text-xs">{domain}</Text>
         <Box
           className="relative top-1 h-[1px] flex-grow opacity-20"
