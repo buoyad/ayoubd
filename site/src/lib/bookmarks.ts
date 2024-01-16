@@ -15,13 +15,16 @@ type Bookmark = {
 export const getBookmarks = async (): Promise<Bookmark[]> => {
   const bookmarks = await fs.promises.readFile(bookmarksContent, 'utf8')
   try {
-    const bm = JSON.parse(bookmarks)
+    const bm: Bookmark[] = JSON.parse(bookmarks)
     for (let i = 0; i < bm.length; i++) {
       const favicon = await getFavicon(bm[i].url)
       bm[i].favicon = favicon
       bm[i].domain = new URL(bm[i].url).hostname
       bm[i].date = new Date(bm[i].date + 'T00:00')
     }
+
+    bm.sort((a, b) => b.date.getTime() - a.date.getTime())
+
     return bm
   } catch (err) {
     return []
