@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Box } from '../ui/components'
 import { styleSheet } from '@/ui/util'
 import { usePathname } from 'next/navigation'
-import { ColorMode } from '@/ui/theme-context'
+import { ColorMode } from '@/ui/components'
 
 type ValidHref = string
 
