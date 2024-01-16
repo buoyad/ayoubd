@@ -4,7 +4,7 @@ import '../syntax.css'
 import { dmSans } from '@/ui/fonts'
 
 import { SetInitialColors } from '../../ui/dark-mode'
-import { ColorMode, ThemeProvider } from '../../ui/theme-context'
+import { ThemeProvider } from '../../ui/theme-context'
 import { Box } from '../../ui/components'
 import Nav from '../nav'
 import Footer from '../footer'
