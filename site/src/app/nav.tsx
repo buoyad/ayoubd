@@ -6,8 +6,6 @@ import { styleSheet } from '@/ui/util'
 import { usePathname } from 'next/navigation'
 import { ColorMode } from '@/ui/components'
 
-type ValidHref = string
-
 const navItems = [
   { title: 'Home', href: '/' },
   { title: 'Work', href: '/work' },
