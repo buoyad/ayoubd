@@ -5,7 +5,6 @@ import {
   getThemePreference,
   setThemePreference,
 } from './dark-mode'
-import { Dropdown } from './components'
 
 export type Theme = 'light' | 'dark'
 
@@ -78,29 +77,5 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     <ThemeContext.Provider value={{ theme, preference, setTheme }}>
       {children}
     </ThemeContext.Provider>
-  )
-}
-
-export const ColorMode = ({ className }: { className?: string }) => {
-  const { theme, preference, setTheme } = useTheme()
-
-  const options = [
-    { label: 'Light', value: 'light', icon: 'sun' },
-    { label: 'Dark', value: 'dark', icon: 'moon' },
-    { label: 'System', value: undefined, icon: 'gear' },
-  ] as const
-
-  if (!theme) {
-    return null
-  }
-
-  return (
-    <Dropdown
-      ariaLabel="Select site theme"
-      selected={preference}
-      options={options}
-      onSelect={setTheme}
-      className={className}
-    />
   )
 }

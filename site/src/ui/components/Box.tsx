@@ -8,7 +8,7 @@ type BoxProps = {
   row?: boolean
   className?: string
   id?: string
-}
+} & React.HTMLAttributes<HTMLDivElement>
 export const Box = React.forwardRef<HTMLDivElement, BoxProps>(
   (
     {
@@ -18,6 +18,7 @@ export const Box = React.forwardRef<HTMLDivElement, BoxProps>(
       row = false,
       className: _className,
       id,
+      ...props
     }: BoxProps,
     ref,
   ) => {
@@ -25,7 +26,7 @@ export const Box = React.forwardRef<HTMLDivElement, BoxProps>(
       row ? styles.boxRow : ''
     } ${_className ?? ''}`
     return (
-      <div ref={ref} className={className} id={id} style={style}>
+      <div ref={ref} className={className} id={id} style={style} {...props}>
         {children}
       </div>
     )

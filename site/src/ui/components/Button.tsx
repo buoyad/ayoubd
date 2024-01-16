@@ -15,7 +15,7 @@ export const Button = React.forwardRef<
             px-3 py-2 text-sm font-semibold tracking-wide text-gray-600
             hover:bg-gray-200 active:border-gray-400 active:bg-gray-300 disabled:bg-gray-200 disabled:text-gray-400 dark:border-gray-700 dark:text-gray-400
             dark:hover:bg-gray-800 dark:active:border-gray-600 active:dark:bg-gray-700 
-            dark:disabled:bg-gray-800 dark:disabled:text-gray-600` +
+            dark:disabled:bg-gray-800 dark:disabled:text-gray-600 ` +
       props.className
     }
   />

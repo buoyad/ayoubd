@@ -1,10 +1,9 @@
 'use client'
 import { IconBadge, Box } from '../ui/components'
 import { styleSheet } from '../ui/util'
-import { ColorMode, useTheme } from '../ui/theme-context'
+import Link from 'next/link'
 
 export default function Footer() {
-  const { theme } = useTheme()
   return (
     <footer style={styles.footer}>
       <Box row style={styles.container} gap="none">
@@ -15,7 +14,9 @@ export default function Footer() {
             icon="threads"
           />
         </Box>
-        <ColorMode />
+        <Link className="text-sm text-gray-500" href="/bookmarks">
+          bookmarks
+        </Link>
       </Box>
     </footer>
   )
