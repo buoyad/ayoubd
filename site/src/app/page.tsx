@@ -50,14 +50,6 @@ export default function Home() {
             <BadgeLink href="/work#chat" icon="openai" text="GPT-4" /> about my
             professional experience.
           </Text>
-          <Text>
-            I currently work on personal projects and experiments under the
-            company I started,{' '}
-            <Link href="https://scratchingpost.net" target="_blank">
-              Scratching Post
-            </Link>
-            .
-          </Text>
         </Box>
       </Box>
     </Box>
