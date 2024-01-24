@@ -151,7 +151,7 @@ export const Status = ({
             variants={check}
             d="M6.5 8.5L11 12L19.5 3"
             stroke="#72FF8D"
-            stroke-opacity="1"
+            strokeOpacity="1"
             strokeWidth={3}
           />
         </m.svg>

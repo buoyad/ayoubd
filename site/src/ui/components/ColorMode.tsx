@@ -14,7 +14,7 @@ export const ColorMode = ({ className }: { className?: string }) => {
   return (
     <button
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-      className={'' + ' ' + className}
+      className={className}
     >
       <SunMoon state={icon} />
     </button>
@@ -68,7 +68,6 @@ const SunMoon = ({ state }: { state: 'sun' | 'moon' }) => {
         animate={state}
         initial={false}
         className="focus:outline-none"
-        style={{ mixBlendMode: 'luminosity' }}
         whileTap="pressed"
       >
         <mask id="moon-mask">
