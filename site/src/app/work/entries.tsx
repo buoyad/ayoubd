@@ -14,7 +14,7 @@ const WorkEntry = (props: WorkEntryProps) => {
   return (
     <Box id={id}>
       <Box row className="w-full justify-between">
-        <Box>
+        <Box gap="none">
           <Text bold>{dates}</Text>
           <H2 style={{ padding: 0 }}>{company}</H2>
           <Subheading>{title}</Subheading>
@@ -128,6 +128,33 @@ export const KeybaseEntry = () => (
           implemented the protocol for sending payments integrating security
           features such as payment confirmation and nonces to prevent replay
           attacks and accidental double spends.
+        </Text>
+      </li>
+    </ul>
+  </WorkEntry>
+)
+
+export const FreelanceEntry = () => (
+  <WorkEntry
+    id="freelance"
+    dates="January 2017 - June 2017"
+    company="12th Wonder"
+    title="Freelance Software Engineer"
+  >
+    <Text>
+      I built features and maintained the codebase for the 12th Wonder TITAN
+      process management system.
+    </Text>
+    <ul>
+      <li>
+        <Text bold inline>
+          Home page -{' '}
+        </Text>
+        <Text inline>
+          I built ten widgets for the home page and built a drag-and-drop system
+          for users to customize their home page with their most useful
+          information. Worked closely with backend engineers to design a
+          protocol for persisting and loading layouts performantly.
         </Text>
       </li>
     </ul>

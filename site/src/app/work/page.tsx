@@ -1,6 +1,6 @@
 import { Box, Heading, Text } from '@/ui/components'
 import { Metadata } from 'next'
-import { ZoomEntry, KeybaseEntry } from './entries'
+import { ZoomEntry, KeybaseEntry, FreelanceEntry } from './entries'
 import { ChatThread } from './chat'
 
 export const metadata: Metadata = {
@@ -18,6 +18,7 @@ export default function Page() {
       <Box gap="xxlarge">
         <ZoomEntry />
         <KeybaseEntry />
+        <FreelanceEntry />
       </Box>
     </Box>
   )
